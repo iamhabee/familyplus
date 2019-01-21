@@ -1,0 +1,261 @@
+/*body{
+  background-image: url("../image/event5.jpg");
+  background-repeat: no-repeat;
+  background-position: cover;
+  background-size: 100%; 
+  /*position: absolute;*/
+}*/
+h1, h2, h3, h4, h5, h6, label{
+  font-family: 'Cuprum', sans-serif;
+  /*font-family: 'Alegreya', serif;*/
+}
+.card-image{
+  height: 250px;
+  width: 250px;
+}
+
+.img-container {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+.bottom-left {
+  position: absolute;
+  bottom: 8px;
+  left: 16px;
+}
+
+.btn-rad{
+  border-radius: 10px;
+  border-width: 1px;
+  border-color: blue;
+}
+a, button, p{
+    /*font-family: 'Pacifico', cursive;*/
+    font-family: 'Kaushan Script', cursive;
+}
+.bg-green{
+  background-color:  #808000;
+}
+.btn-green{
+  background-color:  #808000; 
+}
+.text-green{
+  color:  #808000;
+}
+.insideForms .list-group {
+  flex-direction: row; 
+}
+
+#register {
+  display: none;
+}
+
+#register-btn, #login-btn {
+  color: white;
+}
+
+#register-btn {
+  margin-top: 50px;
+}
+
+.list-group{
+  display: inline;
+  
+}
+.insideForms .list-group .list-group-item {
+  border: none;
+  text-align: center;
+  color: #242021;
+  color: var(--fc); 
+}
+.insideForms .list-group .list-group-item.active {
+  border-bottom: 2px solid #3d91c6;
+  color: #3d91c6;
+  color: var(--blue);
+  background: transparent; 
+}
+
+.insideForms .tab-content {
+  padding: 50px 0px; 
+}
+
+.insideForms .tab-content input {
+  margin-bottom: 20px;
+  height: 60px;
+  padding: 10px;
+  font-size: 18px; 
+}
+
+.insideForms .tab-content button {
+  height: 60px;
+  font-size: 19px; 
+}
+
+.fixed-nav{
+  position: relative;
+  top: 0px;
+}
+.fixed-div{
+  position: fixed;
+  top: 0px;
+  z-index: 9999;
+}
+
+.fixed-div-bottom{
+  position: fixed;
+  bottom: 0px;
+  z-index: 9999;
+}
+
+.fixed-footer{
+  position: relative;
+  bottom: 0px;
+}
+* {
+  text-decoration: none;
+}
+
+.transparent {
+  background-color: rgba(225, 225, 225, 0.7);
+}
+
+.color{
+  /*background-color: rgba(0, 102, 255, 0.7);*/
+  margin-top: 300px;
+  /*color: white;*/
+  /*height: inherit;*/
+}
+.logo{
+  height: 50px;
+  width: 50px;
+  /*border-radius: 50px;*/
+  border-color: black;
+  border-width: 2px
+}
+
+p{
+  font-weight: bold;
+}
+.link-btn{
+  background-color: orange;
+}
+.margin{
+  margin-top: 50px;
+}
+.default-btn{
+  font-weight: bolder;
+  font-size: 15px;
+  /*height: 30px !important;*/
+  width: 100px;
+  color: black;
+  text-align: center;
+}
+.jumbo-pad{
+  padding-top: 20px !important;
+  padding-bottom: 10px !important;
+}
+
+label {
+  font-weight: 800;
+}
+.margin-bottom{
+  margin-bottom: 50px;
+}
+
+.image{
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+}
+
+.event_image{
+  width: 470px;
+  height: 200px;
+  border-radius: 20px;
+}
+
+.edit_panel {
+  display: none;
+  width: 400px;
+}
+
+.icon_link{
+  color: #fff;
+}
+
+html,
+body {
+  overflow-x: hidden; /* Prevent scroll on narrow devices */
+}
+
+body {
+  padding-top: 56px;
+}
+
+@media (max-width: 991.98px) {
+  .offcanvas-collapse {
+    position: fixed;
+    top: 56px; /* Height of navbar */
+    bottom: 0;
+    left: 100%;
+    width: 100%;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    overflow-y: auto;
+    visibility: hidden;
+    background-color: #343a40;
+    transition-timing-function: ease-in-out;
+    transition-duration: .3s;
+    transition-property: left, visibility;
+  }
+  .offcanvas-collapse.open {
+    left: 0;
+    visibility: visible;
+  }
+}
+
+.nav-scroller {
+  position: relative;
+  z-index: 2;
+  height: 2.75rem;
+  overflow-y: hidden;
+}
+
+.nav-scroller .nav {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  padding-bottom: 1rem;
+  margin-top: -1px;
+  overflow-x: auto;
+  color: rgba(255, 255, 255, .75);
+  text-align: center;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+}
+
+.nav-underline .nav-link {
+  padding-top: .75rem;
+  padding-bottom: .75rem;
+  font-size: .875rem;
+  color: #6c757d;
+}
+
+.nav-underline .nav-link:hover {
+  color: #007bff;
+}
+
+.nav-underline .active {
+  font-weight: 500;
+  color: #343a40;
+}
+
+.text-white-50 { color: rgba(255, 255, 255, .5); }
+
+.bg-purple { background-color: #f4a142; }
+
+.lh-100 { line-height: 1; }
+.lh-125 { line-height: 1.25; }
+.lh-150 { line-height: 1.5; }
