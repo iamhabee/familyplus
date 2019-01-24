@@ -1,7 +1,8 @@
-   <div class="container-fluid bg-green">
-      <div class="col-md-4 offset-md-7" >
+    <div class="container-fluid margin-bottom bg-light">
+      <div class="col-md-4 offset-md-4" >
         <div class="row">
-          <div class="col-md-12 margin margin-bottom" style="background-color: white; margin-top: 140px; padding-bottom: 5px; border-radius: 5px;">
+          <div class="col-md-12 " style="background-color: white; padding-top: 5px; padding-bottom: 15px; margin-top: 30px; border-radius: 5px;">
+            <div class="list-group" id="myList" role="tablist">
 
             <?php if ( validation_errors() ): ?>
             <div class="alert alert-danger">
@@ -16,32 +17,25 @@
             <?php endif; ?>
 
             <div class="list-group" id="myList" role="tablist">
-              <div class="jumbotron jumbo-pad bg-white">
-                <h1 class="text-center text-green">Login</h1>
-              </div>
-              <!-- <button class="list-group-item list-group-item-action btn-danger active" id="login-btn">LOGIN</button> -->
-                  <form action="<?php echo site_url() ?>user/login" method="POST">
-                      
-                       <div class="form-group">
-                          <label for="email">E-mail</label>
-                          <input type="email" class="form-control" name="email" placeholder="E-mail">
-                       </div>
-                        <div class="form-group">
-                          <label for="password">Password</label>
-                          <input type="password" class="form-control" name="password" placeholder="Password">
-                          <input type="hidden" class="form-control" value="<?php set_value($this->session->tempdata('rfrom'), 'dashboard') ?>" name="rfrom" placeholder="Password">
-                        </div>
-                        <input type="checkbox" name="status" value="1"> Keep me signed in<br>
-                        <p>If you are a new member <a href="signup" class="btn">Sign up</a></p>
-                      <button class="list-group-item list-group-item-action btn-dark text-center active" type="submit">Login</button>
-                  </form>
-              <!-- <button class="list-group-item list-group-item-action active btn-danger" id="register-btn" style="margin-top: 50px;">REGISTER</button>
- -->
+              <div class="jumbotron jumbo-pad bg-white"> <h4 class="text-center text-green">Log in to your account</h4> </div>
+              <form class="margin-bottom" action="<?php echo site_url() ?>user/login" method="POST">
+                  
+                   <div class="form-group input-group">
+                      <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                      <input id="email" type="text" style="border-width: 0px 0px 1px;" class="form-control" name="email" placeholder="Email">
+                   </div>
+                    <div class="form-group input-group">
+                      <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                      <input type="password" class="form-control" style="border-width: 0px 0px 1px;"  name="password" placeholder="Password">
+                    </div>   
+                  <button class="list-group-item margin list-group-item-action btn-rad btn btn-color text-white text-center" type="submit">Login</button>
+                  <a href="login" class="margin text-center">Forgot Password</a>
+              </form>
               
-
-            </div>
+           </div>
           </div>
         </div>
       </div>
+        <div class="align-items-center"> <p class="text-center">Don't have an account? <a href="signup" class="btn">Sign up</a></p></div>
     </div>
   <!--   <?php //var_dump($this->session->userdata()); ?> -->

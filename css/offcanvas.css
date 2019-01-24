@@ -5,10 +5,15 @@
   background-size: 100%; 
   /*position: absolute;*/
 }*/
-h1, h2, h3, h4, h5, h6, label{
+/* h2, h3, h4, h5, h6, label{
   font-family: 'Cuprum', sans-serif;
   /*font-family: 'Alegreya', serif;*/
 }
+*/
+input{
+  border-width: 0px 0px 1px !important;
+}
+
 .card-image{
   height: 250px;
   width: 250px;
@@ -25,23 +30,26 @@ h1, h2, h3, h4, h5, h6, label{
   left: 16px;
 }
 
-.btn-rad{
-  border-radius: 10px;
-  border-width: 1px;
-  border-color: blue;
+.btn-rad:hover, .btn-rad:focus {
+  /*display: block;*/
+  background-color: rgb(103,58,183);
+  /*border-radius: 10px;*/
+  /*border-width: 1px;*/
+  /*border-color: blue;*/
 }
 a, button, p{
     /*font-family: 'Pacifico', cursive;*/
     font-family: 'Kaushan Script', cursive;
+    font-size: 15px
 }
 .bg-green{
   background-color:  #808000;
 }
-.btn-green{
-  background-color:  #808000; 
+.btn-color{
+  background-color:  rgb(103,58,183); 
 }
-.text-green{
-  color:  #808000;
+.text-color{
+  color: rgb(103,58,183)!important ;
 }
 .insideForms .list-group {
   flex-direction: row; 
@@ -103,6 +111,9 @@ a, button, p{
 }
 
 .fixed-div-bottom{
+  height: 100px;
+  padding-top: 30px;
+  border-top: 1px orange solid;
   position: fixed;
   bottom: 0px;
   z-index: 9999;
@@ -134,9 +145,9 @@ a, button, p{
   border-width: 2px
 }
 
-p{
+/*p{
   font-weight: bold;
-}
+}*/
 .link-btn{
   background-color: orange;
 }

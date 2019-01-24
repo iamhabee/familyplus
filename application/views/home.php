@@ -3,18 +3,6 @@
 		<img src="<?php echo site_url() ?>image/image1.jpg" class="rounded" style="width: 100%; height: 300px;">
 		<button class="bottom-left"  data-toggle="modal" data-target="#exampleModalCenter"><span class="fa fa-camera"></span></button>	
 	</div>
-<!-- 	<div style=" border-top-width: 2px; border-color: black;" class="container">
-		<div class="row">
-			<div class="col-md-5">
-				<div class="card">
-					<h1>this is a card</h1>
-				</div>
-			</div>
-			<div class="col-md-5">
-				
-			</div>
-		</div>
-	</div> -->
 
  	<div class="container">
               <div class="row">
@@ -31,7 +19,7 @@
                     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
 							<div class="jumbotron text-center jumbopad">
 								<h4>Share your useful resources with your friends and families around you </h4>
-								<p>Life is sweet and more beautiful when you share your excess resources with others who are less priviledge or in need of it.<a href="" class="btn btn-white btn-rad">Share</a> </p>
+								<p>Life is sweet and more beautiful when you share your excess resources with others who are less priviledge or in need of it.<a href="" class="btn btn-white ">Share</a> </p>
 							</div>
 
 							<div class="card" style="100%">
@@ -39,7 +27,7 @@
 							    	<h5 class="card-title">Olanrewaju's Family</h5>
 							    	<h6 class="card-subtitle mb-2 text-muted">Ceiling Fan</h6>
 							   	 	<p class="card-text">I have a spare ceiling fan with me, do holla if u are interested.</p>
-						   	 	  	<img class="card-image" src="<?php echo site_url() ?>image/family-plus.png" alt="Card image cap">
+						   	 	  	<!-- <img class="card-image" src="<?php echo site_url() ?>image/family-plus.png" alt="Card image cap"> -->
 							    	<hr>
 							    	<div>
 							    		<a href="#" class="card-link">Like <span class="badge badge-light">2</span></a>
@@ -53,7 +41,7 @@
 							    	<h5 class="card-title">Adejare's Family</h5>
 							    	<h6 class="card-subtitle mb-2 text-muted">Baby's Toy</h6>
 							   	 	<p class="card-text">We own babies toy that are useless in our house please DM if you think it will be usefull in your house.</p>
-						   	 	  	<img class="card-image" src="<?php echo site_url() ?>image/image1.jpg" alt="Card image cap">
+						   	 	  	<!-- <img class="card-image" src="<?php echo site_url() ?>image/image1.jpg" alt="Card image cap"> -->
 							    	<hr>
 							    	<div>
 							    		<a href="#" class="card-link">Like <span class="badge badge-light">4</span></a>
@@ -67,11 +55,11 @@
 							    	<h5 class="card-title">Obinna's Family</h5>
 							    	<h6 class="card-subtitle mb-2 text-muted">Baby's Toy</h6>
 							   	 	<p class="card-text">I no longer used my techno A1 and i will love to give it out with  that are useless in our house please DM if you think it will be usefull in your house.</p>
-						   	 	  	<img class="card-image" src="<?php echo site_url() ?>image/image3.jpg" alt="Card image cap">
+						   	 	  	<!-- <img class="card-image" src="<?php echo site_url() ?>image/image3.jpg" alt="Card image cap"> -->
 							    	<hr>
 							    	<div>
 							    		<a href="#" class="card-link">Like <span class="badge badge-light">4</span></a>
-							    		<a href="#" class="card-link">I am intrested <span class="badge badge-light">4</span></a>
+							    		<!-- <a href="#" class="card-link">I am intrested <span class="badge badge-light">4</span></a> -->
 							  		</div>
 							  </div>
 							</div><br>
@@ -81,7 +69,7 @@
 							    	<h5 class="card-title">Adamu's Family</h5>
 							    	<h6 class="card-subtitle mb-2 text-muted">Baby's Toy</h6>
 							   	 	<p class="card-text">We own babies toy that are useless in our house please DM if you think it will be usefull in your house.</p>
-						   	 	  	<img class="card-image" src="<?php echo site_url() ?>image/image2.jpg" alt="Card image cap">
+						   	 	  	<!-- <img class="card-image" src="<?php echo site_url() ?>image/image2.jpg" alt="Card image cap"> -->
 							    	<hr>
 							    	<div>
 							    		<a href="#" class="card-link">Like <span class="badge badge-light">4</span></a>
@@ -95,7 +83,7 @@
 							    	<h5 class="card-title">Muhammad's Family</h5>
 							    	<h6 class="card-subtitle mb-2 text-muted">Baby's Toy</h6>
 							   	 	<p class="card-text">We own babies toy that are useless in our house please DM if you think it will be usefull in your house.</p>
-						   	 	  	<img class="card-image" src="<?php echo site_url() ?>image/image3	.jpg" alt="Card image cap">
+						   	 	  	<!-- <img class="card-image" src="<?php echo site_url() ?>image/image3	.jpg" alt="Card image cap"> -->
 							    	<hr>
 							    	<div>
 							    		<a href="#" class="card-link">Like <span class="badge badge-light">4</span></a>

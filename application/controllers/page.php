@@ -39,6 +39,27 @@
 			$this->load->view('template/footer');
 		}
 
+		public function about()
+		{
+			# code...
+			$data['title'] = "Familyplus | About";
+			$data['page_name'] = "About";
+			$this->load->view('template/header', $data);
+			$this->load->view('template/nav2', $data);
+			$this->load->view('about');
+			$this->load->view('template/footer');
+		}
+
+		public function connect()
+		{
+			# code...
+			$data['title'] = "Familyplus | Connect";
+			$data['page_name'] = "Connect";
+			$this->load->view('template/header', $data);
+			$this->load->view('template/nav2', $data);
+			$this->load->view('connect');
+			$this->load->view('template/footer');
+		}
     }
 
 ?>

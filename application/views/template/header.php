@@ -16,4 +16,4 @@
     <link rel="stylesheet" type="text/css" href="css/offcanvas.css"> -->
     <meta  name="viewport" content="width=device-width, initial-scale = 1" shrink-to-fit="no">
   </head>
-  <body class="bg-green">
+  <body class="bg-white">
