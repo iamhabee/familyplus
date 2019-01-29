@@ -61,4 +61,6 @@ $route['dashboard'] = 'dashboard/index';
 $route['user/register'] = 'users/register_user';
 $route['user/login'] = 'users/login_user';
 $route['logout'] = 'users/logout';
+$route['consultation'] = 'page/consultation';
+$route['maritalIssues'] = 'page/maritalIssues';
 $route['translate_uri_dashes'] = FALSE;

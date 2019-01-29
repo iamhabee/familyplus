@@ -27,6 +27,8 @@
                     <div class="form-group input-group">
                       <span class="input-group-addon"><i class="fa fa-lock"></i></span>
                       <input type="password" class="form-control" style="border-width: 0px 0px 1px;"  name="password" placeholder="Password">
+                      <input type="hidden" class="form-control" value="<?php set_value($this->session->tempdata('rfrom'), 'dashboard') ?>" name="rfrom" placeholder="Password">
+
                     </div>   
                   <button class="list-group-item margin list-group-item-action btn-rad btn btn-color text-white text-center" type="submit">Login</button>
                   <a href="login" class="margin text-center">Forgot Password</a>

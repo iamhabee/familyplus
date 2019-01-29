@@ -32,6 +32,12 @@
 			return $this->db->update('familyplus', $user_image);
 		}
 		
+		public function get_user(){
+
+			$this->db->from('familyplus');
+			$query=$this->db->get();
+			return $query->result();
+		}
 
 	}
 

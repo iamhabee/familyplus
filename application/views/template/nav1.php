@@ -2,10 +2,10 @@
   ================================================== -->
   <nav class="navbar navbar-dark bg-white navbar-expand-lg fixed-top">
     <div class="container">
-      <a href="<?php echo base_url()?>dashboard"><img src="<?php echo site_url() ?>image/logo.png" class="logo" alt="Conmpany Name"></a>&nbsp; &nbsp;
+      <a href="<?php echo base_url()?>"><img src="<?php echo site_url() ?>image/logo.png" class="logo" alt="Conmpany Name"></a>&nbsp; &nbsp;
 
       <!-- Navbar: Brand -->
-      <a class="navbar-brand text-color" href="dashboard">FamilyPlus</a>
+      <a class="navbar-brand text-color" href="<?php echo base_url()?>">FamilyPlus</a>
 
       <!-- Navbar: Toggler -->
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -17,6 +17,9 @@
 
         <!-- Navbar navigation: Right -->
         <ul class="navbar-nav ml-auto">
+          <li class="nav-item"><a class="nav-link text-color tooltip-test" title="Home" href="dashboard">matchmaking</a></li>&nbsp; &nbsp; &nbsp;
+          <li class="nav-item"><a class="nav-link text-color tooltip-test" title="Cosultation" href="consultation">Consultatiion</a></li>&nbsp; &nbsp; &nbsp;
+          <li class="nav-item"><a class="nav-link text-color tooltip-test" title="Marital-Issues" href="maritalIssues">Marital Issues</a></li>&nbsp; &nbsp; &nbsp;
           <li class="nav-item"><a class="nav-link text-color tooltip-test" title="About" href="about">About Us</a></li>&nbsp; &nbsp; &nbsp;
           <li class="nav-item"><a class="nav-link text-color tooltip-test" title="Connect" href="connect">Connect</a></li>&nbsp; &nbsp; &nbsp;
         </ul>
