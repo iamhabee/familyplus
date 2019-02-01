@@ -26,7 +26,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $config['base_url'] = 'http://localhost/familyplus';
 
 $config['smtp_pass'] = "dsquare1234";
-
+$config['smtp_user'] = "habeehola18@gmail.com";
+$config['server_root'] = $_SERVER["DOCUMENT_ROOT"];
 /*
 |--------------------------------------------------------------------------
 | Index File

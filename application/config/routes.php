@@ -55,12 +55,22 @@ $route['login'] = 'page/login';
 $route['signup'] = 'page/signup';
 $route['about'] = 'page/about';
 $route['connect'] = 'page/connect';
+$route['consultation'] = 'page/consultation';
+$route['maritalIssues'] = 'page/maritalIssues';
+
 $route['profile'] = 'dashboard/profile';
+$route['counsellor'] = 'dashboard/counsellor';
+$route['married'] = 'dashboard/married';
 $route['faf'] = 'dashboard/faf';
 $route['dashboard'] = 'dashboard/index';
+
+$route['admin'] = 'admin/index';
+$route['adminlogin'] = 'admin/login';
+$route['admin_counsellor'] = 'admin/counsellor';
+$route['admin_single'] = 'admin/single';
+$route['admin_married'] = 'admin/married';
+
 $route['user/register'] = 'users/register_user';
 $route['user/login'] = 'users/login_user';
 $route['logout'] = 'users/logout';
-$route['consultation'] = 'page/consultation';
-$route['maritalIssues'] = 'page/maritalIssues';
 $route['translate_uri_dashes'] = FALSE;

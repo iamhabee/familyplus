@@ -49,22 +49,68 @@ $(document).ready(function(){
 			$("#match").addClass('match-password-err');
 		}
 		// body...
-	})
+	});
+	// $("#couple").hide();
+	$("#married").change(function(){
+		alert($(this).val());
+	});
 
+// sidebar js
 
-	// $('#edit_panel .change').click(function(){
-	// 	var change_ele = $('.change');
-	// 	// alert(change_ele.length);
-	// 	var i = $('#edit_panel .change').index(this);
-	// 	// var el = $('.edit_panel')[i];
-	// 	// el.show();
-	// 	alert($("#edit_panel .edit_panel").index(i-$('#edit_panel .change').length));
-	// 	// if (i == $("#edit_panel .edit_panel").index()){
-	// 	// 	alert($("#edit_panel .edit_panel").index());
-	// 	// 	alert('index matched');
-	// 	// }
-	// 	// alert(i);
-	// });
+ $(".sidebar-dropdown > a").click(function() {
+  $(".sidebar-submenu").slideUp(200);
+  if (
+    $(this)
+      .parent()
+      .hasClass("active")
+  ) {
+    $(".sidebar-dropdown").removeClass("active");
+    $(this)
+      .parent()
+      .removeClass("active");
+  } else {
+    $(".sidebar-dropdown").removeClass("active");
+    $(this)
+      .next(".sidebar-submenu")
+      .slideDown(200);
+    $(this)
+      .parent()
+      .addClass("active");
+  }
+});
+
+$("#close-sidebar").click(function() {
+  $(".page-wrapper").removeClass("toggled");
+});
+$("#show-sidebar").click(function() {
+  $(".page-wrapper").addClass("toggled");
+});
+
+	$("#q").keyup(function(){
+		// alert($(this).val());
+		if ($(this).val().length !== 0) {
+			$.ajax({
+				url:"http://localhost/familyplus/page/live_search",
+				type: "GET",
+				data: {q:$(this).val()},
+				dataType: "JSON",
+				success: function(data){
+					var data2 = data.msg;
+					$("#search_result").html("<li><a></a></li>");
+					data2.forEach(function(data3, index){
+						// alert(data3.first_name);
+						$("#search_result").append("<li>"+data3.first_name+"</li>")
+					});
+				},
+				error: function(err){
+					alert(JSON.stringify(err));
+				}
+			});
+		}
+		// $("#search_result").load("<?php echo site_url('page/live_search')?>", {q:$(this).val()}, function(data){
+			
+		// });
+	});
 
 
 });

@@ -1,6 +1,6 @@
 
-      <div class="container-fluid bg-white fixed-div-bottom margin">
-        <footer class="fixed-footer text-center text-secondary">
+      <div class="container-fluid bg-white  margin">
+        <footer class=" text-center text-secondary">
           <p>&copy; TechEnd 2018 copyright reserved</p>
         </footer>
       </div>

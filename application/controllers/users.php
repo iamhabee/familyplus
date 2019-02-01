@@ -40,26 +40,50 @@
 				$this->load->view('template/footer');
 
 			else:
-				
+					$msg = "Hi ".$this->input->post('full_name').", You are welcome to Ikeja Yellow Page.";
+					$msg .= "Please Verify Your  account By Clicking The Link Below";
+					$msg .= " <button><a href=''>Activate</a></button>";
+
+				$message = "
+					     <html>
+					       <head>
+					         <title>Welcome message</title>
+					       </head>
+					       <body>
+					         <p>$msg</p>
+					       </body>
+					     </html>";
+
 
 					$_POST['user_id']=random_string('alnum', 10);
-					var_dump($_FILES['userfile']);
 					move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/'.$_POST['user_id'].'.jpg');
-					if ($this->send_mail($this->input->post("email"), "Account Registration", "Welcome Message From Family Plus", 'text'));
-
-					// var_dump($this->input->post());
+					// if ($this->send_mail($this->input->post("email"), "Account Registration", $message, 'html'));
 
 					$_POST['password'] = md5($_POST['password']);
 					unset($_POST['confirm_password']);
 					$newuser = $this->input->post();
 					
-					// var_dump($newuser);
 
-					if ( $this->user->register_user($newuser) ):
-						$this->session->set_flashdata('msg', 'Registration Successful. You can now login');
-						$this->session->set_flashdata('flag', 'success');
-						redirect("login");
+					
+
+					if($this->send_mail($this->input->post('email'), "Account Registration", $message)):
+					    $this->user->register_user($newuser);
+					     $this->session->set_flashdata('msg', "Registration Successfull! An activation Email have been sent to your mail. Please check your mail to activate your account");
+					     $this->session->set_flashdata('flag', 'success');
+					     redirect('login');
+					   
+					else:
+					     $this->session->set_flashdata('msg', "Please Verify Your Email Is Correct And You Are Connected To The Internet");
+					     $this->session->set_flashdata('flag', 'danger');
+					     redirect('signup');
+					     // echo json_encode($status);
 					endif;
+
+					// if ( $this->user->register_user($newuser) ):
+					// 	$this->session->set_flashdata('msg', 'Registration Successful. You can now login');
+					// 	$this->session->set_flashdata('flag', 'success');
+					// 	redirect("login");
+					// endif;
 
 				
 			endif;
@@ -97,9 +121,15 @@
 							# code...
 							// redirect($rfrom);
 						}
+					// 	$roles = $this->db->get('roles')->result()?
+					// if ($this->roles->role_id == 04) {
+					// 	redirect("married_dashboard");
+					// }elseif ($this->roles->role_id == 02) {
+					// 	redirect("councilor_dashboard");
+					// }else{
 							# code...
 							redirect("dashboard");
-											
+						// }					
 					} else {
 						# code...
 						$this->session->set_flashdata('msg', 'Incorrect Password');
@@ -126,45 +156,37 @@
 
 
 		//		Send Email Function
-		public function send_mail($recipient, $subject, $msg, $mailtype="html"){
+		public function send_mail($mail_to, $subject, $msg, $mailtype="html") {
+    //Load email library
+    $this->load->library('email');
 
-			$this->load->library('email');
-			$sender = "habeehola18@gmail.com";
+    $config = array();
+    $config['protocol'] = 'smtp';
+    $config['smtp_host'] = 'ssl://smtp.googlemail.com';
+    $config['smtp_user'] = 'toykampage1000@gmail.com';
+    $config['smtp_pass'] = 'dolapo2018';
+    $config['smtp_port'] = 465  ;
+    $config['mailtype'] = $mailtype;
+    $this->email->initialize($config);
 
-			$config = array();
-			$config['protocol']= 'smtp';
-			$config['smtp_host']= 'ssl://smtp.googlemail.com';
-			$config['smtp_user'] = 'habeehola18@gmail.com';
-			$config['smtp_pass'] = $this->config->item('smtp_pass');
-			$config['smtp_port'] = '465';
-			$config['mailtype'] = $mailtype;
-
-			$this->email->initialize($config);
-
-			$this->email->set_newline("\r\n");
-			$this->email->from($sender, 'FamilyPlus');
-			$this->email->to($recipient);
-			$this->email->subject($subject);
-			$this->email->message($msg);
-
-			if ($this->email->send()) {
-				$status = array('status' => 1, "msg" => "Mail sent successfully");
-				echo json_encode($status);
-					return true;
-			}else{
-				$status = array('status' =>0 ,'msg'=>'Mail not sent');
-				return json_encode($status);
-				print($this->email->print_debugger());
-				$path = $this->config->item('server_root');
-				$filepath = $path. "/familyplus/logs/errorlog.txt";
-				$file = fopen($file_path, "+a");
-				fwrite($file_path, $this->email->print_debugger().'\n');
-				fclose($file_path);
-			}return false;
-
-
-
-		}
+    $this->email->set_newline("\r\n");
+    $this->email->from($this->config->item('smtp_user'), 'Family Plus');
+    $this->email->to($mail_to);
+    $this->email->subject($subject);
+    $this->email->message($msg);
+    //Send mail
+    if($this->email->send()) {
+        return true;
+    }else{
+        print($this->email->print_debugger());
+        $path = $this->config->item('server_root');
+        $file_path = $path."/familyplus/logs/error_log.txt";
+        $file = fopen($file_path, "+a");
+        fwrite($file_path, $this->email->print_debugger().'\n');
+        fclose($file_path);
+        return false;
+    }
+}
 
 		public function logout(){
 			session_destroy();

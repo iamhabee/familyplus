@@ -39,6 +39,20 @@
 			return $query->result();
 		}
 
+		public function search($file_name){
+
+			$this->db->select('*');
+			$this->db->from('familyplus');
+			$this->db->like('first_name', $first_name);
+			$query = $this->db->get();
+			if ($qury->num_rows() > 0) {
+				return $query->result();
+			}else{
+				return $query->result();
+			}
+			
+		}
+
 	}
 
 ?>

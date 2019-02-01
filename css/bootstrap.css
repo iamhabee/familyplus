@@ -299,14 +299,7 @@ textarea {
   resize: vertical;
 }
 
-fieldset {
-  min-width: 0;
-  padding: 0;
-  margin: 0;
-  border: 0;
-}
-
-legend {
+/*legend {
   display: block;
   width: 100%;
   max-width: 100%;
@@ -316,7 +309,7 @@ legend {
   line-height: inherit;
   color: inherit;
   white-space: normal;
-}
+}*/
 
 progress {
   vertical-align: baseline;
