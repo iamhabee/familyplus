@@ -154,6 +154,75 @@
 			endif;
 		}
 
+public function counsellor()
+		{
+			$this->load->model('user');
+
+			$this->form_validation->set_rules('first_name', 'First Name', 'required|trim|alpha');
+			$this->form_validation->set_rules('last_name', 'Last Name', 'required|trim|alpha');
+			$this->form_validation->set_rules('other_name', 'Other Name', 'required|trim|alpha');
+			$this->form_validation->set_rules('short_description', 'Short Desription', 'required');
+			$this->form_validation->set_rules('email', 'E-mail', 'required|valid_email|is_unique[familyplus.email]');
+			$this->form_validation->set_rules('phone_number', 'Phone Number', 'required|trim|is_numeric|min_length[11]|max_length[13]');
+
+			$this->form_validation->set_rules('gender', 'Gender', 'required');
+			// $this->form_validation->set_rules('marital_status', 'Marital Status', 'required');
+			// $this->form_validation->set_rules('age_range', 'Age range', 'required');
+			$this->form_validation->set_rules('religion', 'Religion', 'required');
+			$this->form_validation->set_rules('occupation', 'Occupation', 'required');
+			$this->form_validation->set_rules('password', 'Password', 'required|trim|max_length[10]|min_length[8]');
+			$this->form_validation->set_rules('confirm_password', 'Confirm password', 'required|trim|matches[password]');
+
+			if ( $this->form_validation->run() === FALSE):
+
+				$data['title'] = "FamilyPlus| Register";
+
+				$this->load->view('template/header', $data);
+				$this->load->view('template/nav');
+				$this->load->view('register');
+				$this->load->view('template/footer');
+
+			else:
+					$msg = "Hi ".$this->input->post('full_name').", You are welcome to FamilyPlus.";
+					$msg .= "Please Verify Your  account By Clicking The Link Below";
+					$msg .= " <button><a href=''>Activate</a></button>";
+
+				$message = "
+					     <html>
+					       <head>
+					         <title>Welcome message</title>
+					       </head>
+					       <body>
+					         <p>$msg</p>
+					       </body>
+					     </html>";
+
+
+					$_POST['user_id']=random_string('alnum', 10);
+					move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/'.$_POST['user_id'].'.jpg');
+					$_POST['password'] = md5($_POST['password']);
+					unset($_POST['confirm_password']);
+					$newuser = $this->input->post();
+					
+
+					
+
+					if($this->send_mail($this->input->post('email'), "Account Registration", $message)):
+					    $this->user->register_user($newuser);
+					     $this->session->set_flashdata('msg', "Registration Successfull! An activation Email have been sent to your mail. Please check your mail to activate your account");
+					     $this->session->set_flashdata('flag', 'success');
+					     redirect('admin');
+					   
+					else:
+					     $this->session->set_flashdata('msg', "Please Verify Your Email Is Correct And You Are Connected To The Internet");
+					     $this->session->set_flashdata('flag', 'danger');
+					     redirect('admin');
+					endif;
+
+				
+			endif;
+		}
+
 		public function login_user()
 		{
 			# code...
@@ -172,31 +241,22 @@
 				if ($details){
 
 					if (md5($password) === $details->password) {
-						// $userList = $this->user->get_user();
-						# code...
-						//echo "Correct Password";
+
 						$this->session->set_flashdata('msg', 'Login Successful');
 						$this->session->set_flashdata('flag', 'success');
 						
 						
-						// $this->session->set_userdata('user_list', $userList);
 						$this->session->set_userdata('user_data', $details);
-						// echo $rfrom;
-						if (isset($rfrom) && strlen($rfrom) !== 0) {
-							# code...
-							// redirect($rfrom);
+
+						if ($details->role_id == 02){
+							redirect("consultation");
 						}
-					// 	$roles = $this->db->get('roles')->result()?
-					// if ($this->roles->role_id == 04) {
-					// 	redirect("married_dashboard");
-					// }elseif ($this->roles->role_id == 02) {
-					// 	redirect("councilor_dashboard");
-					// }else{
-							# code...
+						else{
 							redirect("dashboard");
-						// }					
+						}
+										
 					} else {
-						# code...
+
 						$this->session->set_flashdata('msg', 'Incorrect Password');
 						$this->session->set_flashdata('flag', 'danger');
 						redirect("login");

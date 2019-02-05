@@ -2,25 +2,18 @@
   background-image: url("../image/event5.jpg");
   background-repeat: no-repeat;
   background-position: cover;
-  background-size: 100%; 
-  /*position: absolute;*/
+  background-size: 100%; */
+  /*position: absolute;
 }*/
-/* h2, h3, h4, h5, h6, label{
-  font-family: 'Cuprum', sans-serif;
-  /*font-family: 'Alegreya', serif;*/
+ /*h2, h3, h4, h5, h6, label{
+  font-family: 'Cuprum', sans-serif;*/
+  /*font-family: 'Alegreya', serif;
 }
 */
-#couple{
+/*#couple{
   display: none !important;
 }
-
-#loader{
-  height: 100%;
-  width: 100%;
-  background-image: url("http://localhost/familyplus/image/loader.gif");
-  background-repeat: no-repeat;
-}
-
+*/
 .card-image{
   height: 250px;
   width: 250px;

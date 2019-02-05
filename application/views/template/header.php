@@ -15,9 +15,9 @@
     <?php  echo link_tag('css/bootstrap.css'); ?>
     <?php  echo link_tag('css/main.css'); ?>
     <?php  echo link_tag('css/offcanvas.css'); ?>
-    <?php  echo link_tag('fontawesome/css/all.min.css'); ?>
-    <?php  echo link_tag('link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Alegreya|Cuprum|Pacifico" rel="stylesheet"'); ?>
-
+    <?php  echo link_tag('fontawesome/css/all.min.css'); ?><!-- 
+    <?php  //echo link_tag('https://fonts.googleapis.com/css?family=Kaushan+Script|Alegreya|Cuprum|Pacifico"'); ?>
+ -->
   </head>
   <body class="bg-white" >
   

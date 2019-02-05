@@ -6,10 +6,8 @@
     <?php  echo link_tag('css/main.css'); ?>
     <?php  echo link_tag('css/offcanvas.css'); ?>
     <?php  echo link_tag('fontawesome/css/all.min.css'); ?>
-    <?php  echo link_tag('link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Alegreya|Cuprum|Pacifico" rel="stylesheet"'); ?>
-   <!--  <link rel="stylesheet" type="text/css" href="">
-    <link rel="stylesheet" type="text/css" href="">
-    <link rel="stylesheet" type="text/css" href="css/offcanvas.css"> -->
+  <link rel="shortcut icon" type="image/png" href="<?php echo site_url() ?>image/favicon.png">
+    <!-- <? php // echo link_tag('https://fonts.googleapis.com/css?family=Kaushan+Script|Alegreya|Cuprum|Pacifico'); ?> -->
     <meta  name="viewport" content="width=device-width, initial-scale = 1" shrink-to-fit="no">
   </head>
   <body class="bg-white">
@@ -22,8 +20,6 @@
       <div class="loader-section section-right"></div>
     </div>
 
-
-<!--     <div class="container-fluid fixed-div bg-dark "> -->
   <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-light">
     <div class="container-fluid">
       <a href="<?php echo base_url()?>"></a><img src="<?php echo site_url() ?>image/logo.png" class="logo" alt="Conmpany Name"> &nbsp; &nbsp;
@@ -34,16 +30,25 @@
       </button>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <!-- <?php //if ( current_url() == base_url()): ?>         -->
         <ul class="navbar-nav ml-auto">
+          <?php if ($this->session->user_data) {
+           if ($this->session->user_data->role_id !== '02') {?>
           <li class="nav-item"><a class="nav-link text-color tooltip-test" title="Home" href="dashboard">Home</a></li>&nbsp; &nbsp; &nbsp;
+           <?php }} ?>
+          
           <li class="nav-item"><a class="nav-link text-color tooltip-test" title="Cosultation" href="consultation">Consultatiion</a></li>&nbsp; &nbsp; &nbsp;
+          
+          <?php if ($this->session->user_data) {
+           if ($this->session->user_data->role_id !== '04') {?>
           <li class="nav-item"><a class="nav-link text-color tooltip-test" title="Marital-issues" href="maritalIssues">Marital Issues</a></li>&nbsp; &nbsp; &nbsp;
+          <?php }} ?>
+
           <li class="nav-item"><a class="nav-link text-color tooltip-test" title="About" href="about">About</a></li>&nbsp; &nbsp; &nbsp;
+          
           <li class="nav-item"><a class="nav-link text-color tooltip-test" title="Connect" href="connect">Connect</a></li>&nbsp; &nbsp; &nbsp;
 
-        <?php if (isset($this->session->user_data)): 
-        if ($this->session->userdata('user_data')->user_id.'.jpg' !== null) { ?>
+        <?php if ($this->session->user_data){ 
+        if (file_exists($this->session->userdata('user_data')->user_id.'.jpg')) { ?>
           <li class="nav-item dropdown no-arrow"> 
             <a href="" class="dropdown-toggle bg-dark" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img style="width: 50px; height: 50px; border-radius: 50px;" src="<?php echo site_url('uploads/'.$this->session->user_data->user_id.'.jpg')?>"></a>
               <div class="dropdown-menu text-color" >
@@ -54,17 +59,17 @@
           </li>
           <?php }else{ ?>
             <li class="nav-item dropdown no-arrow"> 
-            <a href="" class="dropdown-toggle bg-dark"  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img style="width: 50px; height: 50px; border-radius: 50px;" src="<?php echo site_url() ?>image/image00.jpg"></a>
+            <a href="" class="dropdown-toggle btn btn-light"  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo $this->session->user_data->first_name; ?></a>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item btn text-color" href="<?php echo site_url()?>/dashboard/profile" ><?php echo $this->session->user_data->first_name; ?></a>
                 <a class="dropdown-item btn text-color" href="<?php echo site_url()?>/dashboard/faf" >FAF</a>
                 <a class="dropdown-item btn text-color" id="logout" href="<?php echo site_url()?>/users/logout"  style="float: right; margin-left: 950px">Log Out</a>
               </div>
           </li>
-          <?php }else:  ?>
+          <?php }}else{  ?>
           <li class="nav-item"><a class="nav-link text-color tooltip-test" title="Login" href="login">Login</a></li>&nbsp; &nbsp; &nbsp;
           <li class="nav-item"><a class="nav-link text-white btn btn-color tooltip-test" title="signup" href="signup" >Get Started</a></li>    
-           <?php endif;  ?>
+           <?php }  ?>
         </ul>
       <!-- <?php// endif; ?>  -->
       </div>
@@ -161,6 +166,7 @@
        	  <img class=" w-100" height="400" src="<?php echo site_url() ?>image/image7.jpg" alt="First slide">
         </div>
         <div class="col-md-6 text-center align-items-center">
+          <div style="height: 25%"></div>
           <h3>WHY YOU SHOULD JOIN FAMILY PLUS</h3>
           <P>Our ethos is based upon the Quranic ayah in which Allah states "Women of Purity are for men of Purity and men of Purity are for women of Purity" (Quran 24:26) We believe that serving Allah SWT and actively seeking His pleasure is the ultimate foundation for success... and this can only be achieved when you marry someone who shares the same values and beliefs as you do. If that's something you believe in too, then join us today. Simply register now to find your pure match or learn more about how we can help you!</P>
         </div>

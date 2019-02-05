@@ -3,9 +3,7 @@
   <!-- sidebar-wrapper  -->
   <main class="page-content">
    
-<?php
-
- $userList = $this->user->get_user();
+<?php $userList = $this->user->get_user();
 	if(isset($page_data)){
 		$users = $page_data;
 	}else{
@@ -40,7 +38,7 @@
 </div>
 <!-- </div> -->
 
-<!-- friends profile modal pop up -->
+<!-- user profile modal pop up -->
 <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -52,8 +50,12 @@
       </div>
       	<div class="modal-body container">
       		<div class="row">
-      			<div class="col-md-4">
+      			<div class="col-md-4 offset-md-1">
       				<img style="width: 200px; height: 200px;" class="thumbnail" src="<?php echo site_url('uploads/'.$this->session->userdata('user_data')->user_id.'.jpg')?>">
+      			</div>
+      			<div class="col-md-7">
+      				<h1><?php echo ucfirst($key->first_name ." " .$key->last_name); ?></h1>
+      				<span></span>
       			</div>
       		</div>
       	</div>
@@ -64,10 +66,8 @@
   </div>
 </div>
 
-<?php foreach ($userList as $key ):
-
-			?>
-    <!-- user profile modal pop up -->
+<?php foreach ($userList as $key ): ?>
+    <!-- friends profile modal pop up -->
 <div class="modal fade" id="<?php echo $key->user_id ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">

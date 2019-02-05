@@ -59,8 +59,8 @@ $route['consultation'] = 'page/consultation';
 $route['maritalIssues'] = 'page/maritalIssues';
 
 $route['profile'] = 'dashboard/profile';
-$route['counsellor'] = 'dashboard/counsellor';
-$route['married'] = 'dashboard/married';
+// $route['counsellor'] = 'dashboard/counsellor';
+// $route['married'] = 'dashboard/married';
 $route['faf'] = 'dashboard/faf';
 $route['dashboard'] = 'dashboard/index';
 
@@ -74,6 +74,7 @@ $route['admin_delete'] = 'admin/delete';
 
 $route['user/single'] = 'users/single';
 $route['user/married'] = 'users/married';
+$route['user/counsellor'] = 'users/counsellor';
 $route['user/login'] = 'users/login_user';
 $route['logout'] = 'users/logout';
 $route['translate_uri_dashes'] = FALSE;

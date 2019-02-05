@@ -54,6 +54,7 @@
 				$data['title'] = "Admin | Single";
 				$this->load->view('template/admin_header', $data);
 				$this->load->view('template/sidebar');
+				$this->load->view('template/nav2');
 				$this->load->view('admin/admin_single');
 				$this->load->view('template/admin_footer');
 			}else {
@@ -66,6 +67,7 @@
 				$data['title'] = "Admin | Married";
 				$this->load->view('template/admin_header', $data);
 				$this->load->view('template/sidebar');
+				$this->load->view('template/nav2');
 				$this->load->view('admin/admin_married');
 				$this->load->view('template/admin_footer');
 			}else {
@@ -78,6 +80,7 @@
 				$data['title'] = "Admin | Counsellor";
 				$this->load->view('template/admin_header', $data);
 				$this->load->view('template/sidebar');
+				$this->load->view('template/nav2');
 				$this->load->view('admin/admin_counsellor');
 				$this->load->view('template/admin_footer');
 			}else {

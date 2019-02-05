@@ -10,12 +10,22 @@
       </button>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <!-- <?php //if ( current_url() == base_url()): ?>         -->
         <ul class="navbar-nav ml-auto">
+
+          <?php if ($this->session->user_data) {
+           if ($this->session->user_data->role_id !== '02') {?>
           <li class="nav-item"><a class="nav-link text-color tooltip-test" title="Home" href="dashboard">Home</a></li>&nbsp; &nbsp; &nbsp;
+           <?php }} ?>
+
           <li class="nav-item"><a class="nav-link text-color tooltip-test" title="Cosultation" href="consultation">Consultatiion</a></li>&nbsp; &nbsp; &nbsp;
+
+          <?php if ($this->session->user_data) {
+           if ($this->session->user_data->role_id !== '04') {?>
           <li class="nav-item"><a class="nav-link text-color tooltip-test" title="Marital-issues" href="maritalIssues">Marital Issues</a></li>&nbsp; &nbsp; &nbsp;
+          <?php }} ?>
+
           <li class="nav-item"><a class="nav-link text-color tooltip-test" title="About" href="about">About</a></li>&nbsp; &nbsp; &nbsp;
+
           <li class="nav-item"><a class="nav-link text-color tooltip-test" title="Connect" href="connect">Connect</a></li>&nbsp; &nbsp; &nbsp;
 
         <?php if (!isset($this->session->user_data)):   ?>

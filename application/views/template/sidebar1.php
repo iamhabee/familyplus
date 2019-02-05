@@ -12,7 +12,11 @@
       </div>
       <div class="sidebar-header">
         <div class="user-pic">
+          <?php if (file_exists($this->session->user_data->user_id.'.jpg')): ?>
           <img style="width: 50px; height: 50px; border-radius: 50px;" src="<?php echo site_url('uploads/'.$this->session->user_data->user_id.'.jpg')?>">
+          <?php else: ?>
+             <img style="width: 50px; height: 50px; border-radius: 50px;" src="<?php echo site_url('image/image00.jpg')?>">
+            <?php  endif ?>
         </div>
         <div class="user-info">
           <span class="user-name"><?php echo $this->session->userdata("user_data")->first_name; ?>
@@ -27,6 +31,7 @@
         </div>
       </div>
       <!-- sidebar-header  -->
+          <?php if ($this->session->user_data->role_id !== '03' && $this->session->user_data->role_id !== '02') {?>
       <div class="sidebar-search">
         <div>
           <div class="input-group">
@@ -39,12 +44,15 @@
           </div>
         </div>
       </div>
+        <?php } ?>
       <!-- sidebar-search  -->
       <div class="sidebar-menu">
         <ul>
           <li class="header-menu">
             <span>Pages</span>
           </li>
+
+           <?php if ($this->session->user_data->role_id !== '02') {?>
           <li >
             <a href="dashboard">
               <i class="fa fa-tachometer-alt"></i>
@@ -52,6 +60,7 @@
              <!--  <span class="badge badge-pill badge-warning">New</span> -->
             </a>
           </li>
+          <?php } ?>
           <li>
             <a href="consultation">
               <i class="fa fa-shopping-cart"></i>
@@ -59,12 +68,16 @@
               <!-- <span class="badge badge-pill badge-danger">3</span> -->
             </a>
           </li>
+
+          <?php if ($this->session->user_data->role_id !== '04') {?>
           <li>
             <a href="maritalIssues">
               <i class="far fa-gem"></i>
               <span>Marital Issues</span>
             </a>
           </li>
+        <?php } ?>
+
           <li>
             <a href="about">
               <i class="fa fa-chart-line"></i>
@@ -105,14 +118,6 @@
     </div>
     <!-- sidebar-content  -->
     <div class="sidebar-footer">
-     <!--  <a href="#">
-        <i class="fa fa-bell"></i>
-        <span class="badge badge-pill badge-warning notification">3</span>
-      </a>
-      <a href="#">
-        <i class="fa fa-envelope"></i>
-        <span class="badge badge-pill badge-success notification">7</span>
-      </a> -->
       <a href="#">
         <i class="fa fa-cog"></i>
         <span class="badge-sonar"></span>

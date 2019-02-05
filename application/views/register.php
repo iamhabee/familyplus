@@ -143,6 +143,7 @@
 				  	<div class="form-row">
 				    <div class="form-group col-md-6">
 				      <input id="password" type="password" class="form-control" name="password" placeholder="Password" style="border-width: 0px 0px 1px;">
+				      <input id="role" type="hidden" class="form-control" name="role_id" value="04">
 				    </div>
 				    <div class="form-group col-md-6">
 				      <input id="confirm" type="password" class="form-control" name="confirm_password" placeholder="Confirm Password" style="border-width: 0px 0px 1px;">
@@ -341,6 +342,7 @@
 				    </div>
 				   </div>
                     <button class="list-group-item list-group-item-action btn-color btn btn-rad text-center text-white" type="submit">Register</button>
+				    <input id="role" type="hidden" class="form-control" name="role_id" value="03">
                   </form>
                  <div class="align-items-center margin-bottom"> <p>Are you a member? <a href="login" class="btn">Login</a></p></div>
 

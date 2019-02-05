@@ -29,39 +29,26 @@
 			# code...
 			$data['title'] = "Familyplus | Register";
 			$this->load->view('template/header', $data);
-			$this->load->view('template/nav', $data);
+			$this->load->view('template/nav');
 			$this->load->view('register');
 			$this->load->view('template/footer');
 		}
 
 		public function about()
 		{
-			if ( !isset($this->session->user_data) ) {
-    		$this->session->set_flashdata('msg', "Please Login to continue");
-			$this->session->set_flashdata('flag', 'danger');
-			redirect('login');
-		}
-			# code...
+			
 			$data['title'] = "Familyplus | About";
 			$this->load->view('template/header', $data);
-			$this->load->view('template/nav', $data);
-			$this->load->view('template/sidebar1');
+			$this->load->view('template/nav');
 			$this->load->view('about');
 			$this->load->view('template/footer');
 		}
 
 		public function connect()
 		{
-			if ( !isset($this->session->user_data) ) {
-    		$this->session->set_flashdata('msg', "Please Login to continue");
-			$this->session->set_flashdata('flag', 'danger');
-			redirect('login');
-		}
-			# code...
 			$data['title'] = "Familyplus | Connect";
 			$this->load->view('template/header', $data);
-			$this->load->view('template/nav', $data);
-			$this->load->view('template/sidebar1');
+			$this->load->view('template/nav');
 			$this->load->view('connect');
 			$this->load->view('template/footer');
 		}
@@ -76,7 +63,7 @@
 			# code...
 			$data['title'] = "Familyplus | Consultation";
 			$this->load->view('template/header', $data);
-			$this->load->view('template/nav', $data);
+			$this->load->view('template/nav');
 			$this->load->view('template/sidebar1');
 			$this->load->view('consultation');
 			$this->load->view('template/footer');
@@ -92,7 +79,7 @@
 			# code...
 			$data['title'] = "Familyplus | marital-issues";
 			$this->load->view('template/header', $data);
-			$this->load->view('template/nav', $data);
+			$this->load->view('template/nav');
 			$this->load->view('template/sidebar1');
 			$this->load->view('marital-status');
 			$this->load->view('template/footer');

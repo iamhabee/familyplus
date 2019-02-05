@@ -69,8 +69,8 @@
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Login Screens:</h6>
-            <a class="collapse-item" href="login.html">Login</a>
-            <a class="collapse-item" href="register.html">Register</a>
+            <a class="collapse-item" href="login">Login</a>
+            <a class="collapse-item" href="signup">Register</a>
           </div>
         </div>
       </li>
@@ -88,13 +88,7 @@
           <i class="fas fa-fw fa-cog"></i>
           <span>Settings</span></a>
       </li>
-
-      <!-- logout -->
-      <li class="nav-item active">
-        <a class="nav-link" href="logout">
-          <i class="fas fa-fw fa-logout"></i>
-          <span>Logout</span></a>
-      </li>
+      
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
 
