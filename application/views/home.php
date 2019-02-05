@@ -5,10 +5,11 @@
    
 <?php
 
+ $userList = $this->user->get_user();
 	if(isset($page_data)){
 		$users = $page_data;
 	}else{
-		$users = $this->session->user_list;
+		$users = $userList;
 	}
 	if(isset($users)){
 		foreach ($users as $key ): 
@@ -24,7 +25,7 @@
 				   	 	<p class="card-text"><?php echo ($key->short_description); ?></p>
 			   	 	  	<!-- <img class="card-image" src="<?php //echo site_url('uploads/'.$key->user_id.'.jpg') ?>" alt="Card image cap"> -->
 				    	<hr>
-				    		<a href="#" class="card-link text-dark btn btn-color btn-sm" data-toggle="modal" data-target="#userModal"">View full Profile</a>
+				    		<a href="#" class="card-link text-dark btn btn-color btn-sm" data-toggle="modal" data-target="#<?php echo $key->user_id ?>">View full Profile</a>
 				  	</div>
 				</div>
 			</div>
@@ -52,7 +53,7 @@
       	<div class="modal-body container">
       		<div class="row">
       			<div class="col-md-4">
-      				<img style="width: 200px; height: 200px;" class="thumbnail" src="<?php echo site_url('uploads/'.$this->session->user_data->user_id.'.jpg')?>">
+      				<img style="width: 200px; height: 200px;" class="thumbnail" src="<?php echo site_url('uploads/'.$this->session->userdata('user_data')->user_id.'.jpg')?>">
       			</div>
       		</div>
       	</div>
@@ -63,8 +64,11 @@
   </div>
 </div>
 
+<?php foreach ($userList as $key ):
+
+			?>
     <!-- user profile modal pop up -->
-<div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="<?php echo $key->user_id ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -76,7 +80,7 @@
       	<div class="modal-body container">
       		<div class="row">
       			<div class="col-md-4">
-      				<img style="width: 200px; height: 200px;" class="thumbnail" src="<?php echo site_url('uploads/'.$this->session->user_data->user_id.'.jpg')?>">
+      				<img style="width: 200px; height: 200px;" class="thumbnail" src="<?php echo site_url('uploads/'.$key->user_id.'.jpg')?>">
       			</div>
       		</div>
       	</div>
@@ -86,3 +90,4 @@
     </div>
   </div>
 </div>
+<?php endforeach;?>

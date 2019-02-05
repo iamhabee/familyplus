@@ -28,8 +28,9 @@
 			return $this->db->get()->row();
 		}
 
-		public function update_user_image($user_image){
-			return $this->db->update('familyplus', $user_image);
+		public function delete_user($id){
+			$this->db->where('id', $id)->delete('familyplus');
+			return true;
 		}
 		
 		public function get_user(){
@@ -39,19 +40,19 @@
 			return $query->result();
 		}
 
-		public function search($file_name){
+		// public function search($file_name){
 
-			$this->db->select('*');
-			$this->db->from('familyplus');
-			$this->db->like('first_name', $first_name);
-			$query = $this->db->get();
-			if ($qury->num_rows() > 0) {
-				return $query->result();
-			}else{
-				return $query->result();
-			}
+		// 	$this->db->select('*');
+		// 	$this->db->from('familyplus');
+		// 	$this->db->like('first_name', $first_name);
+		// 	$query = $this->db->get();
+		// 	if ($qury->num_rows() > 0) {
+		// 		return $query->result();
+		// 	}else{
+		// 		return $query->result();
+		// 	}
 			
-		}
+		// }
 
 	}
 

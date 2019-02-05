@@ -69,8 +69,11 @@ $route['adminlogin'] = 'admin/login';
 $route['admin_counsellor'] = 'admin/counsellor';
 $route['admin_single'] = 'admin/single';
 $route['admin_married'] = 'admin/married';
+$route['admin_edit'] = 'admin/edit';
+$route['admin_delete'] = 'admin/delete';
 
-$route['user/register'] = 'users/register_user';
+$route['user/single'] = 'users/single';
+$route['user/married'] = 'users/married';
 $route['user/login'] = 'users/login_user';
 $route['logout'] = 'users/logout';
 $route['translate_uri_dashes'] = FALSE;

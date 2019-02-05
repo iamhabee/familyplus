@@ -85,6 +85,26 @@
 			}
 		}
 
+		public function edit(){
+			if ($this->session->userdata('admin_data')) {
+				$data['title'] = "Admin | Edit";
+				$this->load->view('template/admin_header', $data);
+				$this->load->view('template/sidebar');
+				$this->load->view('admin/admin_edit');
+				$this->load->view('template/admin_footer');
+			}else {
+				$this->load->view('admin/admin_login');
+			}
+		}
+
+		public function delete($id){
+
+			$this->load->model('user');
+			$this->user->delete_user($id);
+				redirect("admin");
+
+		}
+
 		public function search(){
 			$this->load->model('user');
 		$firstname = $this->input->post('search');

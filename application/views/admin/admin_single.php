@@ -237,10 +237,10 @@
                 <td><?php echo ucfirst($key->marital_status); ?></td> 
                 <!-- <td><?php //echo ucfirst($key->first_name ." " .$key->last_name); ?></td> -->
                 <td>
-                  <a href="admin_edit.php?id=<?php echo $key->id; ?>" class="btn btn-primary btn-sm">EDIT</a>
+                  <a href="admin_edit?id=<?php echo $key->id; ?>" class="btn btn-primary btn-sm">EDIT</a>
                 </td>
                 <td>
-                  <a href="admin_delete.php?id=<?php echo $key->id; ?>" class="btn btn-danger btn-sm delete-btn"> DELETE</a>
+                  <a href="<?php echo site_url('admin/delete/'). $key->id ?>" class="btn btn-danger btn-sm delete-btn"> DELETE</a>
                 </td>
               </tr>
             <?php 

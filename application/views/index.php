@@ -77,7 +77,7 @@
 	<div class="container-fluid" style=" margin-top: 0px; padding-right: 0px; padding-left: 0px;">
           <div id="demo" class="carousel slide carousel-fade" data-ride="carousel">
             <div class="carousel-inner img-height">
-              <div class="carousel-item active" style="background: white; z-index: 5;">
+              <div class="carousel-item active">
             	<img class=" w-100" height="500" src="<?php echo site_url() ?>image/image06.jpg" alt="First slide">
             	<div class="carousel-caption d-none d-md-block" style="top: 150px;">
 
@@ -90,7 +90,7 @@
 					</div>
 				</div>
               </div>
-              <div class="carousel-item" style="background: purple; z-index: 5;">
+              <div class="carousel-item">
             	<img class=" w-100" height="500" src="<?php echo site_url() ?>image/image04.jpg" alt="First slide">
             	<div class="carousel-caption d-none d-md-block" style="top: 150px;">
           <h1 class=" text-center text-color"> WELCOME TO FAMILY+</h3>
@@ -102,7 +102,7 @@
 					</div>
 				</div>
               </div>
-              <div class="carousel-item" style="background: purple; z-index: 5;">
+              <div class="carousel-item" >
             	<img class=" w-100" height="500" src="<?php echo site_url() ?>image/image05.jpg" alt="First slide">
             	<div class="carousel-caption d-none d-md-block" style="top: 150px;">
           <h1 class=" text-center text-color"> WELCOME TO FAMILY+</h1>

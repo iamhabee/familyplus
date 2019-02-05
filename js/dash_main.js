@@ -50,10 +50,13 @@ $(document).ready(function(){
 		}
 		// body...
 	});
-	// $("#couple").hide();
-	$("#married").change(function(){
-		alert($(this).val());
-	});
+
+
+	 $("#couple").hide();
+	// $("#married").change(function(){
+	// 	alert('hello am here');
+	// });
+
 
 // sidebar js
 
@@ -86,6 +89,7 @@ $("#show-sidebar").click(function() {
   $(".page-wrapper").addClass("toggled");
 });
 
+// search database
 	$("#q").keyup(function(){
 		// alert($(this).val());
 		if ($(this).val().length !== 0) {
