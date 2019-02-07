@@ -69,11 +69,14 @@ $route['adminlogin'] = 'admin/login';
 $route['admin_counsellor'] = 'admin/counsellor';
 $route['admin_single'] = 'admin/single';
 $route['admin_married'] = 'admin/married';
+$route['admin_maritalissues'] = 'admin/maritalissues';
 $route['admin_edit'] = 'admin/edit';
 $route['admin_delete'] = 'admin/delete';
 
 $route['user/single'] = 'users/single';
 $route['user/married'] = 'users/married';
+$route['user/maritalissues'] = 'users/maritalissues';
+$route['user/maritalissue'] = 'users/maritalissues_by_counsellors';
 $route['user/counsellor'] = 'users/counsellor';
 $route['user/login'] = 'users/login_user';
 $route['logout'] = 'users/logout';

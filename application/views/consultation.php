@@ -46,23 +46,58 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      	<div class="modal-body container">
-      		<div class="row">
-      			<div class="col-md-4 offset-md-1">
-      				<img style="width: 200px; height: 200px;" class="thumbnail" src="<?php echo site_url('image/image00.jpg')?>">
-      			</div>
-      			<div class="col-md-7">
-      				<h1><?php echo ucfirst($key->first_name ." " .$key->last_name); ?></h1>
-      				<span></span>
-      			</div>
-      		</div>
-      	</div>
-      <div class="modal-footer">
-        
-      </div>
+        <div class="modal-body container">
+          <div class="row" style="margin-bottom: : 10px;">
+            <div class="col-md-4 ">
+              <img style="width: 150px; height: 150px;" class="thumbnail" src="<?php echo site_url('uploads/'.$this->session->userdata('user_data')->user_id.'.jpg')?>">
+            </div>
+            <div class="col-md-8">
+              <p><?php echo ucfirst($key->first_name ." " .$key->last_name); ?></p>
+                <div><span>Home address :</span></div>
+                <div><span>Work :</span></div>
+                <div><span>Post  :</span></div>
+                <div><span>Dislikes :</span></div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <h6>Contact Info</h6><hr>
+                <div><span>Phone No :</span></div>
+                <div><span>email :</span></div>
+                <div><span>Website :</span></div>
+                <div><span>Dislikes :</span></div>
+            </div>
+              <div class="container col-md-8">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                      <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Timeline</a>
+                    </li>
+                  </ul>
+                  <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                      <h6>Basic Info</h6><hr>
+                      <div><span>Gender :</span></div>
+                      <div><span>Age :</span></div>
+                      <div><span>Likes :</span></div>
+                      <div><span>Dislikes :</span></div>
+                    </div>
+                    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                      <h6> Info</h6><hr>
+                      <div><span>Quotes :</span></div>
+                      <div><span>Role model :</span></div>
+                      <div><span>Mentor :</span></div>
+                    </div>
+                  </div>
+              </div>
+          </div>
+        </div>
     </div>
   </div>
 </div>
+
 
 <?php foreach ($userList as $key ): ?>
     <!-- friends profile modal pop up -->

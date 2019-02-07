@@ -11,15 +11,17 @@
 				$data['title'] = "Admin";
 				$this->load->view('template/admin_header', $data);
 				$this->load->view('template/sidebar');
+				$this->load->view('template/nav2');
 				$this->load->view('admin/admin_dashboard');
 				$this->load->view('template/admin_footer');
 			}else{
 				redirect('adminlogin');
 			}
 		}
+
 		public function login(){
 			if ($this->session->userdata('admin_data')) {
-				$this->load->view('admin/admin_dashboard');
+				redirect('admin');
 			}else {
 				$this->load->view('admin/admin_login');
 			}
@@ -56,6 +58,19 @@
 				$this->load->view('template/sidebar');
 				$this->load->view('template/nav2');
 				$this->load->view('admin/admin_single');
+				$this->load->view('template/admin_footer');
+			}else {
+				$this->load->view('admin/admin_login');
+			}
+		}
+
+		public function maritalissues(){
+			if ($this->session->userdata('admin_data')) {
+				$data['title'] = "Admin | Marital Issues";
+				$this->load->view('template/admin_header', $data);
+				$this->load->view('template/sidebar');
+				$this->load->view('template/nav2');
+				$this->load->view('admin/admin_maritalissues');
 				$this->load->view('template/admin_footer');
 			}else {
 				$this->load->view('admin/admin_login');

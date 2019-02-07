@@ -1,31 +1,36 @@
 
-	<div class="container-fluid margin-bottom bg-light">
-		<div class="container align-items-center" style="height: 500px;">
-			<div style="height: 30%";></div>
+	<div class="container-fluid margin-bottom bg-light bkg">
+		<div class="container align-items-center" style="height: 900px;">
+			<div style="height: 100px;"></div>
 
 			<?php if ( validation_errors() ): ?>
             <div class="alert alert-danger">
               <?php echo validation_errors() ?>
             </div>
             <?php endif; ?>
+            <div class="jumbotron bg-light text-center ">
+            	<h3>Welcome to Family Plus</h3>
+            	<p>Register as couple or single and leverage on awesome benefits this platform provides</p>
+            	<h6>Save your <b class="text-danger">Marriage</b> with thousands of ready solved marital issues </h6>
+            	<h6>Save your time seacrhing a <b class="text-danger">Pious Spouse</b>and make use of a broader algorithm to get your <em class="text-warning">Perfect Match</em></h6>
 
-        	<div class="row" style="padding: 10px; margin: 20px;">
-            	<div class="offset-md-3 col-md-4">
-	            	<a href="#" class="card-link text-dark btn btn-color btn-lg" data-toggle="modal" data-target="#singleuserModal">Register as Single</a>
-	            </div>
-	            <div class="col-md-4">
-	            	<button href="#" class="card-link text-dark btn btn-color btn-lg" data-toggle="modal" data-target="#marrieduserModal">Register as Married</button>
-	            </div>
-	        </div>
+            	<div class="row align-items-center" style="height: 50%; padding: 10px; margin: 20px;">
+	            	<div class="offset-md-2 col-md-4">
+		            	<a href="#" class="card-link text-dark btn btn-color btn-lg" data-toggle="modal" data-target="#singleuserModal">Register as Single</a>
+		            </div>
+		            <div class="col-md-4">
+		            	<button href="#" class="card-link text-dark btn btn-color btn-lg" data-toggle="modal" data-target="#marrieduserModal">Register as Married</button>
+		            </div>
+	        	</div>
+            </div>
       	</div>
-
     </div>
 
     <!-- single user register modal pop up -->
 <div class="modal fade" id="singleuserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header btn-color">
         <h5 class="modal-title" id="exampleModalCenterTitle">Register</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -46,42 +51,49 @@
 		            </div>
 		          </div>
 		           <img align="center" class="image" id="image" src="<?php echo site_url().'image/male.png'?>">
-                      
-                  <!-- <div class="form-row"> -->
+
+		           <div class="form-group">
+				     <select class="form-control" name="title" style="border-width: 0px 0px 1px;">
+	                    <option>Select Title</option>
+	                    <option>Mr</option>
+	                    <option>Mrs</option>
+	                    <option>Miss</option>
+	                    <option>Dr</option>
+	                    <option>Chief</option>
+	                    <option>Sheik</option>
+	                    <option>Msc</option>
+	                    <option>Phd</option>
+	                    <option>Professor</option>
+	                  </select>
+
+				  </div>
+
 				   <div class="form-group">
-				     <!-- <label for="fist_name">First Name</label> -->
 				     <input type="text" class="form-control" name="first_name" placeholder="First Name" style="border-width: 0px 0px 1px;">
 				   </div>
+
 				    <div class="form-group">
-				      <!-- <label for="last_name">Last Name</label> -->
 				      <input type="last_name" class="form-control" name="last_name" placeholder="Last Name" style="border-width: 0px 0px 1px;">
 				    </div>
-				  <!-- </div> -->
-				  
+
 				   <div class="form-group">
-				     <!-- <label for="other_name">Other Name</label> -->
 				     <input type="text" class="form-control" name="other_name" placeholder="Other Name" style="border-width: 0px 0px 1px;">
 				   </div>
 
 				   <div class="form-group">
-				     <!-- <label for="other_name">Other Name</label> -->
 				     <input type="text" class="form-control" name="short_description" placeholder="Short Description" style="border-width: 0px 0px 1px;">
 				   </div>
 
 				   <div class="form-group">
-				      <!-- <label for="email">Email</label> -->
 				      <input type="email" class="form-control" name="email" placeholder="Email" style="border-width: 0px 0px 1px;">
 				    </div>
-				  
 
 				  <div class="form-group">
-				     <!-- <label for="phone_number">Gender</label><br> -->
 				     <input type="radio" class="" name="gender" value="male"> Male &nbsp;&nbsp;&nbsp;
 				     <input type="radio" class="" name="gender" value="female"> Female
 				  </div>
 
 				  <div class="form-group">
-	                  <!-- <label>Marital Status</label> -->
 	                  <select class="form-control" name="marital_status" style="border-width: 0px 0px 1px;">
 	                    <option>Select Marital Status</option>
 	                    <option>Unmarried</option>
@@ -93,7 +105,6 @@
 	              </div>
 
 	              <div class="form-group">
-				     <!-- <label for="phone_number">Age Range</label><br> -->
 				     <select class="form-control" name="age_range" style="border-width: 0px 0px 1px;">
 	                    <option>Select Age Range</option>
 	                    <option>18 - 25</option>
@@ -106,12 +117,10 @@
 				  </div>
 
 				  <div class="form-group">
-				     <!-- <label for="phone_number">Phone Number</label> -->
 				     <input type="tel" class="form-control" name="phone_number" placeholder="Phone Number" style="border-width: 0px 0px 1px;">
 				  </div>
 
 				  <div class="form-group">
-	                  <!-- <label>Religion</label> -->
 	                  <select class="form-control" name="religion" style="border-width: 0px 0px 1px;">
 	                    <option>Select Religion</option>
 	                    <option>Islam</option>
@@ -124,7 +133,6 @@
 	              </div>
 
 	              <div class="form-group">
-	                  <!-- <label>Occupation</label> -->
 	                  <select class="form-control" name="occupation" style="border-width: 0px 0px 1px;">
 	                    <option>Select Occupation</option>
 	                    <option>Computer Progammer</option>
@@ -165,7 +173,7 @@
 <div class="modal fade" id="marrieduserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header btn-color">
         <h5 class="modal-title" id="exampleModalCenterTitle">Register</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -186,6 +194,20 @@
 		            </div>
 		          </div>
 		           <img align="center" class="image" id="image" src="<?php echo site_url().'image/male.png'?>">
+
+		           <div class="form-group">
+				     <select class="form-control" name="title" style="border-width: 0px 0px 1px;">
+	                    <option>Select Title</option>
+	                    <option>Mrs & Mrs</option>
+	                    <option>Miss</option>
+	                    <option>Dr</option>
+	                    <option>Chief</option>
+	                    <option>Sheik</option>
+	                    <option>Msc</option>
+	                    <option>Phd</option>
+	                    <option>Professor</option>
+	                  </select>
+				   </div>
 
 				   <div class="form-group">
 				     <input type="text" class="form-control" name="first_name" placeholder="First Name" style="border-width: 0px 0px 1px;">
@@ -218,12 +240,7 @@
 				    <div class="form-group">
 				     <input type="text" class="form-control" name="spouse_email" placeholder="Spouse email" style="border-width: 0px 0px 1px;">
 				   </div>
-				  <!-- 
-				  <div class="form-group">
-				     <input type="radio" class="" name="gender" value="male"> Male &nbsp;&nbsp;&nbsp;
-				     <input type="radio" class="" name="gender" value="female"> Female
-				  </div>
- -->
+
 				  <div class="form-group">
 	                  <select class="form-control" name="marital_status" style="border-width: 0px 0px 1px;">
 	                    <option>Select Marital Status</option>
@@ -350,4 +367,3 @@
       	</div>
     </div>
   </div>
-</div>

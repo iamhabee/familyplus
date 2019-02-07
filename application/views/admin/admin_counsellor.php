@@ -3,18 +3,10 @@
         <!-- begining of main content -->
     <section class="content">
 
-      <!-- Default box -->
-      <div class="box">
-        <div class="box-header with-border">
-          
-        <div class="box-body">
-          <div class="row">
-        <!-- left column -->
-        <div class="col-lg-12">
           <a href="#" class="btn btn-primary btn-sm"data-toggle="modal" data-target="#counsellorsModal">ADD NEW USER</a><br>
           <!--TABLE START -->
           <div class="table-responsive">
-            <table class="table-responsive table table-hover table-boardered table-striped">
+            <table class=" table table-hover table-boardered table-striped">
               <tr>
                 <th>S/NO</th>
                 <th>Firstname</th>
@@ -25,7 +17,6 @@
                 <th>Number</th>
                 <th>User ID</th>
                 <th>Description</th>
-                <th>MaritalStatus</th>
                 <th colspan="2">Action</th>
               </tr>
               <?php 
@@ -47,7 +38,6 @@
                 <td><?php echo ucfirst($key->phone_number); ?></td>
                 <td><?php echo ucfirst($key->user_id); ?></td>
                 <td><?php echo ucfirst($key->short_description); ?></td>
-                <td><?php echo ucfirst($key->marital_status); ?></td> 
                 <!-- <td><?php //echo ucfirst($key->first_name ." " .$key->last_name); ?></td> -->
                 <td>
                   <a href="admin_edit.php?id=<?php echo $key->id; ?>" class="btn btn-primary btn-sm">EDIT</a>
@@ -87,6 +77,19 @@
                   <h4 class="text-center text-green">Create A New Account</h4>
             </div>
             <form id="login" action="<?php echo site_url() ?>user/counsellor" method="POST" enctype="multipart/form-data">
+                 <div class="form-group">
+                    <select class="form-control" name="title" style="border-width: 0px 0px 1px;">
+                      <option>Select Title</option>
+                      <option>Mr & Mrs</option>
+                      <option>Miss</option>
+                      <option>Dr</option>
+                      <option>Chief</option>
+                      <option>Sheik</option>
+                      <option>Msc</option>
+                      <option>Phd</option>
+                      <option>Professor</option>
+                    </select>
+                 </div>
                  <div class="form-group">
                    <input type="text" class="form-control" name="first_name" placeholder="First Name" style="border-width: 0px 0px 1px;">
                  </div>

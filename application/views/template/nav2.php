@@ -23,12 +23,14 @@
               </div>
             </div>
           </form>
-<!--           <ul id="search_result" class="text-dark">
+          <ul class="navbar-nav ml-auto">
+          <!-- <ul id="search_result" class="text-dark"> -->
+<!--           
               <li></li>
           </ul> -->
 
           <!-- Topbar Navbar --><!-- 
-          <ul class="navbar-nav ml-auto"> -->
+           -->
 
             <!-- Nav Item - Search Dropdown (Visible Only XS) -->
            <!--  <li class="nav-item dropdown no-arrow d-sm-none">
@@ -188,5 +190,6 @@
           </ul>
 
         </nav>
-    
         <!-- End of Topbar -->
+
+        

@@ -1,5 +1,5 @@
 
-      <div class="container-fluid bg-white  margin">
+      <div class="container-fluid bg-white">
         <footer class=" text-center text-secondary">
           <p>&copy; TechEnd 2018 copyright reserved</p>
         </footer>

@@ -1,10 +1,12 @@
-/*body{
-  background-image: url("../image/event5.jpg");
+.bkg{
+  background-image: url("../image/image01.jpg");
   background-repeat: no-repeat;
   background-position: cover;
-  background-size: 100%; */
-  /*position: absolute;
-}*/
+  background-size: 100%; 
+  /*position: absolute;*/
+  height: 100%;
+  width: 100%;
+}
  /*h2, h3, h4, h5, h6, label{
   font-family: 'Cuprum', sans-serif;*/
   /*font-family: 'Alegreya', serif;

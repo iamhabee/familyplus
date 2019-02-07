@@ -12,6 +12,7 @@
 		{
 			$this->load->model('user');
 
+			$this->form_validation->set_rules('title', 'Title', 'required');
 			$this->form_validation->set_rules('first_name', 'First Name', 'required|trim|alpha');
 			$this->form_validation->set_rules('last_name', 'Last Name', 'required|trim|alpha');
 			$this->form_validation->set_rules('other_name', 'Other Name', 'required|trim|alpha');
@@ -37,9 +38,12 @@
 				$this->load->view('template/footer');
 
 			else:
+
+					$_POST['token']=random_string('alnum', 32);
+					$url = "localhost/familyplus/users/activation/".$_POST['token'];
 					$msg = "Hi ".$this->input->post('full_name').", You are welcome to FamilyPlus.";
 					$msg .= "Please Verify Your  account By Clicking The Link Below";
-					$msg .= " <button><a href=''>Activate</a></button>";
+					$msg .= "<button><a href='<?php echo (".$url.")?>'>Activate</a></button>";
 
 				$message = "
 					     <html>
@@ -65,6 +69,7 @@
 					    $this->user->register_user($newuser);
 					     $this->session->set_flashdata('msg', "Registration Successfull! An activation Email have been sent to your mail. Please check your mail to activate your account");
 					     $this->session->set_flashdata('flag', 'success');
+					     
 					     redirect('login');
 					   
 					else:
@@ -81,6 +86,7 @@
 		{
 			$this->load->model('user');
 
+			$this->form_validation->set_rules('title', 'Title', 'required');
 			$this->form_validation->set_rules('first_name', 'First Name', 'required|trim|alpha');
 			$this->form_validation->set_rules('spouse_first_name', 'Spouse First Name', 'required|trim|alpha');
 			$this->form_validation->set_rules('last_name', 'Last Name', 'required|trim|alpha');
@@ -114,10 +120,11 @@
 				$this->load->view('template/footer');
 
 			else:
+					$_POST['token']=random_string('alnum', 32);
+					$url = "localhost/familyplus/users/activation/".$_POST['token'];
 					$msg = "Hi ".$this->input->post('full_name').", You are welcome to FamilyPlus.";
 					$msg .= "Please Verify Your  account By Clicking The Link Below";
-					$msg .= " <button><a href=''>Activate</a></button>";
-
+					$msg .= "<button><a href='<?php echo (".$url.")?>'>Activate</a></button>";
 				$message = "
 					     <html>
 					       <head>
@@ -158,6 +165,7 @@ public function counsellor()
 		{
 			$this->load->model('user');
 
+			$this->form_validation->set_rules('title', 'Title', 'required');
 			$this->form_validation->set_rules('first_name', 'First Name', 'required|trim|alpha');
 			$this->form_validation->set_rules('last_name', 'Last Name', 'required|trim|alpha');
 			$this->form_validation->set_rules('other_name', 'Other Name', 'required|trim|alpha');
@@ -166,8 +174,6 @@ public function counsellor()
 			$this->form_validation->set_rules('phone_number', 'Phone Number', 'required|trim|is_numeric|min_length[11]|max_length[13]');
 
 			$this->form_validation->set_rules('gender', 'Gender', 'required');
-			// $this->form_validation->set_rules('marital_status', 'Marital Status', 'required');
-			// $this->form_validation->set_rules('age_range', 'Age range', 'required');
 			$this->form_validation->set_rules('religion', 'Religion', 'required');
 			$this->form_validation->set_rules('occupation', 'Occupation', 'required');
 			$this->form_validation->set_rules('password', 'Password', 'required|trim|max_length[10]|min_length[8]');
@@ -183,9 +189,11 @@ public function counsellor()
 				$this->load->view('template/footer');
 
 			else:
+					$_POST['token']=random_string('alnum', 32);
+					$url = "localhost/familyplus/users/activation/".$_POST['token'];
 					$msg = "Hi ".$this->input->post('full_name').", You are welcome to FamilyPlus.";
 					$msg .= "Please Verify Your  account By Clicking The Link Below";
-					$msg .= " <button><a href=''>Activate</a></button>";
+					$msg .= "<button><a href='<?php echo (".$url.")?>'>Activate</a></button>";
 
 				$message = "
 					     <html>
@@ -239,7 +247,11 @@ public function counsellor()
 
 				$details = $this->user->get_user_by_email($email);
 				if ($details){
-
+					if ($details->acct_status === 'pending') {
+						$this->session->set_flashdata('msg', 'Please activate account');
+						$this->session->set_flashdata('flag', 'info');
+						redirect("login");
+						}
 					if (md5($password) === $details->password) {
 
 						$this->session->set_flashdata('msg', 'Login Successful');
@@ -248,7 +260,7 @@ public function counsellor()
 						
 						$this->session->set_userdata('user_data', $details);
 
-						if ($details->role_id == 02){
+						if ($details->role_id === '02'){
 							redirect("consultation");
 						}
 						else{
@@ -312,6 +324,69 @@ public function counsellor()
         return false;
     }
 }
+
+		public function activation($token){
+			$check = $this->db->get_where('familyplus',  array('token' => $token))->row();
+				if ($check) {
+					if($check->acct_status === 'pending'){
+						$this->db->set('acct_status', 'active')->where('token', $token)->update('familyplus');
+
+						$this->session->set_flashdata('msg', 'Account Activated Successfully');
+						$this->session->set_flashdata('flag', 'success');
+						redirect('login');
+					}elseif($check->acct_status === 'active'){
+
+						$this->session->set_flashdata('msg', 'Account Activated already');
+						$this->session->set_flashdata('flag', 'info');
+						redirect('login');
+
+					}else{
+						$this->session->set_flashdata('msg', 'Account Activation failed');
+						$this->session->set_flashdata('flag', 'danger');
+						redirect('login');
+					}
+				}
+
+		}
+
+		public function maritalissues(){
+			$this->form_validation->set_rules('article', 'Article', 'required');
+			$this->form_validation->set_rules('title', 'Title', 'required');
+			if ( $this->form_validation->run() === FALSE):
+
+			$this->session->set_flashdata('msg', "Not Successful");
+			$this->session->set_flashdata('flag', 'danger');
+				redirect('admin');
+
+			else:
+			$issues = $this->input->post();
+			$sql = $this->db->insert_string('maritalissues', $issues);
+			$this->db->query($sql);
+			$this->session->set_flashdata('msg', "Article posted Successfully");
+			$this->session->set_flashdata('flag', 'success');
+			 redirect('admin');
+			endif;
+		}
+
+		public function maritalissues_by_counsellors(){
+			$this->form_validation->set_rules('article', 'Article', 'required');
+			$this->form_validation->set_rules('title', 'Title', 'required');
+			$this->form_validation->set_rules('description', 'Description', 'required');
+			if ( $this->form_validation->run() === FALSE):
+
+			$this->session->set_flashdata('msg', "Not Successful");
+			$this->session->set_flashdata('flag', 'danger');
+				redirect('maritalIssues');
+
+			else:
+			$issues = $this->input->post();
+			$sql = $this->db->insert_string('maritalissues', $issues);
+			$this->db->query($sql);
+			$this->session->set_flashdata('msg', "Article posted Successfully");
+			$this->session->set_flashdata('flag', 'success');
+			 redirect('maritalIssues');
+			endif;
+		}
 
 		public function logout(){
 			session_destroy();
