@@ -19,6 +19,13 @@
 
 		}
 
+		public function register_user_chat($user_detail){
+
+			$sql = $this->db->insert_string('users', $user_detail);
+			return $this->db->query($sql);
+
+		}
+
 
 		public function get_user_by_email($email){
 			// return $email;
@@ -33,13 +40,32 @@
 			return true;
 		}
 		
-		public function get_user(){
+		public function delete_schedule($id){
+			$this->db->where('user_id', $id)->delete('scheduler');
+			return true;
+		}
 
+		public function get_comunity(){
+
+			$this->db->from('comunity');
+			$query=$this->db->get();
+			return $query->result();
+		}
+
+		public function get_users(){
+			$this->db->select('*');
 			$this->db->from('familyplus');
 			$query=$this->db->get();
 			return $query->result();
 		}
 
+		public function get_schedule($user_id){
+			// return $email;
+			$this->db->select('*');
+			$this->db->from('scheduler');
+			$this->db->where('user_id', $user_id);
+			return $this->db->get()->row();
+		}
 		// public function search($file_name){
 
 		// 	$this->db->select('*');

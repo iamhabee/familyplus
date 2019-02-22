@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost/familyplus';
+$config['base_url'] = 'http://'.$_SERVER['HTTP_HOST'].'/familyplus/';
 
 $config['smtp_pass'] = "dsquare1234";
 $config['smtp_user'] = "habeehola18@gmail.com";
@@ -452,11 +452,31 @@ $config['global_xss_filtering'] = FALSE;
 | 'csrf_exclude_uris' = Array of URIs which ignore CSRF checks
 */
 $config['csrf_protection'] = FALSE;
-$config['csrf_token_name'] = 'csrf_test_name';
-$config['csrf_cookie_name'] = 'csrf_cookie_name';
+$config['csrf_token_name'] = 'ovejobs';
+$config['csrf_cookie_name'] = 'ovejobs';
 $config['csrf_expire'] = 7200;
 $config['csrf_regenerate'] = TRUE;
-$config['csrf_exclude_uris'] = array();
+$config['csrf_exclude_uris'] = array('dashboard-login','dashboard-register',
+'upload-profile','profile-password-update','profile-details-update',
+'vendor/list','vendor/grid-data','vendor/trash','vendor/status','vendor-register-api',
+'customer/list','customer/grid-data','customer/trash','customer/status',
+'add-category','category-grid-data','category_view','edit_category','trash-category',
+'slider-grid-data','add-slide','edit_slide','slide/status',
+'brand-grid-data','add-brand','edit_brand','brand/status',
+'add-product','edit-product','all-products','products/grid-data','childCategory','add-product-api',
+'add_coupon_api','edit_coupon_api','edit-coupon','coupon_grid_data','coupon_trash',
+'orders/grid_data','galleryimagesremove','update_product_api', 'admin-full-invoice','order/trash-admin',
+'product/trash','user-register','webuser-login',
+'add-to-cart','wishlist/removeItem','add-to-cart-product',
+'upload-photo','update-profile-details',
+'proceed-to-order',
+'order/update-status',
+'user-submit-review','remove-review-on-product',
+'send-message','chat-attachment/upload',
+'blog-post',
+'delete-post','update-blog','trash-blog',
+'add-product-brand','brand-product-grid-data','edit_product_brand',
+);
 
 /*
 |--------------------------------------------------------------------------

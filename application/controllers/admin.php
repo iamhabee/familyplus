@@ -23,7 +23,11 @@
 			if ($this->session->userdata('admin_data')) {
 				redirect('admin');
 			}else {
+				$data['title'] = "Admin | Login";
+				$this->load->view('template/header', $data);
+				$this->load->view('template/nav');
 				$this->load->view('admin/admin_login');
+				$this->load->view('template/footer');
 			}
 		}
 

@@ -1,6 +1,8 @@
-   </nav>
-  <main class="page-content">
-   
+ 
+<div class="content-wrapper"> 
+  
+  <section class="content">
+     <div class="row">
 	<?php $userList = $this->user->get_user();
 	// var_dump($userList);
 	if(isset($page_data)){
@@ -13,7 +15,6 @@
 			if ( $key->role_id !== "02") {
 				continue;
 			}?>
-		<div class="row">
 			<div class="col-md-8">
 				<div class="card">
 					<div class="card-body">
@@ -27,15 +28,23 @@
 				  	</div>
 				</div>
 			</div>
-		</div>
 
 	<?php endforeach;
 		}else{
 			echo "No Result Found";
 		}
 	 ?>
-</main>
-
+   </div>
+    
+    <!-- /.row --> 
+    
+    
+    
+  </section>
+  
+  <!-- /.content --> 
+  
+</div>
 <!-- user profile modal pop up -->
 <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">

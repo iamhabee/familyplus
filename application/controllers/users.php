@@ -64,7 +64,6 @@
 					
 
 					
-
 					if($this->send_mail($this->input->post('email'), "Account Registration", $message)):
 					    $this->user->register_user($newuser);
 					     $this->session->set_flashdata('msg', "Registration Successfull! An activation Email have been sent to your mail. Please check your mail to activate your account");
@@ -349,7 +348,7 @@ public function counsellor()
 
 		}
 
-		public function maritalissues(){
+		public function issues(){
 			$this->form_validation->set_rules('article', 'Article', 'required');
 			$this->form_validation->set_rules('title', 'Title', 'required');
 			if ( $this->form_validation->run() === FALSE):
@@ -365,6 +364,24 @@ public function counsellor()
 			$this->session->set_flashdata('msg', "Article posted Successfully");
 			$this->session->set_flashdata('flag', 'success');
 			 redirect('admin');
+			endif;
+		}
+
+		public function comunity(){
+			$this->form_validation->set_rules('post', 'Post', 'required');
+			if ( $this->form_validation->run() === FALSE):
+
+			$this->session->set_flashdata('msg', "Not Successful");
+			$this->session->set_flashdata('flag', 'danger');
+				redirect('dashboard');
+
+			else:
+			$comunity = $this->input->post();
+			$sql = $this->db->insert_string('comunity', $comunity);
+			$this->db->query($sql);
+			$this->session->set_flashdata('msg', "Posted Successfully");
+			$this->session->set_flashdata('flag', 'success');
+			 redirect('dashboard');
 			endif;
 		}
 
@@ -385,6 +402,27 @@ public function counsellor()
 			$this->session->set_flashdata('msg', "Article posted Successfully");
 			$this->session->set_flashdata('flag', 'success');
 			 redirect('maritalIssues');
+			endif;
+		}
+		public function scheduler(){
+			$this->form_validation->set_rules('name', 'Name', 'required');
+			$this->form_validation->set_rules('description', 'Description', 'required');
+			$this->form_validation->set_rules('counsellor', 'Counsellor', 'required');
+			$this->form_validation->set_rules('date', 'Date', 'required');
+			$this->form_validation->set_rules('time', 'Time', 'required');
+			if ( $this->form_validation->run() === FALSE):
+
+			$this->session->set_flashdata('msg', "Schedule not Successful");
+			$this->session->set_flashdata('flag', 'danger');
+				redirect('dashboard');
+
+			else:
+			$schedule = $this->input->post();
+			$sql = $this->db->insert_string('scheduler', $schedule);
+			$this->db->query($sql);
+			$this->session->set_flashdata('msg', "A meeting was Successfully scheduled");
+			$this->session->set_flashdata('flag', 'success');
+			 redirect('dashboard');
 			endif;
 		}
 

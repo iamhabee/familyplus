@@ -20,54 +20,80 @@
       <div class="loader-section section-right"></div>
     </div>
 
-  <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-light">
+  <nav class="navbar navbar-expand-lg fixed-top navbar-dark blue">
     <div class="container-fluid">
       <a href="<?php echo base_url()?>"></a><img src="<?php echo site_url() ?>image/logo.png" class="logo" alt="Conmpany Name"> &nbsp; &nbsp;
-      <a href="<?php echo base_url()?>" class="navbar-brand text-color">FamilyPlus</a>
+      <a href="<?php echo base_url()?>" class="navbar-brand text-white">FamilyPlus</a>
 
-      <button class="navbar-toggler bg-dark" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+      <button class="navbar-toggler blue" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
-          <?php if ($this->session->user_data) {
-           if ($this->session->user_data->role_id !== '02') {?>
-          <li class="nav-item"><a class="nav-link text-color tooltip-test" title="Home" href="dashboard">Home</a></li>&nbsp; &nbsp; &nbsp;
-           <?php }} ?>
+          <li class="nav-item"><a class="nav-link text-white tooltip-test" title="Home" href="dashboard">Community</a></li>&nbsp; &nbsp; &nbsp;
           
-          <li class="nav-item"><a class="nav-link text-color tooltip-test" title="Cosultation" href="consultation">Consultatiion</a></li>&nbsp; &nbsp; &nbsp;
-          
-          <?php if ($this->session->user_data) {
-           if ($this->session->user_data->role_id !== '04') {?>
-          <li class="nav-item"><a class="nav-link text-color tooltip-test" title="Marital-issues" href="maritalIssues">Marital Issues</a></li>&nbsp; &nbsp; &nbsp;
-          <?php }} ?>
+          <li class="nav-item"><a class="nav-link text-white tooltip-test" title="Cosultation" href="chat">Consultatiion</a></li>&nbsp; &nbsp; &nbsp;
 
-          <li class="nav-item"><a class="nav-link text-color tooltip-test" title="About" href="about">About</a></li>&nbsp; &nbsp; &nbsp;
-          
-          <li class="nav-item"><a class="nav-link text-color tooltip-test" title="Connect" href="connect">Connect</a></li>&nbsp; &nbsp; &nbsp;
+          <li class="nav-item"><a class="nav-link text-white tooltip-test" title="Marital-issues" href="maritalIssues">Marital Issues</a></li>&nbsp; &nbsp; &nbsp;
 
+          <li class="nav-item"><a class="nav-link text-white tooltip-test" title="About" href="about">About</a></li>&nbsp; &nbsp; &nbsp;
+          
+          <li class="nav-item"><a class="nav-link text-white tooltip-test" title="Connect" href="connect">Connect</a></li>&nbsp; &nbsp; &nbsp;
+          
         <?php if ($this->session->user_data){ 
         if (file_exists($this->session->userdata('user_data')->user_id.'.jpg')) { ?>
-          <li class="nav-item dropdown no-arrow"> 
-            <a href="" class="dropdown-toggle bg-dark" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img style="width: 50px; height: 50px; border-radius: 50px;" src="<?php echo site_url('uploads/'.$this->session->user_data->user_id.'.jpg')?>"></a>
-              <div class="dropdown-menu text-color" >
-                <a class="dropdown-item text-color" href="<?php echo site_url()?>profile" ><?php echo $this->session->user_data->first_name; ?></a>
-                <a class="dropdown-item text-color" href="<?php echo site_url()?>faf" >FAF</a>
-                <a class="dropdown-item text-color" id="logout" href="<?php echo site_url()?>logout"  style="float: right; margin-left: 950px">Log Out</a>
-              </div>
+
+          <li class="nav-item dropdown user user-menu">
+            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+              <img style="width: 50px; height: 50px; border-radius: 50px;" src="<?php echo site_url('uploads/'.$this->session->user_data->user_id.'.jpg')?>">
+              <span class="hidden-xs NameEdt"><?=$this->session->user_data->first_name;?></span>
+            </a>
+            <ul class="dropdown-menu ">
+              <!-- User image -->
+              <li class="user-header">
+              
+                <img style="width: 200px; height: 178px; border-radius: 50px;" src="<?php echo site_url('uploads/'.$this->session->user_data->user_id.'.jpg')?>">
+                <p>
+                  <span class="NameEdt"> <?=$this->session->user_data->first_name;?></span> -
+                </p>
+              </li>
+              <!-- Menu Footer-->
+              <li class="user-footer">
+                <div class="pull-left">
+                  <a href="<?=base_url('profile');?>" class="btn btn-default btn-flat">Profile</a>
+                </div>
+                <div class="pull-right">
+                  <a href="<?=base_url('logout');?>" class="btn btn-default btn-flat">Sign out</a>
+                </div>
+              </li>
+            </ul>
           </li>
           <?php }else{ ?>
-            <li class="nav-item dropdown no-arrow"> 
-            <a href="" class="dropdown-toggle btn btn-light"  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo $this->session->user_data->first_name; ?></a>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item btn text-color" href="<?php echo site_url()?>/dashboard/profile" ><?php echo $this->session->user_data->first_name; ?></a>
-                <a class="dropdown-item btn text-color" href="<?php echo site_url()?>/dashboard/faf" >FAF</a>
-                <a class="dropdown-item btn text-color" id="logout" href="<?php echo site_url()?>/users/logout"  style="float: right; margin-left: 950px">Log Out</a>
-              </div>
+            <li class="nav-item dropdown user user-menu">
+            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+              <span class="hidden-xs NameEdt"><?=$this->session->user_data->first_name;?></span>
+            </a>
+            <ul class="dropdown-menu ">
+              <!-- User image -->
+              <li class="user-header">
+                <p>
+                  <span class="NameEdt"> <?=$this->session->user_data->first_name;?></span> 
+                </p>
+              </li>
+              <!-- Menu Footer-->
+              <li class="user-footer">
+                <div class="pull-left">
+                  <a href="<?=base_url('profile');?>" class="btn btn-default btn-flat">Profile</a>
+                </div>
+                <div class="pull-right">
+                  <a href="<?=base_url('logout');?>" class="btn btn-default btn-flat">Sign out</a>
+                </div>
+              </li>
+            </ul>
           </li>
           <?php }}else{  ?>
-          <li class="nav-item"><a class="nav-link text-color tooltip-test" title="Login" href="login">Login</a></li>&nbsp; &nbsp; &nbsp;
+          <li class="nav-item"><a class="nav-link text-white tooltip-test" title="Login" href="login">Login</a></li>&nbsp; &nbsp; &nbsp;
           <li class="nav-item"><a class="nav-link text-white btn btn-color tooltip-test" title="signup" href="signup" >Get Started</a></li>    
            <?php }  ?>
         </ul>
@@ -79,14 +105,14 @@
 
 
 <!-- slide container begin -->
-	<div class="container-fluid" style=" margin-top: 0px; padding-right: 0px; padding-left: 0px;">
+	<div class="container-fluid margin" style=" padding-right: 0px; padding-left: 0px;">
           <div id="demo" class="carousel slide carousel-fade" data-ride="carousel">
             <div class="carousel-inner img-height">
               <div class="carousel-item active">
             	<img class=" w-100" height="500" src="<?php echo site_url() ?>image/image06.jpg" alt="First slide">
             	<div class="carousel-caption d-none d-md-block" style="top: 150px;">
 
-          <h1 class=" text-center text-color"> WELCOME TO FAMILY+</h1>
+          <h1 class=" text-center text-color"> WELCOME TO familyPlus</h1>
 					<h3 class=" text-center text-dark"> A safe place to meet your Better Half</h3>
 					<p class=" text-center text-dark">..THE SUNNAH WAY</p>
 					<!-- Button -->
@@ -98,7 +124,7 @@
               <div class="carousel-item">
             	<img class=" w-100" height="500" src="<?php echo site_url() ?>image/image04.jpg" alt="First slide">
             	<div class="carousel-caption d-none d-md-block" style="top: 150px;">
-          <h1 class=" text-center text-color"> WELCOME TO FAMILY+</h3>
+          <h1 class=" text-center text-color"> WELCOME TO familyPlus+</h3>
 					<h3 class=" text-center text-dark"> Take your relationship to the next Level </h1>
 					<p class=" text-center text-dark">..THE SUNNAH WAY</p>
 					<!-- Button -->
@@ -110,7 +136,7 @@
               <div class="carousel-item" >
             	<img class=" w-100" height="500" src="<?php echo site_url() ?>image/image05.jpg" alt="First slide">
             	<div class="carousel-caption d-none d-md-block" style="top: 150px;">
-          <h1 class=" text-center text-color"> WELCOME TO FAMILY+</h1>
+          <h1 class=" text-center text-color"> WELCOME TO familyPlus+</h1>
 					<h3 class=" text-center text-dark">A safe place to resolve family matters</h3>
 					<p class=" text-center text-dark">..THE SUNNAH WAY</p>
 					<div class="text-center">

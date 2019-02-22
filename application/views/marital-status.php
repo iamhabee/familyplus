@@ -1,20 +1,31 @@
-   </nav>
-  <main class="page-content">
+<div class="content-wrapper"> 
+  <section class="content">
+     <div class="row margin">
+        <div class="col-md-8">
+              <?php if ( validation_errors() ): ?>
+                  <div class="alert alert-danger">
+                    <?php echo validation_errors() ?>
+                  </div>
+                  <?php endif; ?>
 
-    <?php  if ($this->session->user_data->role_id == 02) {?>
-      <form action="<?php echo site_url() ?>user/maritalissue" method="POST">
-      <input type="text" style="width: 30%" class="form-control" name="title" placeholder="Title"><br>
-      <input type="text" style="width: 30%" class="form-control" name="description" placeholder="Description"><br>
-      <input type="hidden" style="width: 30%" class="form-control" name="created_by" value="<?php echo $this->session->user_data->title." " .$this->session->user_data->first_name ?>" placeholder="Title">
-      <textarea style="margin: 3px 10px 0px 5px; width: 90%; height: 200px;" name="article">Marital Issues Article</textarea>
-      <button class="btn btn-color btn-sm" type="submit"> Submit</button>
-    </form>
-  <?php }
-   $users = $this->db->get('maritalissues')->result(); 
-        if ($users) {
+                   <?php if ( $this->session->flashdata('msg') ): ?>
+                  <div class="alert alert-<?php echo $this->session->flashdata('flag')?>">
+                    <?php echo $this->session->flashdata('msg') ?>
+                  </div>
+                  <?php endif; ?>
+              <?php  if ($this->session->user_data->role_id == 02) {?>
+
+            <form action="<?php echo site_url() ?>user/issue" method="POST">
+            <input type="text" style="width: 30%" class="form-control" name="title" placeholder="Title"><br>
+            <input type="text" style="width: 30%" class="form-control" name="description" placeholder="Description"><br>
+            <input type="hidden" style="width: 30%" class="form-control" name="created_by" value="<?php echo $this->session->user_data->title." " .$this->session->user_data->first_name ?>" placeholder="Title">
+            <textarea style="margin: 3px 10px 0px 5px; width: 80%; height: 100px;" name="article">Marital Issues Article</textarea>
+            <button class="btn btn-color btn-sm" type="submit"> Submit</button>
+          </form> 
+          <?php }
+           $users = $this->db->get('maritalissues')->result(); 
+              if ($users) {
             foreach ($users as $key ): ?>
-              <div class="row">
-                <div class="col-md-8">
                   <div class="card">
                     <div class="card-body">
                         <h3 class="card-title"><?php echo ucfirst($key->title); ?></h3>
@@ -24,19 +35,18 @@
                           <a href="#" class="card-link text-white btn btn-color btn-sm" data-toggle="modal" data-target="#">Jazakumullahu</a>
                           <a href="#" class="card-link text-white btn btn-danger btn-sm" data-toggle="modal" data-target="#"><i class="fa fa-comment"></i>Questions</a>
                       </div>
-                  </div>
-                </div>
-              </div>   
+                  </div>   
             <?php 
             endforeach ;
-          } else{
+          } else{?>
 
-            ?>
-            <tr><td colspan="9"><b style="color: red">NO articles FOUND!!!</b></td></tr> 
+            <h1><b style="color: red">NO articles FOUND!!!</b></h1>
             <?php } ?>
-            
-</main>
+        </div>
+      </div>
 
+  </section>
+</div>
 <!-- user profile modal pop up -->
 <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">

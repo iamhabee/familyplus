@@ -19,7 +19,7 @@
 			# code...
 			$data['title'] = "Familyplus | Login";
 			$this->load->view('template/header', $data);
-			$this->load->view('template/nav', $data);
+			$this->load->view('template/nav');
 			$this->load->view('login');
 			$this->load->view('template/footer');
 		}
@@ -62,11 +62,11 @@
 		}
 			# code...
 			$data['title'] = "Familyplus | Consultation";
-			$this->load->view('template/header', $data);
-			$this->load->view('template/nav');
-			$this->load->view('template/sidebar1');
+			$this->load->view('include/header',$data);
+			$this->load->view('include/topbar');
+			$this->load->view('include/sidebar');
 			$this->load->view('consultation');
-			$this->load->view('template/footer');
+			$this->load->view('include/footer');
 		}
 
 		public function maritalIssues()
@@ -78,11 +78,11 @@
 		}
 			# code...
 			$data['title'] = "Familyplus | marital-issues";
-			$this->load->view('template/header', $data);
-			$this->load->view('template/nav');
-			$this->load->view('template/sidebar1');
+			$this->load->view('include/header',$data);
+			$this->load->view('include/topbar');
+			$this->load->view('include/sidebar');
 			$this->load->view('marital-status');
-			$this->load->view('template/footer');
+			$this->load->view('include/footer');
 		}
 
 		public function live_search(){

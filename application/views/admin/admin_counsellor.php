@@ -3,7 +3,7 @@
         <!-- begining of main content -->
     <section class="content">
 
-          <a href="#" class="btn btn-primary btn-sm"data-toggle="modal" data-target="#counsellorsModal">ADD NEW USER</a><br>
+          <a href="#" class="btn btn-primary btn-sm"data-toggle="modal" data-target="#counsellorsModal">ADD NEW Counsellor</a><br>
           <!--TABLE START -->
           <div class="table-responsive">
             <table class=" table table-hover table-boardered table-striped">
@@ -116,6 +116,24 @@
 
                 <div class="form-group">
                    <input type="tel" class="form-control" name="phone_number" placeholder="Phone Number" style="border-width: 0px 0px 1px;">
+                </div>
+
+                <div class="form-group">
+                  <label> Courses </label><br>
+                    <input type="checkbox" name="monday" value="Monday"> Monday<br>
+                    <input type="checkbox" name="tuesday" value="Tuesdaay"> Tuesday<br>
+                    <input type="checkbox" name="wednesday" value="Wednesday"> Wednesday<br>
+                    <input type="checkbox" name="thursday" value="Thursday"> Thursday<br>
+                    <input type="checkbox" name="friday" value="Friday"> Friday<br>
+                    <input type="checkbox" name="saturday" value="Saturday"> Saturday<br>
+                    <input type="checkbox" name="sunday" value="Sunday"> Sunday<br>
+                </div>
+
+                <div class="form-group">
+                  <label> Courses </label><br>
+                    <input type="checkbox" name="morning" value="10am to 12am"> Morning Session<br>
+                    <input type="checkbox" name="afternoon" value="2pm to 4pm"> Afternoon Session<br>
+                    <input type="checkbox" name="evening" value="8pm to 9pm"> Evening Session<br>
                 </div>
 
                 <div class="form-group">

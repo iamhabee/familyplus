@@ -1,4 +1,4 @@
-    <div class="container-fluid margin-bottom bg-light">
+    <div class="container-fluid margin margin-bottom bg-light">
       <div class="col-md-4 offset-md-4" >
         <div class="row">
           <div class="col-md-12 " style="background-color: white; padding-top: 5px; padding-bottom: 15px; margin-top: 30px; border-radius: 5px;">

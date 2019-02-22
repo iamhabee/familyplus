@@ -58,12 +58,8 @@ $route['connect'] = 'page/connect';
 $route['consultation'] = 'page/consultation';
 $route['maritalIssues'] = 'page/maritalIssues';
 
-$route['profile'] = 'dashboard/profile';
-// $route['counsellor'] = 'dashboard/counsellor';
-// $route['married'] = 'dashboard/married';
-$route['faf'] = 'dashboard/faf';
-$route['dashboard'] = 'dashboard/index';
 
+$route['dashboard'] = 'dashboard/index';
 $route['admin'] = 'admin/index';
 $route['adminlogin'] = 'admin/login';
 $route['admin_counsellor'] = 'admin/counsellor';
@@ -75,9 +71,28 @@ $route['admin_delete'] = 'admin/delete';
 
 $route['user/single'] = 'users/single';
 $route['user/married'] = 'users/married';
-$route['user/maritalissues'] = 'users/maritalissues';
-$route['user/maritalissue'] = 'users/maritalissues_by_counsellors';
+$route['user/issues'] = 'users/issues';
+$route['user/comunity'] = 'users/comunity';
+$route['user/issue'] = 'users/maritalissues_by_counsellors';
 $route['user/counsellor'] = 'users/counsellor';
+$route['user/scheduler'] = 'users/scheduler';
 $route['user/login'] = 'users/login_user';
 $route['logout'] = 'users/logout';
 $route['translate_uri_dashes'] = FALSE;
+
+// chat 
+$route['profile'] = 'ProfileController/index';
+$route['upload-profile'] = 'ProfileController/change_photo';
+$route['profile-password-update'] = 'ProfileController/change_user_profile_password_update';
+$route['profile-details-update'] = 'ProfileController/user_update_profile_data';
+$route['i-forgot-my-password'] = 'ProfileController/forgot_password';
+$route['forgot-password'] = 'ProfileController/forgot_password_email';
+$route['all-messages'] = 'MessagesController/index';
+$route['view-all-notifications'] = 'NotificationsController/index';
+
+////////////////
+$route['chat'] = 'ChatController/index';
+$route['send-message'] = 'ChatController/send_text_message';
+$route['chat-attachment/upload'] = 'ChatController/send_text_message';
+$route['get-chat-history-vendor'] = 'ChatController/get_chat_history_by_vendor';
+$route['chat-clear'] = 'ChatController/chat_clear_client_cs';

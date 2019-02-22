@@ -1,41 +1,64 @@
 
-  </nav>
-  <!-- sidebar-wrapper  -->
-  <main class="page-content">
-   
-<?php $userList = $this->user->get_user();
-	if(isset($page_data)){
-		$users = $page_data;
-	}else{
-		$users = $userList;
-	}
-	if(isset($users)){
-		foreach ($users as $key ): 
-			if ($key == $this->session->user_data) {
-				continue;
-			}?>
-		<div class="row">
-			<div class="col-md-8">
+<div class="content-wrapper"> 
+  
+  <section class="content">
+     <div class="row margin">
+
+        <div class="col-md-8">
+          <?php if ( validation_errors() ): ?>
+            <div class="alert alert-danger">
+              <?php echo validation_errors() ?>
+            </div>
+            <?php endif; ?>
+
+             <?php if ( $this->session->flashdata('msg') ): ?>
+            <div class="alert alert-<?php echo $this->session->flashdata('flag')?>">
+              <?php echo $this->session->flashdata('msg') ?>
+            </div>
+            <?php endif; ?>
+          <form action="<?php echo site_url() ?>user/comunity" method="POST">
+          <input type="hidden" style="width: 30%" class="form-control" name="user_id" value="<?php echo $this->session->user_data->id ?>" placeholder="Title">
+          <textarea style="margin: 3px 10px 0px 5px; width: 80%; height: 100px;" name="post">What's on your mind</textarea>
+          <button class="btn btn-color btn-sm" type="submit"> Submit</button>
+          </form>
+            <?php $userList = $this->user->get_comunity();
+            	if(isset($page_data)){
+            		$users = $page_data;
+            	}else{
+            		$users = $userList;
+            	}
+            	if(isset($users)){
+            		foreach ($users as $key ): 
+            			?>
 				<div class="card">
 					<div class="card-body">
-				    	<h5 class="card-title"><?php echo ucfirst($key->first_name ." " .$key->last_name); ?></h5>
-				    	<h6 class="card-subtitle mb-2 text-muted"><?php echo ($key->marital_status); ?></h6>
-				   	 	<p class="card-text"><?php echo ($key->short_description); ?></p>
+<!-- 				    	<h5 class="card-title"><?php echo ucfirst($key->first_name ." " .$key->last_name); ?></h5> -->
+				    	<h6 class="card-subtitle mb-2 text-muted"><?php echo ($key->post); ?></h6>
+				   	 	<p class="card-text"><?php echo ($key->post_date); ?></p>
 
 				    	<hr>
-                <a href="#" class="card-link text-dark btn btn-color btn-sm" data-toggle="modal" data-target="#<?php echo $key->user_id ?>">View full Profile</a>
-				    		<a href="#" class="card-link text-dark btn btn-secondary btn-sm fa fa-message" data-toggle="modal" data-target="#<?php echo $key->user_id ?>">send request</a>
+                <a href="#" class="card-link text-dark btn btn-color btn-sm" data-toggle="modal" data-target="#<?php echo $key->user_id ?>">Like</a>
+				    		<a href="#" class="card-link text-dark btn btn-secondary btn-sm " data-toggle="modal" data-target="#<?php echo $key->user_id ?>">Comment</a>
 				  	</div>
 				</div>
-			</div>
-		</div>
 
 	<?php endforeach;
 		}else{
 			echo "No Result Found";
 		}
 	 ?>
-</main>
+
+    </div>
+   </div>
+    
+    <!-- /.row --> 
+    
+    
+    
+  </section>
+  
+  <!-- /.content --> 
+  
 </div>
 <!-- </div> -->
 

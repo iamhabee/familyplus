@@ -2,7 +2,7 @@
         <!-- begining of main content -->
     <section class="content">
         
-        <form id="login" action="<?php echo site_url() ?>user/maritalissues" method="POST">
+        <form id="login" action="<?php echo site_url() ?>user/issues" method="POST">
           <input type="text" style="width: 30%" class="form-control" name="title" placeholder="Title"><br>
           <input type="text" style="width: 30%" class="form-control" name="description" placeholder="Description"><br>
           <input type="hidden" style="width: 30%" class="form-control" name="created_by" value="<?php echo $this->session->admin_data->title." " .$this->session->admin_data->name ?>" placeholder="Title">
