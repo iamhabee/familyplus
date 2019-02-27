@@ -38,7 +38,7 @@
       </div>
       	<div class="modal-body container">
       		 <div class="jumbotron jumbo-pad bg-white">
-	                <h4 class="text-center text-green">Create A New Account</h4>
+	                <h4 class="text-center text-green">Create New Account</h4>
 	             </div>
                  <form id="login" action="<?php echo site_url() ?>user/single" method="POST" enctype="multipart/form-data">
 					

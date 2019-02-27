@@ -6,7 +6,14 @@ class ProfileController extends CI_Controller {
  
  
  public function index(){
- 
+ 		if ( !isset($this->session->user_data) ) {
+    		$this->session->set_flashdata('msg', "Please Login to continue");
+			$this->session->set_flashdata('flag', 'danger');
+			redirect('login');
+
+		}
+	$data['title'] = "Familyplus | Profile";
+	$this->load->view('include/header',$data);
  	$this->parser->parse('profile/profile_index',[]);
  
  }

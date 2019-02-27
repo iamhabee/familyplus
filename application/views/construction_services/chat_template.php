@@ -43,7 +43,9 @@
      <div class="row">
            
 
-            <?php $user_id = $this->session->user_data->user_id;
+            <?php $userList = $this->user->get_users();
+            // var_dump($userList);
+                $user_id = $this->session->user_data->user_id;
                 $scheduler = $this->user->get_schedule($user_id);
                 if ($scheduler != NULL && $scheduler->status == 'active') { ?>
 
@@ -57,7 +59,7 @@
               <!-- DIRECT CHAT -->
               <div class="box box-warning direct-chat direct-chat-primary">
                 <div class="box-header with-border">
-                  <h3 class="box-title" id="ReciverName_txt"><?=$chatTitle;?></h3>
+                  <h3 class="box-title" id="ReciverName_txt">Chat  with Counsellor</h3>
 
                   <div class="box-tools pull-right">
                     <span data-toggle="tooltip" title="Clear Chat" class="ClearChat"><i class="fa fa-comments"></i></span>
@@ -96,7 +98,7 @@
                         <!-- <input type="hidden" id="Sender_Name" value="<?=$user['name'];?>"> -->
                         <!-- <input type="hidden" id="Sender_ProfilePic" value="<?=$profile_url;?>"> -->
                     	
-                    	<input type="hidden" id="ReciverId_txt">
+                    	<!-- <input type="hidden" id="ReciverId_txt"> -->
                         <input type="text" name="message" placeholder="Type Message ..." class="form-control message">
                       		<span class="input-group-btn">
                              <button type="button" class="btn btn-success btn-flat btnSend" id="nav_down">Send</button>
@@ -118,7 +120,7 @@
               <!-- USERS LIST -->
               <div class="box box-danger">
                 <div class="box-header with-border">
-                  <h3 class="box-title"><?=$strTitle;?></h3>
+                  <h3 class="box-title">All Counsellors</h3>
 
                   <div class="box-tools pull-right">
                     <span class="label label-danger"></span>
@@ -132,13 +134,17 @@
                 <div class="box-body no-padding">
                   <ul class="users-list clearfix">
                   
-                    <?php if(!empty($vendorslist)){
-						            foreach($vendorslist as $v):
+                    <?php if(!empty($userList)){
+
+						            foreach($userList as $v):
+                          if ($v->role_id !== '02') {
+                            continue;
+                            
+                          }
 						?>
-                        <li class="selectVendor" id="<?=$v['id'];?>" title="<?=$v['name'];?>">
-                          <!-- <img src="<?=$v['picture_url'];?>" alt="<?=$v['name'];?>" title="<?=$v['name'];?>"> -->
-                          <a class="users-list-name" href="#"><?=$v['name'];?></a>
-                          <span class="users-list-date">Yesterday</span>
+                        <li class="selectVendor" id="<?php echo $v->id;?>" title="<?php echo $v->first_name;?>">
+                          <a class="users-list-name" href="#"><?php echo $v->first_name ?></a>
+                          <!-- <span class="users-list-date">Yesterday</span> -->
                         </li>
                     <?php endforeach;?>
                     

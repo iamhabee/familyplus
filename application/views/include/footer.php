@@ -17,27 +17,23 @@
   
   </div>
 
-      <?php echo script_tag('js/jquery.js'); ?>
-      <?php echo script_tag('js/bootstrap.js'); ?>
-      <?php echo script_tag('js/main.js'); ?>
-     <?php echo script_tag('js/dash_main.js'); ?>
+     
 </body>
   
   
-  
+       <?php echo script_tag('js/jquery.js'); ?>
+      <?php echo script_tag('js/bootstrap.js'); ?>
+      <?php echo script_tag('js/main.js'); ?>
+     <?php echo script_tag('js/dash_main.js'); ?>
+     <?php echo script_tag('public/components/jquery/dist/jquery.min.js'); ?>
+     <?php echo script_tag('public/components/jquery-slimscroll/jquery.slimscroll.min.js'); ?>
+     <?php echo script_tag('public/components/fastclick/lib/fastclick.js'); ?>
+     <?php echo script_tag('public/dist/js/adminlte.min.js'); ?>
+     <?php echo script_tag('public/dist/js/demo.js'); ?>
   <!-- jQuery 3 -->
-<script src="<?=base_url('public')?>/components/jquery/dist/jquery.min.js"></script>
  <?php if($this->uri->segment(1) != 'chat'){?>
-<script src="<?=base_url('public')?>/components/PACE/pace.min.js"></script>
+     <?php echo script_tag('public/components/PACE/pace.min.js'); ?>
  <?php }?>
-<!-- SlimScroll -->
-<script src="<?=base_url('public')?>/components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-<!-- FastClick -->
-<script src="<?=base_url('public')?>/components/fastclick/lib/fastclick.js"></script>
-<!-- AdminLTE App -->
-<script src="<?=base_url('public')?>/dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="<?=base_url('public')?>/dist/js/demo.js"></script>
 <script>
 
 

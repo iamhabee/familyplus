@@ -1,6 +1,5 @@
  <?php defined('BASEPATH') OR exit('No direct script access allowed');?>
 
-<?php $this->load->view('include/header');?>
 <style>
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
@@ -25,7 +24,7 @@ input[type=number]::-webkit-outer-spin-button {
   
   
     <!-- Content Header (Page header) -->
-    <section class="content-header">
+    <!-- <section class="content-header">
       <h1>
         Profile Settings
         <small>Control panel</small>
@@ -34,33 +33,32 @@ input[type=number]::-webkit-outer-spin-button {
         <li><a href="<?=base_url();?>"><i class="fa fa-dashboard"></i> Dashboard</a></li>
         
       </ol>
-    </section>
-
+    </section> -->
+         
     <!-- Main content -->
      <section class="content">
 
-      <div class="row">
+      <div class="row" >
+          <?php if ( $this->session->flashdata('msg') ): ?>
+            <div class="alert alert-<?php echo $this->session->flashdata('flag')?> col-md-12">
+              <?php echo $this->session->flashdata('msg') ?>
+            </div>
+          <?php endif; ?>
         <div class="col-md-3" >
 
           <!-- Profile Image -->
+           
           <div class="box box-primary" id="element_overlap">
             <div class="box-body box-profile">
             
-            <!-- <?php
-            	$obj=&get_instance();
-				$obj->load->model('UserModel');
- 				$profile_url = $obj->UserModel->PictureUrl();
-				$user=$obj->UserModel->GetUserData();
-			?> -->
-              <img class="profile-user-img img-responsive img-circle profileImgUrl" src="<?=$profile_url;?>" alt="<?=$user['name'];?>">
+            
+              <img class="profile-user-img img-responsive img-circle profileImgUrl" src="<?php echo site_url('uploads/'.$this->session->user_data->user_id.'.jpg')?> " alt="">
 
-              <h3 class="profile-username text-center NameEdt"><?=$user['name'];?></h3>
+              <h3 class="profile-username text-center NameEdt"><?=$this->session->user_data->first_name;?></h3>
 
-              <p class="text-muted text-center">Member since   </p>
+              <p class="text-muted text-center">Member since <?=$this->session->user_data->date_created;?>  </p>
  
                <a href="javascript:void(0);" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#myModal" class="btn btn-primary btn-block"><b>Upload Photo</b></a>
-               
-               <p id="ErrorMessage" style="padding: 5px;"></p>
             </div>
             <!-- /.box-body -->
           </div>
@@ -72,27 +70,27 @@ input[type=number]::-webkit-outer-spin-button {
         <!-- /.col -->
         <div class="col-md-9">
           <div class="nav-tabs-custom" id="element_overlap1">
-            <ul class="nav nav-tabs">
+            <ul class="nav nav-tabs" style="margin-top: 7px;">
               <li class="active"><a href="#activity" data-toggle="tab">General Details</a></li>
                <li><a href="#settings" data-toggle="tab">Change Password</a></li>
             </ul>
             <div class="tab-content">
               <div class="active tab-pane" id="activity">
-               	<form class="form-horizontal UpdateDetails">
+               	<form class="form-horizontal " method="POST" action="<?php echo site_url() ?>user/update">
                   <div class="form-group">
-                    <label for="" class="col-sm-2 control-label">Admin ID</label>
+                    <label for="" class="col-sm-2 control-label">Profile</label>
 
-                    <div class="col-sm-10">
+                    <!-- <div class="col-sm-10">
                       <input type="text" class="form-control" value="<?=$user['id']?>" readonly>
-                    </div>
+                    </div> -->
                   </div>
                   <div class="form-group">
                     <label for="" class="col-sm-2 control-label">Name</label>
                      <div class="col-sm-5">
-                      <input type="text" class="form-control" name="first_name" value="<?=$user['first_name']?>" placeholder="First Name">
+                      <input type="text" class="form-control" name="first_name" value="<?=$this->session->user_data->first_name;?>" placeholder="First Name">
                     </div>
                     <div class="col-sm-5">
-                      <input type="text" class="form-control" name="last_name" value="<?=$user['last_name']?>" placeholder="Last Name">
+                      <input type="text" class="form-control" name="last_name" value="<?=$this->session->user_data->last_name;?>" placeholder="Last Name">
                     </div>
                   </div>
                   
@@ -100,43 +98,42 @@ input[type=number]::-webkit-outer-spin-button {
                   <div class="form-group">
                     <label for="inputEmail" class="col-sm-2 control-label">Email</label>
                      <div class="col-sm-10">
-                      <input type="email" class="form-control" name="email" value="<?=$user['email']?>" placeholder="Email">
+                      <input type="email" class="form-control" name="email" value="<?=$this->session->user_data->email;?>" placeholder="Email">
                     </div>
                   </div>
                   
                   <div class="form-group">
                     <label for="" class="col-sm-2 control-label">Mobile No.</label>
                      <div class="col-sm-10">
-                      <input type="number" class="form-control" name="mobile_no" value="<?=$user['mobile_no']?>" placeholder="Mobile No.">
+                      <input type="number" class="form-control" name="phone_number" value="<?=$this->session->user_data->phone_number;?>" placeholder="Mobile No.">
                     </div>
                   </div>
                   
                   <div class="form-group">
-                    <label for="inputExperience" class="col-sm-2 control-label">Address</label>
-
+                    <label for="inputExperience" class="col-sm-2 control-label">Description</label>
                     <div class="col-sm-10">
-                      <textarea class="form-control" name="address" placeholder="Address"><?=$user['address']?></textarea>
+                      <textarea class="form-control" name="short_description" placeholder="Address"><?=$this->session->user_data->short_description;?></textarea>
                     </div>
                   </div>
                   
                   <div class="form-group">
-                    <label for="" class="col-sm-2 control-label">Pincode </label>
+                    <label for="" class="col-sm-2 control-label">occupation </label>
                      <div class="col-sm-10">
-                      <input type="number" class="form-control" name="pincode" value="<?=$user['pincode']?>" placeholder="Pincode">
+                      <input type="text" class="form-control" name="occupation" value="<?=$this->session->user_data->occupation;?>" placeholder="Pincode">
                     </div>
                   </div>
                   
                   
                   
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                     <label for="inputExperience" class="col-sm-2 control-label">About</label>
-
                     <div class="col-sm-10">
                       <textarea class="form-control" name="about" placeholder="About Yourself"><?=$user['about']?></textarea>
                     </div>
-                  </div>
-                  <div class="form-group"><label for="" required class="col-sm-2 control-label">&nbsp;</label>
-                 	<p  id="ErrorMessageU"></p>
+                  </div> -->
+                  <div class="form-group">
+                    <label for="" required class="col-sm-2 control-label">&nbsp;</label>
+                 	  <p  id="ErrorMessageU"></p>
                  	</div>
                    
                   <div class="form-group">
@@ -209,21 +206,28 @@ input[type=number]::-webkit-outer-spin-button {
     
       <!-- Modal content-->
       <div class="modal-content">
-      <form class="UploadForm">
+       
+      <!-- <form method="POST" action="<?php //echo site_url() ?>user/photo" enctype="multipart/form-data"> -->
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title" id="document_name">Change Profile Photo</h4>
         </div>
         <div class="modal-body">
-               <input type="file" required id="userImage">
-          </div>
-        <div class="modal-footer">
-         <button type="submit" class="btn btn-info Upload">Upload</button>
+          <form action="<?php echo site_url() ?>user/photo" method="POST" enctype="multipart/form-data">
+           <div class="input-group">
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" name="userfile" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
+                  <label class="custom-file-label" for="inputGroupFile04">Choose picture</label>
+                </div>
+                <div class="input-group-append">
+                </div>
+              </div>
+            <img align="center" class="image" id="image" src="<?php echo site_url('uploads/'.$this->session->user_data->user_id.'.jpg')?>">
+          <button type="submit" class="btn btn-info ">Upload</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
        </form>
       </div>
-      
+     </div>
     </div>
   </div>
    <!-- /.content-wrapper -->

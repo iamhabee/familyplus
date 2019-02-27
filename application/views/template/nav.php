@@ -1,6 +1,6 @@
 
 <!--     <div class="container-fluid fixed-div bg-dark "> -->
-  <nav class="navbar navbar-expand-lg fixed-top navbar-dark" style="background-color: #3c8dbc;">
+  <nav class="navbar navbar-expand-lg fixed-top navbar-dark margin-bottom  blue">
     <div class="container-fluid">
       <a href="<?php echo base_url()?>"></a><img src="<?php echo site_url() ?>image/logo.png" class="logo" alt="Conmpany Name"> &nbsp; &nbsp;
       <a href="<?php echo base_url()?>" class="navbar-brand text-white">FamilyPlus</a>
@@ -10,7 +10,7 @@
       </button>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav">
 
           <li class="nav-item"><a class="nav-link text-white tooltip-test" title="Home" href="dashboard">Community</a></li>&nbsp; &nbsp; &nbsp;
 
@@ -23,20 +23,19 @@
           <li class="nav-item"><a class="nav-link text-white tooltip-test" title="Connect" href="connect">Connect</a></li>&nbsp; &nbsp; &nbsp;
 
         <?php if ($this->session->user_data){ 
-        if (file_exists($this->session->userdata('user_data')->user_id.'.jpg')) { ?>
+        if (!file_exists($this->session->userdata('user_data')->user_id.'.jpg')) { ?>
 
           <li class="nav-item dropdown user user-menu">
             <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-              <img style="width: 50px; height: 50px; border-radius: 50px;" src="<?php echo site_url('uploads/'.$this->session->user_data->user_id.'.jpg')?>">
-              <span class="hidden-xs NameEdt"><?=$this->session->user_data->first_name;?></span>
+              <img style="width: 20px; height: 20px; border-radius: 20px;" src="<?php echo site_url('uploads/'.$this->session->user_data->user_id.'.jpg')?>">
             </a>
             <ul class="dropdown-menu ">
               <!-- User image -->
               <li class="user-header">
               
-                <img style="width: 200px; height: 178px; border-radius: 50px;" src="<?php echo site_url('uploads/'.$this->session->user_data->user_id.'.jpg')?>">
+                <img style="width: 100px; height: 100px;" src="<?php echo site_url('uploads/'.$this->session->user_data->user_id.'.jpg')?>">
                 <p>
-                  <span class="NameEdt"> <?=$this->session->user_data->first_name;?></span>
+                  <span class="NameEdt"> <?=$this->session->user_data->first_name." ". $this->session->user_data->last_name;?></span>
                 </p>
               </li>
               <!-- Menu Footer-->
@@ -45,7 +44,7 @@
                   <a href="<?=base_url('profile');?>" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="<?=base_url('logout');?>" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="<?=base_url('logout');?>" id="logout" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
             </ul>
@@ -68,7 +67,7 @@
                   <a href="<?=base_url('profile');?>" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="<?=base_url('logout');?>" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="<?=base_url('logout');?>" id="logout" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
             </ul>

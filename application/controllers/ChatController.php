@@ -17,27 +17,27 @@ class ChatController extends CI_Controller {
 			redirect('login');
 		}
 		
-		$data['strTitle']='';
-		$data['strsubTitle']='';
+		// $data['strTitle']='';
+		// $data['strsubTitle']='';
 		// $list=[];
-		$vendorslist=[];
-		$counsellor =  $this->db->get('familyplus')->result();
-		foreach ($counsellor as $key) {
-			if ($key->role_id == '02') {
-				$list = $key;
-			$vendorslist =
-				[
-				'id' => $this->OuthModel->Encryptor('encrypt', $key->id),
-				'name' => $key->first_name
-				// 'picture_url' => $this->UserModel->PictureUrlById($u['id']),
-				];
-			}
-		}
+		// $vendorslist=[];
+		// $counsellor =  $this->db->get('familyplus')->result();
+		// foreach ($counsellor as $key) {
+		// 	if ($key->role_id == '02') {
+		// 		$list = $key;
+		// 	$vendorslist =
+		// 		[
+		// 		'id' => $this->OuthModel->Encryptor('encrypt', $key->id),
+		// 		'name' => $key->first_name
+		// 		// 'picture_url' => $this->UserModel->PictureUrlById($u['id']),
+		// 		];
+		// 	}
+		// }
 			
-		$data['vendorslist']=$vendorslist;
-		$data['strTitle']='All Counsellors';
-		$data['strsubTitle']='Counsellor';
-		$data['chatTitle']='Select counsellor with Chat';
+		// $data['vendorslist']=$vendorslist;
+		// $data['strTitle']='All Counsellors';
+		// $data['strsubTitle']='Counsellor';
+		// $data['chatTitle']='Select counsellor with Chat';
 	
 			# code...
 			$data['title'] = "Familyplus | Consultation";

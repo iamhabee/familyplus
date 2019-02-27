@@ -348,6 +348,25 @@ public function counsellor()
 
 		}
 
+		public function update_profile(){
+			$uid = $this->session->user_data->id;
+			$email = $this->session->user_data->email;
+			$update = $this->input->post();
+			$profile_updated = $this->db->update('familyplus', $update ,['id' => $uid ] );
+
+				if ($profile_updated) {
+				$details = $this->user->get_user_by_email($email);
+					$this->session->set_userdata('user_data', $details);
+					$this->session->set_flashdata('msg', 'Profile updated Successfully');
+						$this->session->set_flashdata('flag', 'success');
+						redirect('profile');
+				}else{
+					$this->session->set_flashdata('msg', 'Profile update failed');
+						$this->session->set_flashdata('flag', 'danger');
+						redirect('login');
+				}
+		}
+
 		public function issues(){
 			$this->form_validation->set_rules('article', 'Article', 'required');
 			$this->form_validation->set_rules('title', 'Title', 'required');
@@ -434,7 +453,9 @@ public function counsellor()
 
 		public function upload_picture(){
 			move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/'.$this->session->user_data->user_id.'.jpg');
-			redirect('dashboard');
+			$this->session->set_flashdata('msg', "Picture uploaded Successfully");
+			$this->session->set_flashdata('flag', 'success');
+			redirect('profile');
 		}
 
 	}
