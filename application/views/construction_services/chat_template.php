@@ -150,7 +150,7 @@
                     
                    <?php }else{?>
                    	<li>
-                       <a class="users-list-name" href="#">No Vendor's Find...</a>
+                       <a class="users-list-name" href="#">No Counsellors's Find...</a>
                      </li>
                   	<?php } ?>
                     
