@@ -41,17 +41,27 @@
   <section class="content">
 
      <div class="row">
-           
-
-            <?php $userList = $this->user->get_users();
+           <?php $title = '';
+                 $chat = '';
+             if ($this->session->user_data->role_id == 02) {
+                $title = 'All Users';
+                $chat = 'Chat with Users';
+            }else{
+              $title = 'All Counsellors';
+              $chat = 'Chat with Counsellor';
+            } 
+             $userList = $this->user->get_users();
+                  $users = $this->db->get('scheduler')->result();
             // var_dump($userList);
                 $user_id = $this->session->user_data->user_id;
                 $scheduler = $this->user->get_schedule($user_id);
-                if ($scheduler != NULL && $scheduler->status == 'active') { ?>
+                if ($scheduler != NULL && $scheduler->status == 'pending') { 
+                  
+            ?>
 
             <div class="container text-center">
               <h4> Hi <?php echo $this->session->user_data->first_name; ?> </h4><br>
-              <p> Your meeting is still on pending, please check back later. Thank You</p>
+              <p> Your meeting is still on pending, please check back later.  Thank You</p>
             </div>
             <?php }else{ ?>
 
@@ -59,17 +69,17 @@
               <!-- DIRECT CHAT -->
               <div class="box box-warning direct-chat direct-chat-primary">
                 <div class="box-header with-border">
-                  <h3 class="box-title" id="ReciverName_txt">Chat  with Counsellor</h3>
+                  <h3 class="box-title" id="ReciverName_txt"><?=$chat ?></h3>
 
                   <div class="box-tools pull-right">
-                    <span data-toggle="tooltip" title="Clear Chat" class="ClearChat"><i class="fa fa-comments"></i></span>
+                    <!-- <span data-toggle="tooltip" title="Clear Chat" class="ClearChat"><i class="fa fa-trash"></i></span> -->
                     <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                     </button>
                     <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Clear Chat"
                             data-widget="chat-pane-toggle">
-                      <i class="fa fa-comments"></i></button>
-                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
-                    </button>
+                      <i class="fa fa-trash"></i></button>
+                    <!-- <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
+                    </button> -->
                   </div>
                 </div>
                 <!-- /.box-header -->
@@ -95,10 +105,10 @@
 					//	$user=$obj->UserModel->GetUserData();
  					?> -->
                     	
-                        <!-- <input type="hidden" id="Sender_Name" value="<?=$user['name'];?>"> -->
+                        <input type="hidden" id="Sender_Name" value="<?=$this->session->user_data->first_name;?>">
                         <!-- <input type="hidden" id="Sender_ProfilePic" value="<?=$profile_url;?>"> -->
                     	
-                    	<!-- <input type="hidden" id="ReciverId_txt"> -->
+                    	<input type="hidden" id="ReciverId_txt">
                         <input type="text" name="message" placeholder="Type Message ..." class="form-control message">
                       		<span class="input-group-btn">
                              <button type="button" class="btn btn-success btn-flat btnSend" id="nav_down">Send</button>
@@ -120,14 +130,14 @@
               <!-- USERS LIST -->
               <div class="box box-danger">
                 <div class="box-header with-border">
-                  <h3 class="box-title">All Counsellors</h3>
+                  <h3 class="box-title"><?=$title ?></h3>
 
                   <div class="box-tools pull-right">
                     <span class="label label-danger"></span>
                     <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                     </button>
-                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
-                    </button>
+                    <!-- <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
+                    </button> -->
                   </div>
                 </div>
                 <!-- /.box-header -->
@@ -135,20 +145,29 @@
                   <ul class="users-list clearfix">
                   
                     <?php if(!empty($userList)){
-
+                      if($this->session->user_data->role_id !== '02') { 
 						            foreach($userList as $v):
                           if ($v->role_id !== '02') {
                             continue;
                             
                           }
-						?>
-                        <li class="selectVendor" id="<?php echo $v->id;?>" title="<?php echo $v->first_name;?>">
-                          <a class="users-list-name" href="#"><?php echo $v->first_name ?></a>
+                            
+                          ?>
+                        <li class=" selectVendor" id="<?php echo $this->OuthModel->Encryptor('encrypt', $v->id);?>" title="<?php echo $v->first_name;?>">
+                          <a class="users-list-name" href="#"><?php echo  $v->title. ' '. $v->first_name ?></a>
                           <!-- <span class="users-list-date">Yesterday</span> -->
                         </li>
-                    <?php endforeach;?>
-                    
-                   <?php }else{?>
+                    <?php
+                        endforeach;
+                      }else{
+                          foreach ($users as $key):  ?>
+                        <li class=" selectVendor" id="<?php echo $this->OuthModel->Encryptor('encrypt', $key->id);?>" title="<?php echo $key->name;?>">
+                          <a class="users-list-name" href="#"><?php echo $key->name ?></a>
+                          <!-- <span class="users-list-date">Yesterday</span> -->
+                        </li>
+                    <?php endforeach; 
+                          }
+                         }else{?>
                    	<li>
                        <a class="users-list-name" href="#">No Counsellors's Find...</a>
                      </li>

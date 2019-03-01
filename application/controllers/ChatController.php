@@ -69,7 +69,7 @@ class ChatController extends CI_Controller {
 		}	
 		 
 				$data=[
- 					'sender_id' => $this->session->userdata['Admin']['id'],
+ 					'sender_id' => $this->session->user_data->id,
 					'receiver_id' => $this->OuthModel->Encryptor('decrypt', $post['receiver_id']),
 					'message' =>   $messageTxt,
 					'attachment_name' => $attachment_name,
@@ -118,7 +118,7 @@ class ChatController extends CI_Controller {
 	public function get_chat_history_by_vendor(){
 		$receiver_id = $this->OuthModel->Encryptor('decrypt', $this->input->get('receiver_id') );
 		
-		$Logged_sender_id = $this->session->userdata['Admin']['id'];
+		$Logged_sender_id = $this->session->user_data->id;
 		 
 		$history = $this->ChatModel->GetReciverChatHistory($receiver_id);
 		//print_r($history);
@@ -127,7 +127,7 @@ class ChatController extends CI_Controller {
 			$message_id = $this->OuthModel->Encryptor('encrypt', $chat['id']);
 			$sender_id = $chat['sender_id'];
 			$userName = $this->UserModel->GetName($chat['sender_id']);
-			$userPic = $this->UserModel->PictureUrlById($chat['sender_id']);
+			// $userPic = $this->UserModel->PictureUrlById($chat['sender_id']);
 			
 			$message = $chat['message'];
 			$messagedatetime = date('d M H:i A',strtotime($chat['message_date_time']));
@@ -177,7 +177,7 @@ class ChatController extends CI_Controller {
                         <span class="direct-chat-timestamp pull-right"><?=$messagedatetime;?></span>
                       </div>
                       <!-- /.direct-chat-info -->
-                      <img class="direct-chat-img" src="<?=$userPic;?>" alt="<?=$userName;?>">
+                      <!-- <img class="direct-chat-img" src="<?=$userPic;?>" alt="<?=$userName;?>"> -->
                       <!-- /.direct-chat-img -->
                       <div class="direct-chat-text">
                          <?=$messageBody;?>
@@ -194,7 +194,7 @@ class ChatController extends CI_Controller {
                         <span class="direct-chat-timestamp pull-left"><?=$messagedatetime;?></span>
                       </div>
                       <!-- /.direct-chat-info -->
-                      <img class="direct-chat-img" src="<?=$userPic;?>" alt="<?=$userName;?>">
+                      <!-- <img class="direct-chat-img" src="<?=$userPic;?>" alt="<?=$userName;?>"> -->
                       <!-- /.direct-chat-img -->
                       <div class="direct-chat-text">
                       	<?=$messageBody;?>

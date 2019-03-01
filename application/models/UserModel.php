@@ -20,7 +20,7 @@ class UserModel extends CI_Model {
 
 	
 
-	private $User = 'users';
+	private $User = 'familyplus';
 
  
 
@@ -142,7 +142,7 @@ class UserModel extends CI_Model {
 
 	{  
 
- 		$this->db->select('id,name');
+ 		$this->db->select('id,first_name');
 
 		$this->db->from($this->User);
 
@@ -154,7 +154,7 @@ class UserModel extends CI_Model {
 
 		$res = $query->row_array();
 
- 		return $res['name'];
+ 		return $res['first_name'];
 
 		 
 
@@ -164,11 +164,11 @@ class UserModel extends CI_Model {
 
 	{  
 
- 		$this->db->select('id,name');
+ 		$this->db->select('id,first_name');
 
 		$this->db->from($this->User);
 
-		$this->db->where("name",$name);
+		$this->db->where("first_name",$name);
 
 		$this->db->limit(1);
 

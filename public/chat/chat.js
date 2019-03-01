@@ -21,7 +21,7 @@ $('.selectVendor').click(function(){
 $('.upload_attachmentfile').change(function(){
 	
 	DisplayMessage('<div class="spiner"><i class="fa fa-circle-o-notch fa-spin"></i></div>');
-	ScrollDown();
+	// ScrollDown();
 	
 	var file_data = $('.upload_attachmentfile').prop('files')[0];
 	var receiver_id = $('#ReciverId_txt').val();   
@@ -105,7 +105,7 @@ function ScrollDown(){
     var h = elmnt.scrollHeight;
    $('#content').animate({scrollTop: h}, 1000);
 }
-window.onload = ScrollDown();
+// window.onload = ScrollDown();
 
 function DisplayMessage(message){
 	var Sender_Name = $('#Sender_Name').val();
@@ -115,7 +115,7 @@ function DisplayMessage(message){
 				str+='<div class="direct-chat-info clearfix">';
 				 str+='<span class="direct-chat-name pull-right">'+Sender_Name ;
 				 str+='</span><span class="direct-chat-timestamp pull-left"></span>'; //23 Jan 2:05 pm
-				 str+='</div><img class="direct-chat-img" src="'+Sender_ProfilePic+'" alt="">';
+				 // str+='</div><img class="direct-chat-img" src="'+Sender_ProfilePic+'" alt="">';
 				 str+='<div class="direct-chat-text">'+message;
 				 str+='</div></div>';
 		$('#dumppy').append(str);
@@ -144,7 +144,7 @@ function sendTxtMessage(message){
 					
 		
 		
-		ScrollDown();
+		// ScrollDown();
 		$('.message').val('');
 		$('.message').focus();
 	}else{
@@ -159,7 +159,7 @@ function GetChatHistory(receiver_id){
 						  success:function(data)
 						  {
   							$('#dumppy').html(data);
-							ScrollDown();	 
+							// ScrollDown();	 
 						  },
 						  error: function (jqXHR, status, err) {
  							 // alert('Local error callback');

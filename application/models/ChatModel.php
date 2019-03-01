@@ -19,7 +19,7 @@
 	}
 	public function GetReciverChatHistory($receiver_id){
 		
-		$sender_id = $this->session->userdata['Admin']['id'];
+		$sender_id = $this->session->user_data->id;
 		
 		//SELECT * FROM `chat` WHERE `sender_id`= 197 AND `receiver_id` = 184 OR `sender_id`= 184 AND `receiver_id` = 197
 		$condition= "`sender_id`= '$sender_id' AND `receiver_id` = '$receiver_id' OR `sender_id`= '$receiver_id' AND `receiver_id` = '$sender_id'";

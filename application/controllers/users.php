@@ -259,12 +259,8 @@ public function counsellor()
 						
 						$this->session->set_userdata('user_data', $details);
 
-						if ($details->role_id === '02'){
-							redirect("consultation");
-						}
-						else{
 							redirect("dashboard");
-						}
+						
 										
 					} else {
 
@@ -431,7 +427,7 @@ public function counsellor()
 			$this->form_validation->set_rules('time', 'Time', 'required');
 			if ( $this->form_validation->run() === FALSE):
 
-			$this->session->set_flashdata('msg', "Schedule not Successful");
+			$this->session->set_flashdata('msg', "Schedule not Successful!!! Please fill all the form to schedule a meeting with a counsellor");
 			$this->session->set_flashdata('flag', 'danger');
 				redirect('dashboard');
 

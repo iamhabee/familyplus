@@ -53,12 +53,15 @@
               <span>About Us</span>
             </a>
           </li>
+          <?php if ($this->session->user_data->role_id !== '02'): ?>
           <li>
             <a href="#" data-toggle="modal" data-target="#schedulerModal" class="text-white">
-              <i class="fa fa-cog"></i>
+              <i class="fa fa-calendar"></i>
               <span>Scheduler</span>
             </a>
           </li>
+          <?php endif ?>
+          
           <li>
             <a href="#" class="text-white">
               <i class="fa fa-cog"></i>
@@ -90,8 +93,10 @@
           <?php $user_id = $this->session->user_data->user_id;
           $scheduler = $this->user->get_schedule($user_id);
           // var_dump($scheduler);
-          if ($scheduler != NULL && $scheduler->status == 'pending') {?>
-          <h5>Your Schedule with the <?php echo $scheduler->counsellor;?> has not elapse, you can only meet our expert when you have no schedule on queue. </h5> <br> Thank You.
+          if ($scheduler != NULL && $scheduler->status == 'pending') {
+            $Schedule_time = 'The time remaining is'. $scheduler->time;
+            ?>
+          <h5>Your Schedule with the <?php echo $scheduler->counsellor;?> has not elapse, you can only meet our expert when you have no schedule on queue. <?=$Schedule_time ?> </h5> <br> Thank You.
         <?php }else{
           $this->user->delete_schedule($user_id); ?>
          <form id="login" action="<?php echo site_url() ?>user/scheduler" method="POST">
@@ -121,16 +126,17 @@
             </div>
 
             <div class="form-group">
-              <?php $userList = $this->db->get('familyplus')->result(); 
-               foreach ($userList as $key ):
-                if ($key->role_id === '02') {
-                $available_date[] = $key->monday;
-                var_dump($available_date);
-                } endforeach; ?>
+              <input type="date" class="form-control" name="date" value="<?php echo $this->session->user_data->user_id;?>" style="border-width: 0px 0px 1px;">
             </div>
 
             <div class="form-group">
-              <input type="text" class="form-control" name="time" placeholder="" style="border-width: 0px 0px 1px;">
+            
+                <select class="form-control" name="time" style="border-width: 0px 0px 1px;">
+                  <option>Select Time</option>
+                  <option value="10:00am">Morning</option>
+                  <option value="02:30pm">Afternoon</option>
+                  <option value="08:45pm">Night</option>
+                </select>
             </div>
 
             <button class="list-group-item list-group-item-action btn-color btn btn-rad text-center text-white" type="submit">Submit</button>
