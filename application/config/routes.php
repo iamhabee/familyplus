@@ -57,6 +57,7 @@ $route['about'] = 'page/about';
 $route['connect'] = 'page/connect';
 $route['consultation'] = 'page/consultation';
 $route['maritalIssues'] = 'page/maritalIssues';
+$route['MarriageArticle'] = 'page/marriageArticle';
 
 
 $route['dashboard'] = 'dashboard/index';

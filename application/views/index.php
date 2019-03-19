@@ -100,7 +100,6 @@
   </nav>
     <!-- </div> -->
 
-
 <!-- slide container begin -->
 	<div class="container-fluid margin" style=" padding-right: 0px; padding-left: 0px;">
           <div id="demo" class="carousel slide carousel-fade" data-ride="carousel">

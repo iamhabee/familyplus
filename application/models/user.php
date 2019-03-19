@@ -66,6 +66,10 @@
 			$this->db->where('user_id', $user_id);
 			return $this->db->get()->row();
 		}
+		public function article($id){
+			$query = $this->db->query("SELECT * FROM maritalissues WHERE id=".$id);
+			return $query->row();
+		}
 		// public function search($file_name){
 
 		// 	$this->db->select('*');

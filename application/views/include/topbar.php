@@ -23,11 +23,11 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="nav navbar-nav ">
 
-          <li class="nav-item"><a class="nav-link text-white tooltip-test" title="Home" href="dashboard">Community</a></li>&nbsp; 
+          <li class="nav-item"><a class="nav-link text-white tooltip-test" title="Home" href="<?php echo base_url()?>dashboard">Community</a></li>&nbsp; 
 
-          <li class="nav-item"><a class="nav-link text-white tooltip-test" title="Cosultation" href="chat">Consultatiion</a></li>&nbsp; 
+          <li class="nav-item"><a class="nav-link text-white tooltip-test" title="Cosultation" href="<?php echo base_url()?>chat">Consultatiion</a></li>&nbsp; 
 
-          <li class="nav-item"><a class="nav-link text-white tooltip-test" title="Marital-issues" href="maritalIssues">Marital Issues</a></li>&nbsp;
+          <li class="nav-item"><a class="nav-link text-white tooltip-test" title="Marital-issues" href="<?php echo base_url()?>maritalIssues">Marital Issues</a></li>&nbsp;
           
          <?php if ($this->session->user_data){ 
         if (!file_exists($this->session->userdata('user_data')->user_id.'.jpg')) { ?>

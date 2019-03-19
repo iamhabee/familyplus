@@ -162,7 +162,7 @@ function GetChatHistory(receiver_id){
 							// ScrollDown();	 
 						  },
 						  error: function (jqXHR, status, err) {
- 							 // alert('Local error callback');
+ 							 alert('Local error callback');
 						  }
  					});
 }
@@ -170,4 +170,6 @@ function GetChatHistory(receiver_id){
 setInterval(function(){ 
 	var receiver_id = $('#ReciverId_txt').val();
 	if(receiver_id!=''){GetChatHistory(receiver_id);}
-}, 3000);
+}, 500000000000);
+ 
+

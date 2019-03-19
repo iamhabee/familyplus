@@ -29,7 +29,7 @@
                   <div class="card">
                     <div class="card-body">
                         <h3 class="card-title"><?php echo ucfirst($key->title); ?></h3>
-                        <h6 class="card-subtitle mb-2 text-muted"><?php echo $key->description; ?>  <a href="#" class="card-link text-color btn-sm" data-toggle="modal" data-target="#">Read full story</a></h6>
+                        <h6 class="card-subtitle mb-2 text-muted"><?php echo $key->description; ?>  <a href="<?php echo base_url();?>page/marriageArticle/<?php echo $key->id; ?>" class="card-link text-color btn-sm">Read full story</a></h6>
                         <hr>
                         <span style="display: inline;"><p class="card-subtitle mb-2 text-muted">created by<?php echo ': '. $key->created_by; ?></p><p class="card-subtitle mb-2 text-muted"><?php echo $key->date; ?></p></span>
                           <a href="#" class="card-link text-white btn btn-color btn-sm" data-toggle="modal" data-target="#">Jazakumullahu</a>

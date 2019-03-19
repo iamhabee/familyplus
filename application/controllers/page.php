@@ -85,6 +85,22 @@
 			$this->load->view('include/footer');
 		}
 
+		public function marriageArticle($id=0)
+		{
+			if ( !isset($this->session->user_data) ) {
+    		$this->session->set_flashdata('msg', "Please Login to continue");
+			$this->session->set_flashdata('flag', 'danger');
+			redirect('login');
+		}
+			$data['rec'] = $this->user->article($id);
+			$data['title'] = "Familyplus | marriage-articles";
+			$this->load->view('include/header', $data);
+			$this->load->view('include/topbar');
+			$this->load->view('include/sidebar');
+			$this->load->view('marriage-articles',$data);
+			$this->load->view('include/footer');
+		}
+
 		public function live_search(){
 			$res = array('status' => 1, "msg"=>$this->db->like('first_name', $_GET['q'])->get('familyplus')->result());
 			echo json_encode($res);
