@@ -30,9 +30,9 @@
      <?php echo script_tag('public/components/fastclick/lib/fastclick.js'); ?>
      <?php echo script_tag('public/dist/js/adminlte.min.js'); ?>
      <?php echo script_tag('public/dist/js/demo.js'); ?>
-     <?php echo script_tag('public/chat/chat.js'); ?>
   <!-- jQuery 3 -->
- <?php if($this->uri->segment(1) != 'chat'){?>
+ <?php if($this->uri->segment(1) == 'chat'){?>
+     <?php echo script_tag('public/chat/chat.js'); ?>
      <?php echo script_tag('public/components/PACE/pace.min.js'); ?>
  <?php }?>
 <script>

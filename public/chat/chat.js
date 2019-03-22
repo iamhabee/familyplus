@@ -18,6 +18,8 @@ $('.selectVendor').click(function(){
 	  GetChatHistory(receiver_id);
  				
 });
+
+
 $('.upload_attachmentfile').change(function(){
 	
 	DisplayMessage('<div class="spiner"><i class="fa fa-circle-o-notch fa-spin"></i></div>');

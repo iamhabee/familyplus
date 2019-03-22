@@ -432,12 +432,35 @@ public function counsellor()
 				redirect('dashboard');
 
 			else:
-			$schedule = $this->input->post();
-			$sql = $this->db->insert_string('scheduler', $schedule);
-			$this->db->query($sql);
-			$this->session->set_flashdata('msg', "A meeting was Successfully scheduled");
-			$this->session->set_flashdata('flag', 'success');
-			 redirect('dashboard');
+					$msg = "Hi ".$this->input->post('name').", has successfully schedule a meeting with " .$this->input->post('counsellor');
+					$msg .= "This is to inform the both parties that a meeting have schedule to take place at " .$this->input->post('time');
+
+				$message = "
+					     <html>
+					       <head>
+					         <title>Welcome message</title>
+					       </head>
+					       <body>
+					         <p>$msg</p>
+					       </body>
+					     </html>";
+
+					if($this->send_mail($this->session->user_data->email, "Schedule Successfull", $message) && $this->send_mail($this->input->post('counsellor_email'), "Schedule Successfull", $message)):
+					    $schedule = $this->input->post();
+						$sql = $this->db->insert_string('scheduler', $schedule);
+						$this->db->query($sql);
+						$this->session->set_flashdata('msg', "A meeting was Successfully scheduled");
+						$this->session->set_flashdata('flag', 'success');
+						 redirect('dashboard');
+					   
+					else:
+					     $this->session->set_flashdata('msg', "Please Verify You Are Connected To The Internet");
+					     $this->session->set_flashdata('flag', 'danger');
+					     redirect('dashboard');
+					     // echo json_encode($status);
+					endif;
+
+			
 			endif;
 		}
 
@@ -445,6 +468,12 @@ public function counsellor()
 			session_destroy();
 			// $this->session->unset_userdata('user_data');
 			redirect(base_url());
+		}
+
+		public function delete(){
+			 $user_id = $this->session->user_data->id;
+			 $this->user->delete_schedule($user_id);
+			 redirect('chat');
 		}
 
 		public function upload_picture(){

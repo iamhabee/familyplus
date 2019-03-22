@@ -120,7 +120,7 @@
               <div class="carousel-item">
             	<img class=" w-100" height="500" src="<?php echo site_url() ?>image/image04.jpg" alt="First slide">
             	<div class="carousel-caption d-none d-md-block" style="top: 150px;">
-          <h1 class=" text-center text-color"> WELCOME TO familyPlus+</h3>
+          <h1 class=" text-center text-color"> WELCOME TO familyPlus</h3>
 					<h3 class=" text-center text-dark"> Take your relationship to the next Level </h1>
 					<p class=" text-center text-dark">..THE SUNNAH WAY</p>
 					<!-- Button -->
@@ -132,7 +132,7 @@
               <div class="carousel-item" >
             	<img class=" w-100" height="500" src="<?php echo site_url() ?>image/image05.jpg" alt="First slide">
             	<div class="carousel-caption d-none d-md-block" style="top: 150px;">
-          <h1 class=" text-center text-color"> WELCOME TO familyPlus+</h1>
+          <h1 class=" text-center text-color"> WELCOME TO familyPlus</h1>
 					<h3 class=" text-center text-dark">A safe place to resolve family matters</h3>
 					<p class=" text-center text-dark">..THE SUNNAH WAY</p>
 					<div class="text-center">

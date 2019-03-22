@@ -41,8 +41,9 @@
   <section class="content">
 
      <div class="row">
-           <?php $title = '';
-                 $chat = '';
+           <?php 
+                $title = '';
+                $chat = '';
              if ($this->session->user_data->role_id == 02) {
                 $title = 'All Users';
                 $chat = 'Chat with Users';
@@ -50,20 +51,26 @@
               $title = 'All Counsellors';
               $chat = 'Chat with Counsellor';
             } 
-             $userList = $this->user->get_users();
-                  $users = $this->db->get('scheduler')->result();
+            $userList = $this->user->get_users();
+            $users = $this->db->get('scheduler')->result();
             // var_dump($userList);
-                $user_id = $this->session->user_data->user_id;
+                $user_id = $this->session->user_data->id;
                 $scheduler = $this->user->get_schedule($user_id);
-                if ($scheduler != NULL && $scheduler->status == 'pending') { 
-                  
-            ?>
+            if ($scheduler === NULL) : ?>
 
             <div class="container text-center">
               <h4> Hi <?php echo $this->session->user_data->first_name; ?> </h4><br>
-              <p> Your meeting is still on pending, please check back later.  Thank You</p>
+              <p> You currently do not have a schedule on queue, Please click on the schedule button to schedule an appointment with one of our topmost expert. Thank You</p>
             </div>
-            <?php }else{ ?>
+
+            <?php elseif ($scheduler->status == 'pending') :  ?>
+
+              <div class="container text-center">
+                <h4> Hi <?php echo $this->session->user_data->first_name; ?> </h4><br>
+                <p> Your meeting is still on pending, please check back later.  Thank You</p>
+              </div>
+
+           <?php else : ?>
 
             <div class="col-md-8" id="chatSection">
               <!-- DIRECT CHAT -->
@@ -75,9 +82,8 @@
                     <!-- <span data-toggle="tooltip" title="Clear Chat" class="ClearChat"><i class="fa fa-trash"></i></span> -->
                     <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                     </button>
-                    <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Clear Chat"
-                            data-widget="chat-pane-toggle">
-                      <i class="fa fa-trash"></i></button>
+                    <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Clear Chat" data-widget="chat-pane-toggle"><i class="fa fa-trash"></i></button>
+                    <a type="button" class="btn btn-box-tool" href="delete" data-toggle="tooltip" title="Close Chat"> <i class="fa fa-close"></i></a>
                     <!-- <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
                     </button> -->
                   </div>
@@ -161,7 +167,7 @@
                         endforeach;
                       }else{
                           foreach ($users as $key):  ?>
-                        <li class=" selectVendor" id="<?php echo $this->OuthModel->Encryptor('encrypt', $key->id);?>" title="<?php echo $key->name;?>">
+                        <li class=" selectVendor" id="<?php echo $this->OuthModel->Encryptor('encrypt', $key->user_id);?>" title="<?php echo $key->name;?>">
                           <a class="users-list-name" href="#"><?php echo $key->name ?></a>
                           <!-- <span class="users-list-date">Yesterday</span> -->
                         </li>
@@ -186,7 +192,7 @@
               <!--/.box -->
             </div>
             <!-- /.col -->
-            <?php } ?>         
+            <?php endif; ?>         
           </div>
     
     <!-- /.row --> 

@@ -52,11 +52,10 @@ $(document).ready(function(){
 	});
 
 
-	 $("#couple").hide();
-	// $("#married").change(function(){
-	// 	alert('hello am here');
-	// });
-
+	 //cousellor email selector
+	 $('.counsellor-email').change(function(){
+	  $('#counsellor_email').val($('.counselloremail').attr('title'));	
+	});
 
 // sidebar js
 

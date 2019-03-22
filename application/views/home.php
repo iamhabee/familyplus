@@ -34,13 +34,13 @@
 					<div class="card-body">
 <!-- 				    	<h5 class="card-title"><?php echo ucfirst($key->first_name ." " .$key->last_name); ?></h5> -->
 				    	<h6 class="card-subtitle mb-2 text-muted"><?php echo ($key->post); ?></h6>
-				   	 	<p class="card-text"><?php echo ($key->post_date); ?></p>
+				   	 	<!-- <p class="card-text"><?php echo ($key->post_date); ?></p> -->
 
 				    	<hr>
-                <a href="#" class="card-link text-dark btn btn-color btn-sm" data-toggle="modal" data-target="#<?php echo $key->user_id ?>">Like</a>
-				    		<a href="#" class="card-link text-dark btn btn-secondary btn-sm " data-toggle="modal" data-target="#<?php echo $key->user_id ?>">Comment</a>
+                <a href="#" class="card-link text-dark btn btn-color btn-sm" id="#<?php echo $key->user_id ?>">Like</a>
+				    		<a href="#" class="card-link text-dark btn btn-secondary btn-sm " id="#<?php echo $key->user_id ?>">Comment</a>
 				  	</div>
-				</div>
+				</div> <br>
 
 	<?php endforeach;
 		}else{
