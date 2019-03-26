@@ -104,7 +104,7 @@
           <h5>You are currently chatting with the <?php echo $scheduler->counsellor;?>. You can make a new schedule once you complete your current meeting with <?php echo $scheduler->counsellor;?>. </h5> <br> Thank You.
 
        <?php } else{ ?>
-         <form id="login" action="<?php echo site_url() ?>user/scheduler" method="POST">
+         <form id="schedulermodal" action="<?php echo site_url() ?>user/scheduler" method="POST">
 
            <div class="form-group">
              <input type="text" class="form-control" name="name" placeholder="Name" value="<?=$this->session->user_data->first_name. " ". $this->session->user_data->last_name;?>" style="border-width: 0px 0px 1px;">
@@ -120,7 +120,7 @@
 
             <div class="form-group">
             
-                <select class="form-control counsellor-email" style="border-width: 0px 0px 1px;">
+                <select name="counsellor" class="form-control" id="counsellor-email" style="border-width: 0px 0px 1px;">
                   <option>Select Occupation</option>
                     <?php $userList = $this->db->get('familyplus')->result(); 
                     foreach ($userList as $key ):  
@@ -133,7 +133,7 @@
             </div>
 
             <div class="form-group">
-              <input type="email" class="form-control" id="counsellor_email" style="border-width: 0px 0px 1px;">
+              <input type="hidden" name="counsellor_email" class="form-control" id="counsellor_email" style="border-width: 0px 0px 1px;">
             </div>
 
             <div class="form-group">

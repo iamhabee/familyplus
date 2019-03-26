@@ -82,6 +82,7 @@ $route['user/photo'] = 'users/upload_picture';
 $route['user/login'] = 'users/login_user';
 $route['logout'] = 'users/logout';
 $route['delete'] = 'users/delete';
+$route['activate'] = 'users/update_schedule_status';
 $route['translate_uri_dashes'] = FALSE;
 
 // chat 

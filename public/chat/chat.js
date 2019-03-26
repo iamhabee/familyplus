@@ -1,4 +1,6 @@
-$(function() {
+
+$(document).ready(function() {
+
 $('.message').keypress(function(event){
     var keycode = (event.keyCode ? event.keyCode : event.which);
     if(keycode == '13'){
@@ -11,14 +13,19 @@ $('.btnSend').click(function(){
 $('.selectVendor').click(function(){
 	ChatSection(1);
       var receiver_id = $(this).attr('id');
+      var id = $(this).attr('height');
+
 	  //alert(receiver_id);
 	  $('#ReciverId_txt').val(receiver_id);
 	  $('#ReciverName_txt').html($(this).attr('title'));
+		// var id = $('#ReciverId_txt').val();
+		  $('.activate').attr("href", 'users/update_schedule_status/'+id);
+		  $('.delete').attr("href", 'users/deleteByCounsellor/'+id);
 	  
 	  GetChatHistory(receiver_id);
  				
 });
-
+  
 
 $('.upload_attachmentfile').change(function(){
 	

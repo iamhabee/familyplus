@@ -11,6 +11,8 @@
 //   document.getElementById("myDiv").style.display = "block";
 // }
 $(document).ready(function(){
+
+	
 	setTimeout(function(){
 		$('body').addClass('loaded');
 		$('h1').css('color','#222222');
@@ -24,6 +26,22 @@ $(document).ready(function(){
 			return false;
 		}
 	});
+
+	$("#close").click(function(e){
+			var ask = confirm("Are you sure you want to close this chat?");
+			if (!ask) {
+				e.preventDefault();
+				return false;
+			}
+		});
+
+	$("#activate").click(function(e){
+			var ask = confirm("Are you sure you are ready to chat with this user?");
+			if (!ask) {
+				e.preventDefault();
+				return false;
+			}
+		});
 
 	$("#inputGroupFile04").change(function(event){
 		var reader = new FileReader();
@@ -51,12 +69,27 @@ $(document).ready(function(){
 		// body...
 	});
 
-
 	 //cousellor email selector
-	 $('.counsellor-email').change(function(){
-	  $('#counsellor_email').val($('.counselloremail').attr('title'));	
+	 $('#counsellor-email').change(function(){
+	 	// schedulermodal(1);
+	 	if ($('.counselloremail').click()) {
+		var val = $('.counselloremail').attr('title');
+		alert(val);
+	  $('#counsellor_email').val(val);
+	}
 	});
 
+
+
+// function schedulermodal(status){
+// 	//chatSection
+// 	if(status==0){
+// 		$('#schedulermodal :input').attr('disabled', true);
+//     } else {
+//         $('#schedulermodal :input').removeAttr('disabled');
+//     }   
+// }
+// schedulermodal(0);
 // sidebar js
 
  $(".sidebar-dropdown > a").click(function() {

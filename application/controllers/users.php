@@ -426,10 +426,11 @@ public function counsellor()
 			$this->form_validation->set_rules('date', 'Date', 'required');
 			$this->form_validation->set_rules('time', 'Time', 'required');
 			if ( $this->form_validation->run() === FALSE):
-
 			$this->session->set_flashdata('msg', "Schedule not Successful!!! Please fill all the form to schedule a meeting with a counsellor");
+			echo validation_errors();
 			$this->session->set_flashdata('flag', 'danger');
 				redirect('dashboard');
+				// var_dump($this->input->post());
 
 			else:
 					$msg = "Hi ".$this->input->post('name').", has successfully schedule a meeting with " .$this->input->post('counsellor');
@@ -474,6 +475,33 @@ public function counsellor()
 			 $user_id = $this->session->user_data->id;
 			 $this->user->delete_schedule($user_id);
 			 redirect('chat');
+		}
+		public function deleteByCounsellor($id){
+			 $this->user->delete_schedule($id);
+			 redirect('chat');
+		}
+
+		public function update_schedule_status($id){
+					$check = $this->db->get_where('scheduler',  array('user_id' => $id))->row();
+				if ($check) {
+					if($check->status === 'pending'){
+						$this->db->set('status', 'active')->where('user_id', $id)->update('scheduler');
+
+						$this->session->set_flashdata('msg', 'Chat Activated Successfully');
+						$this->session->set_flashdata('flag', 'success');
+						redirect('chat');
+					}elseif($check->status === 'active'){
+
+						$this->session->set_flashdata('msg', 'Chat has already been activated ');
+						$this->session->set_flashdata('flag', 'info');
+						redirect('chat');
+
+					}else{
+						$this->session->set_flashdata('msg', 'Chat activation failed');
+						$this->session->set_flashdata('flag', 'danger');
+						redirect('chat');
+					}
+				}
 		}
 
 		public function upload_picture(){

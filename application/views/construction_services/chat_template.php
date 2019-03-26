@@ -39,6 +39,11 @@
   <!-- Main content -->
   
   <section class="content">
+    <?php if ( $this->session->flashdata('msg') ): ?>
+    <div class="alert alert-<?php echo $this->session->flashdata('flag')?>">
+      <?php echo $this->session->flashdata('msg') ?>
+    </div>
+    <?php endif; ?>
 
      <div class="row">
            <?php 
@@ -56,14 +61,14 @@
             // var_dump($userList);
                 $user_id = $this->session->user_data->id;
                 $scheduler = $this->user->get_schedule($user_id);
-            if ($scheduler === NULL) : ?>
+            if ($this->session->user_data->role_id !== '02' && $scheduler === NULL) : ?>
 
             <div class="container text-center">
               <h4> Hi <?php echo $this->session->user_data->first_name; ?> </h4><br>
               <p> You currently do not have a schedule on queue, Please click on the schedule button to schedule an appointment with one of our topmost expert. Thank You</p>
             </div>
 
-            <?php elseif ($scheduler->status == 'pending') :  ?>
+            <?php elseif ($this->session->user_data->role_id !== '02' && $scheduler->status == 'pending') :  ?>
 
               <div class="container text-center">
                 <h4> Hi <?php echo $this->session->user_data->first_name; ?> </h4><br>
@@ -79,11 +84,13 @@
                   <h3 class="box-title" id="ReciverName_txt"><?=$chat ?></h3>
 
                   <div class="box-tools pull-right">
-                    <!-- <span data-toggle="tooltip" title="Clear Chat" class="ClearChat"><i class="fa fa-trash"></i></span> -->
-                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                    </button>
-                    <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Clear Chat" data-widget="chat-pane-toggle"><i class="fa fa-trash"></i></button>
-                    <a type="button" class="btn btn-box-tool" href="delete" data-toggle="tooltip" title="Close Chat"> <i class="fa fa-close"></i></a>
+
+                    <?php if ($this->session->user_data->role_id === '02') : ?>
+                    <a class="btn btn-box-tool delete" id="close" href="" data-toggle="tooltip" title="Close Chat"> <i class="fa fa-close"></i></a>
+                    <a class="btn btn-box-tool activate" id="activate" href="" data-toggle="tooltip" title="activate"> <i class="fa fa-check"></i></a>
+                    <?php else :  ?>
+                    <a class="btn btn-box-tool" id="close" href="delete" data-toggle="tooltip" title="Close Chat"> <i class="fa fa-close"></i></a>
+                    <?php endif ?>
                     <!-- <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
                     </button> -->
                   </div>
@@ -140,8 +147,6 @@
 
                   <div class="box-tools pull-right">
                     <span class="label label-danger"></span>
-                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                    </button>
                     <!-- <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
                     </button> -->
                   </div>
@@ -159,6 +164,7 @@
                           }
                             
                           ?>
+                          <!-- counsellors list -->
                         <li class=" selectVendor" id="<?php echo $this->OuthModel->Encryptor('encrypt', $v->id);?>" title="<?php echo $v->first_name;?>">
                           <a class="users-list-name" href="#"><?php echo  $v->title. ' '. $v->first_name ?></a>
                           <!-- <span class="users-list-date">Yesterday</span> -->
@@ -167,7 +173,8 @@
                         endforeach;
                       }else{
                           foreach ($users as $key):  ?>
-                        <li class=" selectVendor" id="<?php echo $this->OuthModel->Encryptor('encrypt', $key->user_id);?>" title="<?php echo $key->name;?>">
+                            <!-- users list-->
+                        <li class=" selectVendor" height="<?php echo $key->user_id;?>" id="<?php echo $this->OuthModel->Encryptor('encrypt', $key->user_id);?>" title="<?php echo $key->name;?>">
                           <a class="users-list-name" href="#"><?php echo $key->name ?></a>
                           <!-- <span class="users-list-date">Yesterday</span> -->
                         </li>
@@ -175,7 +182,7 @@
                           }
                          }else{?>
                    	<li>
-                       <a class="users-list-name" href="#">No Counsellors's Find...</a>
+                       <a class="users-list-name" href="#">No users on schedule...</a>
                      </li>
                   	<?php } ?>
                     
@@ -184,10 +191,6 @@
                   <!-- /.users-list -->
                 </div>
                 <!-- /.box-body -->
-                <div class="box-footer text-center">
-                  <a href="javascript:void(0)" class="uppercase">View All Users</a>
-                </div>
-                <!-- /.box-footer -->
               </div>
               <!--/.box -->
             </div>
@@ -229,3 +232,5 @@
       </div>
     </div>
   </div>
+
+  

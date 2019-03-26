@@ -84,11 +84,12 @@ class ChatController extends CI_Controller {
 				if($query == true){
 					$response = ['status' => 1 ,'message' => '' ];
 				}else{
-					$response = ['status' => 0 ,'message' => 'sorry we re having some technical problems. please try again !' 						];
+					$response = ['status' => 0 ,'message' => 'sorry we re having some technical problems. please try again !'];
 				}
              
  		   echo json_encode($response);
 	}
+
 	public function ChatAttachmentUpload(){
 		 
 		
@@ -113,6 +114,19 @@ class ChatController extends CI_Controller {
 				}
 		    }
  		 
+	}
+
+	public function update_schedule_status(){
+		$receiver_id = $this->OuthModel->Encryptor('decrypt', $this->input->get('receiver_id') );
+		$query = $this->ChatModel->schedule_status_update($receiver_id);
+		$response='';
+				if($query == true){
+					$response = ['status' => 1 ,'message' => 'You are now ready to chat with your guest' ];
+				}else{
+					$response = ['status' => 0 ,'message' => 'sorry we re having some technical problems. please try again !' ];
+				}
+             
+ 		   echo json_encode($response);
 	}
 	
 	public function get_chat_history_by_vendor(){

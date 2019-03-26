@@ -17,6 +17,15 @@
  		else
  			return false;
 	}
+
+	public function schedule_status_update($id){
+				$res = $this->db->set('status', 'active')->where('id', $id)->update('scheduler');
+					if($res == 1)
+			 			return true;
+			 		else
+			 			return false;
+	}
+
 	public function GetReciverChatHistory($receiver_id){
 		
 		$sender_id = $this->session->user_data->id;
