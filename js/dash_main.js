@@ -70,14 +70,21 @@ $(document).ready(function(){
 	});
 
 	 //cousellor email selector
-	 $('#counsellor-email').change(function(){
-	 	// schedulermodal(1);
-	 	if ($('.counselloremail').click()) {
-		var val = $('.counselloremail').attr('title');
-		alert(val);
-	  $('#counsellor_email').val(val);
-	}
-	});
+	//  $('#counsellor-email').change(function(){
+	//  	// schedulermodal(1);
+	//  	if ($('.counselloremail').click()) {
+	// 	var val = $('.counselloremail').attr('title');
+	// 	// alert(val);
+	//   $('#counsellor_email').val(val);
+	// }
+	// });
+
+	$("#counsellor-email").change(function(){
+		var val = $(this).val();
+		// alert(val);
+		$("#counsellor_email").val(val);
+		// $('.counselloremail').removeAttr('value');
+})
 
 
 

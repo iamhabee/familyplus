@@ -39,21 +39,9 @@
 
 			else:
 
-					$_POST['token']=random_string('alnum', 32);
-					$url = "localhost/familyplus/users/activation/".$_POST['token'];
-					$msg = "Hi ".$this->input->post('full_name').", You are welcome to FamilyPlus.";
-					$msg .= "Please Verify Your  account By Clicking The Link Below";
-					$msg .= "<button><a href='<?php echo (".$url.")?>'>Activate</a></button>";
+					$token = $_POST['token']=random_string('alnum', 32);
 
-				$message = "
-					     <html>
-					       <head>
-					         <title>Welcome message</title>
-					       </head>
-					       <body>
-					         <p>$msg</p>
-					       </body>
-					     </html>";
+					
 
 
 					$_POST['user_id']=random_string('alnum', 10);
@@ -62,6 +50,8 @@
 					unset($_POST['confirm_password']);
 					$newuser = $this->input->post();
 					
+					$data['userdata'] = $newuser;
+                    $message = $this->load->view('mail-template', $data, true);
 
 					
 					if($this->send_mail($this->input->post('email'), "Account Registration", $message)):
@@ -433,7 +423,12 @@ public function counsellor()
 				// var_dump($this->input->post());
 
 			else:
-					$msg = "Hi ".$this->input->post('name').", has successfully schedule a meeting with " .$this->input->post('counsellor');
+				$counsellor = $this->input->post('counsellor');
+				 $userList = $this->user->get_user_by_email($counsellor); 
+                   
+				$occupation = $userList->occupation;
+				// $counsellor = $occupation;
+					$msg = "Hi ".$this->input->post('name').", you have successfully schedule a meeting with " .$occupation;
 					$msg .= "This is to inform the both parties that a meeting have schedule to take place at " .$this->input->post('time');
 
 				$message = "
@@ -447,6 +442,7 @@ public function counsellor()
 					     </html>";
 
 					if($this->send_mail($this->session->user_data->email, "Schedule Successfull", $message) && $this->send_mail($this->input->post('counsellor_email'), "Schedule Successfull", $message)):
+						$_POST['counsellor'] = $occupation;
 					    $schedule = $this->input->post();
 						$sql = $this->db->insert_string('scheduler', $schedule);
 						$this->db->query($sql);

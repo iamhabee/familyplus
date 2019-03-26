@@ -127,13 +127,13 @@
                     if ($key->role_id !== "02") {
                        continue;
                       }?>
-                  <option class="counselloremail" title="<?php echo $key->email ?>"><?php echo $key->occupation ?></option>
+                  <option class="counselloremail" value="<?php echo $key->email ?>"><?php echo $key->occupation ?></option>
                   <?php endforeach;?>
                 </select>
             </div>
 
             <div class="form-group">
-              <input type="hidden" name="counsellor_email" class="form-control" id="counsellor_email" style="border-width: 0px 0px 1px;">
+              <input type="email" name="counsellor_email" class="form-control" id="counsellor_email" style="border-width: 0px 0px 1px;">
             </div>
 
             <div class="form-group">

@@ -65,7 +65,7 @@
 
             <div class="container text-center">
               <h4> Hi <?php echo $this->session->user_data->first_name; ?> </h4><br>
-              <p> You currently do not have a schedule on queue, Please click on the schedule button to schedule an appointment with one of our topmost expert. Thank You</p>
+              <p> You currently do not have a schedule on queue, Please click on the scheduler on the left side menu to schedule an appointment with one of our topmost expert. Thank You</p>
             </div>
 
             <?php elseif ($this->session->user_data->role_id !== '02' && $scheduler->status == 'pending') :  ?>
