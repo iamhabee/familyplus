@@ -47,9 +47,24 @@
 
 		public function get_comunity(){
 
-			$this->db->from('comunity');
-			$query=$this->db->get();
+			$this->db->order_by('id', 'DESC');
+			$query=$this->db->get('comunity');
 			return $query->result();
+		}
+
+
+// get comment with post_id
+		public function get_comments($comment_id){
+
+			$this->db->select('*');
+			$this->db->from('comments');
+			$this->db->where('comment_id', $comment_id);
+			$query = $this->db->get();
+ 		if ($query) {
+			 return $query->result_array();
+		 } else {
+			 return false;
+		 }
 		}
 
 		public function get_users(){
@@ -70,6 +85,33 @@
 			$query = $this->db->query("SELECT * FROM maritalissues WHERE id=".$id);
 			return $query->row();
 		}
+
+		public function community_post($post_id){
+			$this->db->select('*');
+			$this->db->from('comunity');
+			$this->db->where('post_id', $post_id);
+			return $this->db->get()->row();
+		}
+
+// insert comments in to database
+		public function comments($data){
+
+			$res = $this->db->insert('comments', $data ); 
+ 		if($res == 1)
+ 			return true;
+ 		else
+ 			return false;
+		}
+
+		public function count($countId, $counter){
+
+			$res = $this->db->update('comunity', ['comment_count' => $counter ] ,['id' => $countId ] ); 
+ 		if($res == 1)
+ 			return true;
+ 		else
+ 			return false;
+		}
+
 		// public function search($file_name){
 
 		// 	$this->db->select('*');

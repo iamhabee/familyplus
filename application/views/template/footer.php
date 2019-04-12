@@ -1,7 +1,7 @@
 
       <div class="container-fluid bg-white">
         <footer class=" text-center text-secondary">
-          <p>&copy; TechEnd 2018 copyright reserved</p>
+          <p>&copy; TechEnd <?php echo date('Y') ?> copyright reserved</p>
         </footer>
       </div>
 

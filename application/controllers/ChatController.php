@@ -90,31 +90,31 @@ class ChatController extends CI_Controller {
  		   echo json_encode($response);
 	}
 
-	public function ChatAttachmentUpload(){
+	// public function ChatAttachmentUpload(){
 		 
 		
-		$file_data='';
-		if(isset($_FILES['attachmentfile']['name']) && !empty($_FILES['attachmentfile']['name'])){	
-				$config['upload_path']          = './uploads/attachment';
-				$config['allowed_types']        = 'jpeg|jpg|png|txt|pdf|docx|xlsx|pptx|rtf';
-				//$config['max_size']             = 500;
-				//$config['max_width']            = 1024;
-				//$config['max_height']           = 768;
-				$this->load->library('upload', $config);
-				if ( ! $this->upload->do_upload('attachmentfile'))
-				{
-					echo json_encode(['status' => 0,
-					'message' => '<span style="color:#900;">'.$this->upload->display_errors(). '<span>' ]); die;
-				}
-				else
-				{
-					$file_data = $this->upload->data();
-					//$filePath = $file_data['file_name'];
-					return $file_data;
-				}
-		    }
+	// 	$file_data='';
+	// 	if(isset($_FILES['attachmentfile']['name']) && !empty($_FILES['attachmentfile']['name'])){	
+	// 			$config['upload_path']          = './uploads/attachment';
+	// 			$config['allowed_types']        = 'jpeg|jpg|png|txt|pdf|docx|xlsx|pptx|rtf';
+	// 			//$config['max_size']             = 500;
+	// 			//$config['max_width']            = 1024;
+	// 			//$config['max_height']           = 768;
+	// 			$this->load->library('upload', $config);
+	// 			if ( ! $this->upload->do_upload('attachmentfile'))
+	// 			{
+	// 				echo json_encode(['status' => 0,
+	// 				'message' => '<span style="color:#900;">'.$this->upload->display_errors(). '<span>' ]); die;
+	// 			}
+	// 			else
+	// 			{
+	// 				$file_data = $this->upload->data();
+	// 				//$filePath = $file_data['file_name'];
+	// 				return $file_data;
+	// 			}
+	// 	    }
  		 
-	}
+	// }
 
 	public function update_schedule_status(){
 		$receiver_id = $this->OuthModel->Encryptor('decrypt', $this->input->get('receiver_id') );

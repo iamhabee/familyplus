@@ -18,7 +18,7 @@
         <!-- Navbar navigation: Right -->
         <ul class="navbar-nav ml-auto">
           <li class="nav-item"><a class="nav-link text-color tooltip-test" title="Home" href="dashboard">matchmaking</a></li>&nbsp; &nbsp; &nbsp;
-          <li class="nav-item"><a class="nav-link text-color tooltip-test" title="Cosultation" href="consultation">Consultatiion</a></li>&nbsp; &nbsp; &nbsp;
+          <li class="nav-item"><a class="nav-link text-color tooltip-test" title="Cosultation" href="consultation">Consultation</a></li>&nbsp; &nbsp; &nbsp;
           <li class="nav-item"><a class="nav-link text-color tooltip-test" title="Marital-Issues" href="maritalIssues">Marital Issues</a></li>&nbsp; &nbsp; &nbsp;
           <li class="nav-item"><a class="nav-link text-color tooltip-test" title="About" href="about">About Us</a></li>&nbsp; &nbsp; &nbsp;
           <li class="nav-item"><a class="nav-link text-color tooltip-test" title="Connect" href="connect">Connect</a></li>&nbsp; &nbsp; &nbsp;

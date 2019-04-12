@@ -3,11 +3,9 @@
   <head>
     <title>FamilyPlus</title>
     <?php  echo link_tag('css/bootstrap.css'); ?>
-    <?php  echo link_tag('css/main.css'); ?>
     <?php  echo link_tag('css/offcanvas.css'); ?>
     <?php  echo link_tag('fontawesome/css/all.min.css'); ?>
   <link rel="shortcut icon" type="image/png" href="<?php echo site_url() ?>image/favicon.png">
-    <!-- <? php // echo link_tag('https://fonts.googleapis.com/css?family=Kaushan+Script|Alegreya|Cuprum|Pacifico'); ?> -->
     <meta  name="viewport" content="width=device-width, initial-scale = 1" shrink-to-fit="no">
   </head>
   <body class="bg-white">
@@ -33,7 +31,7 @@
         <ul class="navbar-nav ">
           <li class="nav-item"><a class="nav-link text-white tooltip-test" title="Home" href="dashboard">Community</a></li>&nbsp; &nbsp; &nbsp;
           
-          <li class="nav-item"><a class="nav-link text-white tooltip-test" title="Cosultation" href="chat">Consultatiion</a></li>&nbsp; &nbsp; &nbsp;
+          <li class="nav-item"><a class="nav-link text-white tooltip-test" title="Cosultation" href="chat">Consultation</a></li>&nbsp; &nbsp; &nbsp;
 
           <li class="nav-item"><a class="nav-link text-white tooltip-test" title="Marital-issues" href="maritalIssues">Marital Issues</a></li>&nbsp; &nbsp; &nbsp;
 
@@ -224,7 +222,7 @@
 
       <div class="container-fluid bg-white margin">
         <footer class=" text-center text-secondary">
-          <p>&copy; TechEnd 2018 copyright reserved</p>
+          <p>&copy; TechEnd <?php echo date('Y') ?> copyright reserved</p>
         </footer>
       </div>
   </div>

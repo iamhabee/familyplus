@@ -16,11 +16,26 @@
               <?php echo $this->session->flashdata('msg') ?>
             </div>
             <?php endif; ?>
-          <form action="<?php echo site_url() ?>user/comunity" method="POST">
-          <input type="hidden" style="width: 30%" class="form-control" name="user_id" value="<?php echo $this->session->user_data->id ?>" placeholder="Title">
-          <textarea style="margin: 3px 10px 0px 5px; width: 80%; height: 100px;" name="post">What's on your mind</textarea>
-          <button class="btn btn-color btn-sm" type="submit"> Submit</button>
-          </form>
+
+
+          <!-- Post box start here -->
+              <form action="<?php echo site_url() ?>user/comunity" method="POST">
+                <div class="box-footer input-group">
+                    <input type="hidden" class="form-control" name="user_id" value="<?php echo $this->session->user_data->id ?>" >
+                    <input type="hidden" class="form-control" name="username" value="<?php echo $this->session->user_data->first_name ?>">
+                    <input type="hidden" class="form-control" name="post_date" value="<?php echo date('d/m/Y') ?>">
+                    <input type="text" name="post" class="form-control" style=" border-width: 0px 0px 1px;" placeholder="What's on your mind">
+                    
+                    <span class="input-group-btn">
+                      <button type="submit" class="btn btn-primary btn-sm btn-flat" ><i class="fa fa-send"></i></button>
+                    </span>
+                </div>
+              </form>
+
+              <br>
+              <!-- post box end here -->
+
+              <!-- Loop of All the posts in the communty database start here -->
             <?php $userList = $this->user->get_comunity();
             	if(isset($page_data)){
             		$users = $page_data;
@@ -32,14 +47,20 @@
             			?>
 				<div class="card">
 					<div class="card-body">
-<!-- 				    	<h5 class="card-title"><?php echo ucfirst($key->first_name ." " .$key->last_name); ?></h5> -->
-				    	<h6 class="card-subtitle mb-2 text-muted"><?php echo ($key->post); ?></h6>
-				   	 	<!-- <p class="card-text"><?php echo ($key->post_date); ?></p> -->
+			    	<h6 class="card-subtitle mb-2"><?php echo $key->post; ?></h6>
+			   	 	<p class="card-text">Post bY: <?php echo $key->username. " On ". $key->post_date ?> </p>
+			  	</div>
+          
+                <input type="hidden" id="like_count" value="<?php echo $key->id?>">
+          <hr>
+          <!-- buttons start here -->
+          <div> &nbsp;
+            <a class="btn btn-light like" href="#"><i class="fa fa-thumbs-up fa-lg"></i> Like<span class="badge badge-light" id="likeId"><?php echo $key->like_count?></span></a>
 
-				    	<hr>
-                <a href="#" class="card-link text-dark btn btn-color btn-sm" id="#<?php echo $key->user_id ?>">Like</a>
-				    		<a href="#" class="card-link text-dark btn btn-secondary btn-sm " id="#<?php echo $key->user_id ?>">Comment</a>
-				  	</div>
+            <a class="btn btn-light" href="<?php echo base_url('communities/') .$key->post_id; ?>" id="<?php echo $key->user_id ?>"><i class="fa fa-comment fa-lg"></i> View comments<span class="badge badge-light comment_count" id="<?php echo $key->comment_count?>" name="comment_count"></span></a>
+            
+          </div>
+          <!-- buttons end here -->
 				</div> <br>
 
 	<?php endforeach;
@@ -47,7 +68,7 @@
 			echo "No Result Found";
 		}
 	 ?>
-
+<!-- Loops end here -->
     </div>
    </div>
     
@@ -63,7 +84,7 @@
 <!-- </div> -->
 
 <!-- user profile modal pop up -->
-<div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<!-- <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -75,10 +96,10 @@
       	<div class="modal-body container">
       		<div class="row" style="margin-bottom: : 10px;">
       			<div class="col-md-4 ">
-      				<img style="width: 150px; height: 150px;" class="thumbnail" src="<?php echo site_url('uploads/'.$this->session->userdata('user_data')->user_id.'.jpg')?>">
+      				<img style="width: 150px; height: 150px;" class="thumbnail" src="<?php //echo site_url('uploads/'.$this->session->userdata('user_data')->user_id.'.jpg')?>">
       			</div>
       			<div class="col-md-8">
-      				<p><?php echo ucfirst($key->first_name ." " .$key->last_name); ?></p>
+      				<p><?php //echo ucfirst($key->first_name ." " .$key->last_name); ?></p>
                 <div><span>Home address :</span></div>
                 <div><span>Work :</span></div>
                 <div><span>Post  :</span></div>
@@ -122,11 +143,11 @@
       	</div>
     </div>
   </div>
-</div>
+</div> -->
 
-<?php foreach ($userList as $key ): ?>
+<!-- <?php //foreach ($userList as $key ): ?> -->
     <!-- friends profile modal pop up -->
-<div class="modal fade" id="<?php echo $key->user_id ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<!-- <div class="modal fade" id="<?php// echo $key->user_id ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -138,7 +159,7 @@
       	<div class="modal-body container">
       		<div class="row">
       			<div class="col-md-4">
-      				<img style="width: 200px; height: 200px;" class="thumbnail" src="<?php echo site_url('uploads/'.$key->user_id.'.jpg')?>">
+      				<img style="width: 200px; height: 200px;" class="thumbnail" src="<?php //echo site_url('uploads/'.$key->user_id.'.jpg')?>">
       			</div>
       		</div>
       	</div>
@@ -148,4 +169,4 @@
     </div>
   </div>
 </div>
-<?php endforeach;?>
+<?php //endforeach;?> -->

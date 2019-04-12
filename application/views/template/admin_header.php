@@ -13,7 +13,6 @@
 
     <title><?php echo $title; ?></title>
     <?php  echo link_tag('css/bootstrap.css'); ?>
-    <?php  echo link_tag('css/main.css'); ?>
     <?php  echo link_tag('css/sb-admin-2.min.css'); ?>
     <?php  echo link_tag('fontawesome/css/all.min.css'); ?>
     <?php  echo link_tag('https://fonts.googleapis.com/css?family=Kaushan+Script|Alegreya|Cuprum|Pacifico'); ?>

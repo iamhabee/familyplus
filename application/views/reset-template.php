@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width" />
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>familyPlus Account Activation email</title>
+    <title>Reset Password email</title>
 
     <link rel="stylesheet" href="<?php echo site_url('resources/css/email.css') ?>">
     <style>
@@ -235,14 +235,16 @@
                     <tr>
                         <td>
 
-                            <h3>Welcome, <?php echo $userdata['first_name'] ?></h3>
-                            <p class="lead">You are 0ne step away from enjoying all the awesome benefits that come with being among your brothers and sisters in Islam. Just activate your account by ckicking the button below.</p>
-                            <p class="lead">If you have any question you can reach us through the contact info below or your dashboard</p>
-                            <a class="btn" href="<?php echo site_url("users/activation/".$userdata['token']) ?>">Activate</a>
+                            <h3>Hello, <?php echo $details['first_name'] ?></h3>
+                            <p class="lead">You have requested to reset your password. Please click on the link below to reset your password.</p>
+                            <p class="lead">Please ignore If you have not requested for password reset. If you have any  question you can reach us through the contact info below</p>
 
+                            <p> Click here to 
+                            <a class="btn" href="<?php echo site_url("page/reset/".$details['id']) ?>">Reset</a>Password</p>
                             <br>
                             <p>Thanks</p>
                             <p>Best Regards</p>
+
                             <br/>
                             <br/>
 

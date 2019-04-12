@@ -39,7 +39,12 @@ input[type=number]::-webkit-outer-spin-button {
      <section class="content">
 
       <div class="row" >
-          <?php if ( $this->session->flashdata('msg') ): ?>
+        <?php if ( validation_errors() ): ?>
+            <div class="alert alert-danger">
+              <?php echo validation_errors() ?>
+            </div>
+            <?php endif;  
+            if ( $this->session->flashdata('msg') ): ?>
             <div class="alert alert-<?php echo $this->session->flashdata('flag')?> col-md-12">
               <?php echo $this->session->flashdata('msg') ?>
             </div>
@@ -85,15 +90,18 @@ input[type=number]::-webkit-outer-spin-button {
                     </div> -->
                   </div>
                   <div class="form-group">
-                    <label for="" class="col-sm-2 control-label">Name</label>
+                    <label for="" class="col-sm-2 control-label">First Name</label>
                      <div class="col-sm-5">
                       <input type="text" class="form-control" name="first_name" value="<?=$this->session->user_data->first_name;?>" placeholder="First Name">
                     </div>
-                    <div class="col-sm-5">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="" class="col-sm-2 control-label">Last Name</label>
+                     <div class="col-sm-5">
                       <input type="text" class="form-control" name="last_name" value="<?=$this->session->user_data->last_name;?>" placeholder="Last Name">
                     </div>
                   </div>
-                  
                     
                   <div class="form-group">
                     <label for="inputEmail" class="col-sm-2 control-label">Email</label>
@@ -146,19 +154,19 @@ input[type=number]::-webkit-outer-spin-button {
             
 
               <div class="tab-pane" id="settings">
-                <form class="form-horizontal ChangePassword" action="<?=base_url('profile-password-update');?>">
+                <form class="form-horizontal " action="<?=base_url('profile-password-update');?>" method="POST">
                   <div class="form-group">
                     <label for="" class="col-sm-2 control-label">Old Password</label>
 
                     <div class="col-sm-10">
-                      <input type="password" class="form-control" required id="Old" placeholder="Old Password">
+                      <input type="password" class="form-control" name="old" required id="Old" placeholder="Old Password">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="inputEmail" class="col-sm-2 control-label">New Password</label>
 
                     <div class="col-sm-10">
-                      <input type="password" class="form-control" required id="New" placeholder="New Password">
+                      <input type="password" class="form-control" name="new" required id="password" placeholder="New Password">
                     </div>
                   </div>
                   
@@ -166,8 +174,9 @@ input[type=number]::-webkit-outer-spin-button {
                     <label for="inputEmail" required class="col-sm-2 control-label">Confirm Password</label>
 
                     <div class="col-sm-10">
-                      <input type="password" class="form-control" required id="Confirm" placeholder="Confirm Password">
+                      <input type="password" class="form-control" name="confirm" required id="confirm" placeholder="Confirm Password">
                     </div>
+                    <p id="match"></p>
                   </div>
                   
                   <div class="form-group"><label for="" required class="col-sm-2 control-label">&nbsp;</label>
@@ -178,7 +187,7 @@ input[type=number]::-webkit-outer-spin-button {
                   <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                      
-                      <button type="submit" class="btn btn-info ChangePassword">Update</button>
+                      <button type="submit" class="btn btn-info">Update</button>
                     </div>
                   </div>
                 </form>
@@ -217,6 +226,7 @@ input[type=number]::-webkit-outer-spin-button {
            <div class="input-group">
                 <div class="custom-file">
                   <input type="file" class="custom-file-input" name="userfile" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
+                  <input type="hidden" name="oldfile" id="inputGroupFile04" value="<?php echo site_url('uploads/'.$this->session->user_data->user_id.'.jpg')?>">
                   <label class="custom-file-label" for="inputGroupFile04">Choose picture</label>
                 </div>
                 <div class="input-group-append">
@@ -235,6 +245,7 @@ input[type=number]::-webkit-outer-spin-button {
 <?php $this->load->view('include/footer');?>
 <script src="<?=base_url('public');?>/loadingoverlap/loadingoverlay.min.js"></script>
 <script src="<?=base_url('public');?>/loadingoverlap/loadingoverlay_progress.min.js"></script>
+<script src="<?=base_url('js/dash_main.js');?>"></script>
 
 <script>
 function LoginWith(url){
@@ -283,37 +294,37 @@ $(".UploadForm").submit('on',function(e){
  });
  
  
- $(".ChangePassword").submit('on',function(e){
-	e.preventDefault();
-	var New,Old,Confirm;
-	New=$('#New').val();
-	Old=$('#Old').val();
-	Confirm=$('#Confirm').val();
-     				$("#element_overlap1").LoadingOverlay("show");
-    					$.ajax({
-						  dataType : "json",
-						  type : "post",
-						  data : {New:New,Old:Old,Confirm:Confirm,},
-						  headers: {  'Authkey': '<?=$this->security->get_csrf_hash();?>'},
-						  url: '<?=base_url('profile-password-update');?>',
-						  success:function(data)
-								{
-									$("#element_overlap1").LoadingOverlay("hide", true);
-									if(data.status == 0)
-									{
-									  $('#ErrorMessageP').html('<span style="color:red;">'+data.message+'</span>');
-									}
-									if(data.status == 1)
-									{
-										  $('#ErrorMessageP').html(data.message);
- 									}
-						  },
-						  error: function (jqXHR, status, err) {
-							  $('#ErrorMessageP').html('<span style="color:red;">Local error callback.</span>');
-						  }
- 					});
-					//} //else
- });
+ // $(".ChangePassword").submit('on',function(e){
+	// e.preventDefault();
+	// var New,Old,Confirm;
+	// New=$('#New').val();
+	// Old=$('#Old').val();
+	// Confirm=$('#Confirm').val();
+ //     				$("#element_overlap1").LoadingOverlay("show");
+ //    					$.ajax({
+	// 					  dataType : "json",
+	// 					  type : "post",
+	// 					  data : {New:New,Old:Old,Confirm:Confirm,},
+	// 					  headers: {  'Authkey': '<?=$this->security->get_csrf_hash();?>'},
+	// 					  url: '<?=base_url('profile-password-update');?>',
+	// 					  success:function(data)
+	// 							{
+	// 								$("#element_overlap1").LoadingOverlay("hide", true);
+	// 								if(data.status == 0)
+	// 								{
+	// 								  $('#ErrorMessageP').html('<span style="color:red;">'+data.message+'</span>');
+	// 								}
+	// 								if(data.status == 1)
+	// 								{
+	// 									  $('#ErrorMessageP').html(data.message);
+ // 									}
+	// 					  },
+	// 					  error: function (jqXHR, status, err) {
+	// 						  $('#ErrorMessageP').html('<span style="color:red;">Local error callback.</span>');
+	// 					  }
+ // 					});
+	// 				//} //else
+ // });
   
  $(".UpdateDetails").submit('on',function(e){
 	e.preventDefault();

@@ -238,7 +238,7 @@ class OveModel extends CI_Model {
 
 	{  
 
- 		$res = $this->db->update($this->User, ['password' => $newpassword ] ,['id' => $user_id ] ); 
+ 		$res = $this->db->update('familyplus', ['password' => $newpassword ] ,['id' => $user_id ] ); 
 
 		if($res == 1)
 

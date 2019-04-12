@@ -15,12 +15,12 @@
             	<h6>Save your time seacrhing a <b class="text-danger">Pious Spouse</b>and make use of a broader algorithm to get your <em class="text-warning">Perfect Match</em></h6>
 
             	<div class="row align-items-center" style="height: 50%; padding: 10px; margin: 20px;">
-	            	<div class="offset-md-2 col-md-4">
-		            	<a href="#" class="card-link text-dark btn btn-color btn-lg" data-toggle="modal" data-target="#singleuserModal">Register as Single</a>
+	            	<div class="offset-md-2 col-md-8">
+		            	<a href="#" class="card-link text-dark btn btn-color btn-lg" data-toggle="modal" data-target="#singleuserModal">Register </a>
 		            </div>
-		            <div class="col-md-4">
+		            <!-- <div class="col-md-4">
 		            	<button href="#" class="card-link text-dark btn btn-color btn-lg" data-toggle="modal" data-target="#marrieduserModal">Register as Married</button>
-		            </div>
+		            </div> -->
 	        	</div>
             </div>
       	</div>
@@ -152,6 +152,7 @@
 				    <div class="form-group col-md-6">
 				      <input id="password" type="password" class="form-control" name="password" placeholder="Password" style="border-width: 0px 0px 1px;">
 				      <input id="role" type="hidden" class="form-control" name="role_id" value="04">
+				      <input id="role" type="hidden" class="form-control" name="date_created" value="<?php echo date('d/m/Y') ?>">
 				    </div>
 				    <div class="form-group col-md-6">
 				      <input id="confirm" type="password" class="form-control" name="confirm_password" placeholder="Confirm Password" style="border-width: 0px 0px 1px;">
@@ -360,6 +361,7 @@
 				   </div>
                     <button class="list-group-item list-group-item-action btn-color btn btn-rad text-center text-white" type="submit">Register</button>
 				    <input id="role" type="hidden" class="form-control" name="role_id" value="03">
+				    <input id="role" type="hidden" class="form-control" name="date_created" value="<?php echo date('d/m/Y') ?>">
                   </form>
                  <div class="align-items-center margin-bottom"> <p>Are you a member? <a href="login" class="btn">Login</a></p></div>
 

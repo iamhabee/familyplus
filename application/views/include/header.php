@@ -14,15 +14,14 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="<?=base_url('public')?>/dist/css/AdminLTE.css">
   
-  <!-- Google Font -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <!-- Google Font --><!-- 
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"> -->
   
   <link rel="stylesheet" href="<?=base_url('public')?>/dist/css/skins/_all-skins.min.css">
   <link rel="stylesheet" href="<?=base_url('public')?>/plugins/pace/pace.min.css">
   <link rel="shortcut icon" type="image/png" href="<?php echo site_url() ?>image/favicon.png">
     <title><?php echo $title; ?></title>
     <?php  echo link_tag('css/bootstrap.css'); ?>
-    <?php  echo link_tag('css/main.css'); ?>
     <?php  echo link_tag('css/offcanvas.css'); ?>
 
   <body class="hold-transition skin-blue sidebar-mini">

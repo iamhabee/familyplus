@@ -41,9 +41,6 @@
 
 					$token = $_POST['token']=random_string('alnum', 32);
 
-					
-
-
 					$_POST['user_id']=random_string('alnum', 10);
 					move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/'.$_POST['user_id'].'.jpg');
 					$_POST['password'] = md5($_POST['password']);
@@ -109,21 +106,8 @@
 				$this->load->view('template/footer');
 
 			else:
-					$_POST['token']=random_string('alnum', 32);
-					$url = "localhost/familyplus/users/activation/".$_POST['token'];
-					$msg = "Hi ".$this->input->post('full_name').", You are welcome to FamilyPlus.";
-					$msg .= "Please Verify Your  account By Clicking The Link Below";
-					$msg .= "<button><a href='<?php echo (".$url.")?>'>Activate</a></button>";
-				$message = "
-					     <html>
-					       <head>
-					         <title>Welcome message</title>
-					       </head>
-					       <body>
-					         <p>$msg</p>
-					       </body>
-					     </html>";
-
+					
+					$token = $_POST['token']=random_string('alnum', 32);
 
 					$_POST['user_id']=random_string('alnum', 10);
 					move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/'.$_POST['user_id'].'.jpg');
@@ -131,21 +115,22 @@
 					unset($_POST['confirm_password']);
 					$newuser = $this->input->post();
 					
-
+					$data['userdata'] = $newuser;
+				    $message = $this->load->view('mail-template', $data, true);
 					
-
 					if($this->send_mail($this->input->post('email'), "Account Registration", $message)):
 					    $this->user->register_user($newuser);
 					     $this->session->set_flashdata('msg', "Registration Successfull! An activation Email have been sent to your mail. Please check your mail to activate your account");
 					     $this->session->set_flashdata('flag', 'success');
+					     
 					     redirect('login');
 					   
 					else:
 					     $this->session->set_flashdata('msg', "Please Verify Your Email Is Correct And You Are Connected To The Internet");
 					     $this->session->set_flashdata('flag', 'danger');
 					     redirect('signup');
-					     // echo json_encode($status);
 					endif;
+
 				
 			endif;
 		}
@@ -178,22 +163,7 @@ public function counsellor()
 				$this->load->view('template/footer');
 
 			else:
-					$_POST['token']=random_string('alnum', 32);
-					$url = "localhost/familyplus/users/activation/".$_POST['token'];
-					$msg = "Hi ".$this->input->post('full_name').", You are welcome to FamilyPlus.";
-					$msg .= "Please Verify Your  account By Clicking The Link Below";
-					$msg .= "<button><a href='<?php echo (".$url.")?>'>Activate</a></button>";
-
-				$message = "
-					     <html>
-					       <head>
-					         <title>Welcome message</title>
-					       </head>
-					       <body>
-					         <p>$msg</p>
-					       </body>
-					     </html>";
-
+					$token = $_POST['token']=random_string('alnum', 32);
 
 					$_POST['user_id']=random_string('alnum', 10);
 					move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/'.$_POST['user_id'].'.jpg');
@@ -201,21 +171,63 @@ public function counsellor()
 					unset($_POST['confirm_password']);
 					$newuser = $this->input->post();
 					
-
+					$data['userdata'] = $newuser;
+				    $message = $this->load->view('mail-template', $data, true);
 					
-
 					if($this->send_mail($this->input->post('email'), "Account Registration", $message)):
 					    $this->user->register_user($newuser);
 					     $this->session->set_flashdata('msg', "Registration Successfull! An activation Email have been sent to your mail. Please check your mail to activate your account");
 					     $this->session->set_flashdata('flag', 'success');
-					     redirect('admin');
+					     
+					     redirect('login');
 					   
 					else:
 					     $this->session->set_flashdata('msg', "Please Verify Your Email Is Correct And You Are Connected To The Internet");
 					     $this->session->set_flashdata('flag', 'danger');
-					     redirect('admin');
+					     redirect('signup');
 					endif;
 
+				
+			endif;
+		}
+
+		public function resetPassword()
+		{
+			$this->load->model('user');
+
+			$this->form_validation->set_rules('email', 'E-mail', 'required|valid_email');
+
+			if ( $this->form_validation->run() === FALSE):
+
+				$data['title'] = "FamilyPlus| Reset Password";
+
+				$this->load->view('template/header', $data);
+				$this->load->view('template/nav');
+				$this->load->view('reset-password');
+				$this->load->view('template/footer');
+
+			else:
+					$email = $this->input->post('email');
+					$details = $this->user->get_user_by_email($email);
+					if ($details) :
+					    $message = $this->load->view('reset-template', $details);
+						
+						if($this->send_mail($this->input->post('email'), "Password Reset", $message)):
+						     $this->session->set_flashdata('msg', " An activation Link has been sent to your mail. Please check your mail to reset your Password");
+						     $this->session->set_flashdata('flag', 'success');
+						     
+						     redirect('login');
+						   
+						else:
+						     $this->session->set_flashdata('msg', "Please Verify You Are Connected To The Internet");
+						     $this->session->set_flashdata('flag', 'danger');
+						     redirect('user/resetPassword');
+						endif;
+					else:
+						$this->session->set_flashdata('msg', "Please Verify Your Email Is Correct");
+					    $this->session->set_flashdata('flag', 'danger');
+					    redirect('user/resetPassword');
+					 endif;
 				
 			endif;
 		}
@@ -334,6 +346,23 @@ public function counsellor()
 
 		}
 
+		public function reset($id){
+			$check = $this->db->get_where('familyplus',  array('id' => $id))->row();
+					if($check){
+						$password = $this->input->post('password');
+						md5($password);
+						$this->db->set('password', $password)->where('id', $id)->update('familyplus');
+
+						$this->session->set_flashdata('msg', 'Password Reset Successfully');
+						$this->session->set_flashdata('flag', 'success');
+						redirect('login');
+					}else{
+						$this->session->set_flashdata('msg', 'Password Reset failed');
+						$this->session->set_flashdata('flag', 'danger');
+						redirect('login');
+					}
+		}
+
 		public function update_profile(){
 			$uid = $this->session->user_data->id;
 			$email = $this->session->user_data->email;
@@ -349,7 +378,7 @@ public function counsellor()
 				}else{
 					$this->session->set_flashdata('msg', 'Profile update failed');
 						$this->session->set_flashdata('flag', 'danger');
-						redirect('login');
+						redirect('profile');
 				}
 		}
 
@@ -381,6 +410,7 @@ public function counsellor()
 				redirect('dashboard');
 
 			else:
+				$_POST['post_id']=random_string('alpha', 10);
 			$comunity = $this->input->post();
 			$sql = $this->db->insert_string('comunity', $comunity);
 			$this->db->query($sql);
@@ -501,12 +531,124 @@ public function counsellor()
 		}
 
 		public function upload_picture(){
+			$path = 'uploads/'.$this->session->user_data->user_id.'.jpg';
+			unlink($path);
+			if(isset($_FILES['userfile']['tmp_name']) && $_FILES['userfile']['tmp_name'] != ""):
 			move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/'.$this->session->user_data->user_id.'.jpg');
 			$this->session->set_flashdata('msg', "Picture uploaded Successfully");
 			$this->session->set_flashdata('flag', 'success');
 			redirect('profile');
+		else:
+			$this->session->set_flashdata('msg', "No Picture to uploaded");
+			$this->session->set_flashdata('flag', 'warning');
+			redirect('profile');
+		endif;
 		}
 
-	}
 
+
+	public function comments(){
+			$comment = $this->input->post();
+			$commentTxt = reduce_multiples($comment['commentTxt'],' ');
+
+			$data=[
+ 					'username' => $comment['Sender_Name'],
+					'user_id' => $comment['userId'],
+					'comment_id' => $comment['comment_id'],
+					'comment' =>   $commentTxt,
+					'date' => date('Y-m-d H:i:s'), //23 Jan 2:05 pm
+					// 'ip_address' => $this->input->ip_address(),
+				];
+			$query = $this->user->comments($data);
+			$response='';
+				if($query == true){
+					$response = ['status' => 1 ,'message' => 'comment Successfull' ];
+				}else{
+					$response = ['status' => 0 ,'message' => 'sorry we re having some technical problems. please try again !'];
+				}
+             
+ 		   echo json_encode($response);
+		}
+
+		public function comment_count(){
+			$count = $this->input->post();
+
+				$countId = $count['countId'];
+				$counter =  $count['count'];
+
+			$query = $this->user->count($countId, $counter);
+			$response='';
+				if($query == true){
+					$response = ['status' => 1 ,'message' => 'count updated Successfully' ];
+				}else{
+					$response = ['status' => 0 ,'message' => 'sorry we re having some technical problems. please try again !'];
+				}
+             
+ 		   echo json_encode($response);
+		}
+
+		public function get_comment_history(){
+		$comment_id = $this->input->get('comment_id');
+		
+		$Logged_sender_id = $this->session->user_data->id;
+		 
+		$history = $this->user->get_comments($comment_id);
+		//print_r($history);
+		foreach($history as $comment):
+			
+			$comment_id = $comment['id'];
+			$sender_id = $comment['user_id'];
+			$userName = $comment['username'];
+			// $userPic = $this->UserModel->PictureUrlById($chat['sender_id']);
+			
+			$comment = $comment['comment'];
+			// $commentdatetime = date('d M H:i A',strtotime($comment['date']));
+			
+ 		?>
+            
+            
+        
+             <?php if($Logged_sender_id!=$sender_id){?>     
+                  <!-- Message. Default to the left -->
+                    <div class="direct-chat-msg">
+                      <div class="direct-chat-info clearfix">
+                        <span class="direct-chat-name pull-left"><?=$userName;?></span>
+                        <!-- <span class="direct-chat-timestamp pull-right"><?=$commentdatetime;?></span> -->
+                      </div>
+                      <!-- /.direct-chat-info -->
+                      <!-- <img class="direct-chat-img" src="<?=$userPic;?>" alt="<?=$userName;?>"> -->
+                      <!-- /.direct-chat-img -->
+                      <div class="direct-chat-text">
+                         <?=$comment;?>
+                      </div>
+                      <!-- /.direct-chat-text -->
+                      
+                    </div>
+                    <!-- /.direct-chat-msg -->
+			<?php }else{?>
+                    <!-- Message to the right -->
+                    <div class="direct-chat-msg right">
+                      <div class="direct-chat-info clearfix">
+                        <span class="direct-chat-name pull-right"><?=$userName;?></span>
+                        <!-- <span class="direct-chat-timestamp pull-left"><?=$commentdatetime;?></span> -->
+                      </div>
+                      <!-- /.direct-chat-info -->
+                      <!-- <img class="direct-chat-img" src="<?=$userPic;?>" alt="<?=$userName;?>"> -->
+                      <!-- /.direct-chat-img -->
+                      <div class="direct-chat-text">
+                      	<?=$comment;?>
+                          	<!--<div class="spiner">
+                             	<i class="fa fa-circle-o-notch fa-spin"></i>
+                            </div>-->
+                       </div>
+                       <!-- /.direct-chat-text -->
+                    </div>
+                    <!-- /.direct-chat-msg -->
+             <?php }?>
+        
+        <?php
+		endforeach;
+ 		
+	}
+}
 ?>

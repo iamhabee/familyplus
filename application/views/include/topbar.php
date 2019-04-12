@@ -25,7 +25,7 @@
 
           <li class="nav-item"><a class="nav-link text-white tooltip-test" title="Home" href="<?php echo base_url()?>dashboard">Community</a></li>&nbsp; 
 
-          <li class="nav-item"><a class="nav-link text-white tooltip-test" title="Cosultation" href="<?php echo base_url()?>chat">Consultatiion</a></li>&nbsp; 
+          <li class="nav-item"><a class="nav-link text-white tooltip-test" title="Cosultation" href="<?php echo base_url()?>chat">Consultation</a></li>&nbsp; 
 
           <li class="nav-item"><a class="nav-link text-white tooltip-test" title="Marital-issues" href="<?php echo base_url()?>maritalIssues">Marital Issues</a></li>&nbsp;
           

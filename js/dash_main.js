@@ -10,14 +10,41 @@
 //   document.getElementById("loader").style.display = "none";
 //   document.getElementById("myDiv").style.display = "block";
 // }
+
 $(document).ready(function(){
 
-	
+
 	setTimeout(function(){
 		$('body').addClass('loaded');
 		$('h1').css('color','#222222');
 	}, 3000);
-	// alert('i am ready to work');
+	
+
+	
+	$("#counsellor-email").change(function(){
+		var val = $(this).val();
+		$("#counsellor_email").val(val);
+	});
+    
+
+
+	$('#like').click(function(){
+
+				$.ajax({
+						  dataType : "json",
+						  type : 'post',
+						  data : {likeId : likeId, count: count},
+						  url: '/familyplus/like-count',
+						  success:function(data)
+						  {
+						  	data['']
+						  },
+						  error: function (jqXHR, status, err) {
+ 							 // alert('Local error callback');
+						  }
+ 					});
+
+	});
 
 	$("#logout").click(function(e){
 		var ask = confirm("Do you really want to logout?");
@@ -69,35 +96,6 @@ $(document).ready(function(){
 		// body...
 	});
 
-	 //cousellor email selector
-	//  $('#counsellor-email').change(function(){
-	//  	// schedulermodal(1);
-	//  	if ($('.counselloremail').click()) {
-	// 	var val = $('.counselloremail').attr('title');
-	// 	// alert(val);
-	//   $('#counsellor_email').val(val);
-	// }
-	// });
-
-	$("#counsellor-email").change(function(){
-		var val = $(this).val();
-		// alert(val);
-		$("#counsellor_email").val(val);
-		// $('.counselloremail').removeAttr('value');
-})
-
-
-
-// function schedulermodal(status){
-// 	//chatSection
-// 	if(status==0){
-// 		$('#schedulermodal :input').attr('disabled', true);
-//     } else {
-//         $('#schedulermodal :input').removeAttr('disabled');
-//     }   
-// }
-// schedulermodal(0);
-// sidebar js
 
  $(".sidebar-dropdown > a").click(function() {
   $(".sidebar-submenu").slideUp(200);
@@ -156,4 +154,116 @@ $("#show-sidebar").click(function() {
 	});
 
 
+
+	   var countId = $('#comment_count_id').val();
+	   var counter = $('.comment_count').attr('id');
+	   var add = 1;
+	   var count = Number(counter) + Number(add);
+
+$('.comments').keypress(function(event){
+    var keycode = (event.keyCode ? event.keyCode : event.which);
+    if(keycode == '13'){
+       
+
+       var comment = $(this).val();
+       alert(count);
+	   updateCommentCount(countId, count, comment);
+       sendTxtComment(comment);
+    }
 });
+		$('.btnCommentSend').click(function(){
+       var comment = $('.comments').val();
+       alert(count);
+	   updateCommentCount(countId, count, comment);
+       sendTxtComment(comment);
+	});
+		
+		var comment_id = $('#id').val();
+		GetCommentHistory(comment_id);
+});
+
+function Displaycomments(comment){
+	var Sender_Name = $('#Sender_Name').val();
+	
+		var str = '<div class="direct-chat-msg right">';
+				str+='<div class="direct-chat-info clearfix">';
+				 str+='<span class="direct-chat-name pull-right">'+Sender_Name ;
+				 str+='</span><span class="direct-chat-timestamp pull-left"></span>'; //23 Jan 2:05 pm
+				 // str+='</div><img class="direct-chat-img" src="'+Sender_ProfilePic+'" alt="">';
+				 str+='<div class="direct-chat-text">'+comment;
+				 str+='</div></div>';
+		$('#dumppy').append(str);
+}
+
+function sendTxtComment(comment){
+	var commentTxt = comment.trim();
+	if(commentTxt!=''){
+
+ 		Displaycomments(commentTxt);
+		
+				var userId = $('#userId').val();
+				var comment_id = $('#commentId_txt').val();
+				var Sender_Name = $('#Sender_Name').val();
+				$.ajax({
+						  dataType : "json",
+						  type : 'post',
+						  data : {commentTxt : commentTxt, comment_id: comment_id, userId: userId, Sender_Name: Sender_Name },
+						  url: '/familyplus/send-comment',
+						  success:function(data)
+						  {
+  							GetCommentHistory(comment_id)		 
+						  },
+						  error: function (jqXHR, status, err) {
+ 							 // alert('Local error callback');
+						  }
+ 					});
+				$('.comments').val('');
+		$('.comments').focus();
+	}else{
+		$('.comments').focus();
+	}
+}
+
+function updateCommentCount(countId, count, comment){
+			var commentTxt = comment.trim();
+			if(commentTxt!=''){
+				$.ajax({
+						  dataType : "json",
+						  type : 'post',
+						  data : {countId : countId, count: count},
+						  url: '/familyplus/comment-count',
+						  success:function(data)
+						  {
+
+						  },
+						  error: function (jqXHR, status, err) {
+ 							 // alert('Local error callback');
+						  }
+ 					});
+				$('.comments').val('');
+		$('.comments').focus();
+	}else{
+		$('.comments').focus();
+	}
+}
+
+
+function GetCommentHistory(comment_id){
+				$.ajax({
+						  //dataType : "json",
+  						  url: '/familyplus/get-comment-history?comment_id='+comment_id,
+						  success:function(data)
+						  {
+  							$('#dumppy').html(data);
+							// ScrollDown();	 
+						  },
+						  error: function (jqXHR, status, err) {
+ 							 alert('Local error callback');
+						  }
+ 					});
+}
+
+setInterval(function(){ 
+	var comment_id = $('#commentId_txt').val();
+	if(comment_id!=''){GetCommentHistory(comment_id);}
+}, 50000);

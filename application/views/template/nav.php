@@ -14,13 +14,11 @@
 
           <li class="nav-item"><a class="nav-link text-white tooltip-test" title="Home" href="dashboard">Community</a></li>&nbsp; &nbsp; &nbsp;
 
-          <li class="nav-item"><a class="nav-link text-white tooltip-test" title="Cosultation" href="chat">Consultatiion</a></li>&nbsp; &nbsp; &nbsp;
+          <li class="nav-item"><a class="nav-link text-white tooltip-test" title="Cosultation" href="chat">Consultation</a></li>&nbsp; &nbsp; &nbsp;
 
           <li class="nav-item"><a class="nav-link text-white tooltip-test" title="Marital-issues" href="maritalIssues">Marital Issues</a></li>&nbsp; &nbsp; &nbsp;
 
-          <li class="nav-item"><a class="nav-link text-white tooltip-test" title="About" href="about">About</a></li>&nbsp; &nbsp; &nbsp;
-
-          <li class="nav-item"><a class="nav-link text-white tooltip-test" title="Connect" href="connect">Connect</a></li>&nbsp; &nbsp; &nbsp;
+          <li class="nav-item"><a class="nav-link text-white tooltip-test" title="About" href="about">About</a></li>
 
         <?php if ($this->session->user_data){ 
         if (!file_exists($this->session->userdata('user_data')->user_id.'.jpg')) { ?>

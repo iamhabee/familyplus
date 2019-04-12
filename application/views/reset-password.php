@@ -19,21 +19,15 @@
             <?php endif; ?>
 
             <div class="list-group" id="myList" role="tablist">
-              <div class="jumbotron jumbo-pad bg-white"> <h4 class="text-center text-green">Log in to your account</h4> </div>
-              <form class="margin-bottom" action="<?php echo site_url() ?>user/login" method="POST">
+              <div class="jumbotron jumbo-pad bg-white"> <h4 class="text-center text-green">Provide your email below to reset your password </h4> </div>
+              <form class="margin-bottom" action="<?php echo site_url() ?>user/resetPassword" method="POST">
                   
                    <div class="form-group input-group">
                       <span class="input-group-addon"><i class="fa fa-user"></i></span>
                       <input id="email" type="text" style="border-width: 0px 0px 1px;" class="form-control" name="email" placeholder="Email">
                    </div>
-                    <div class="form-group input-group">
-                      <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                      <input type="password" class="form-control" style="border-width: 0px 0px 1px;"  name="password" placeholder="Password">
-                      <input type="hidden" class="form-control" value="<?php set_value($this->session->tempdata('rfrom'), 'dashboard') ?>" name="rfrom" placeholder="Password">
-
-                    </div>   
-                  <button class="list-group-item margin list-group-item-action btn-rad btn btn-color text-white text-center" type="submit">Login</button>
-                  <a href="resetPassword" class="margin text-center">Forgot Password</a>
+                      
+                  <button class="list-group-item margin list-group-item-action btn-rad btn btn-color text-white text-center" type="submit">Reset</button>
               </form>
               
            </div>

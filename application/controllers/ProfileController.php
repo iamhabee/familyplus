@@ -56,34 +56,35 @@ class ProfileController extends CI_Controller {
  		 $this->OuthModel->CSRFVerify();
 		$post = $this->input->post();
  		
- 		if(empty($post['Old'])){
-			echo json_encode(['status' => 0 ,'message' => 'Old Password is Required !']);
-		}else if(empty($post['New'])){
-			echo json_encode(['status' => 0 ,'message' => 'Password is required fields !']); 
-		}else if(strlen($post['Confirm'])  < 4 ){ 
-			echo json_encode(['status' => 0 ,'message' => 'Password must contain at least 4 characters ! ']); 
-		}else if($post['New'] != $post['Confirm'] ){
-				echo json_encode(['status' => 0 ,'message' => "password and confirm password don't match"]);  
-		}else{
-			  
-			$checkOldPasswordInDB = $this->OveModel->checkOldPasswordInDB();
-			$hashed=$checkOldPasswordInDB['password'];
+ 		$this->form_validation->set_rules('old', 'Old Password', 'required|trim');
+		$this->form_validation->set_rules('new', 'New Password', 'required|trim');
+		$this->form_validation->set_rules('confirm', 'Confirm New Password', 'required|trim');
+ 		if($this->form_validation->run()):
 			
  			 
-			if($this->OuthModel->VerifyPassword($post['Old'],$hashed) == 1){
+			if(md5($post['old']) === $this->session->user_data->password):
  				 
-  				$user_id = $checkOldPasswordInDB['id'];
-				$update = $this->OveModel->UpdatePassword($user_id,$this->OuthModel->HashPassword($post['New']));
-				if($update == true){
-					echo json_encode(['status' => 1 ,'message' => "Password updated !"]);
-				}else{
-					echo json_encode(['status' => 0 ,'message' => "Faild to password updated, Please try again !"]);
-				}
-				
-			}else{
- 				echo json_encode(['status' => 0 ,'message' => "Your old password do not match in databases, please enter correct password !"]);
-			}
-		}
+  				$user_id = $this->session->user_data->id;
+				$update = $this->OveModel->UpdatePassword($user_id, md5($post['new']));
+				if($update == true):
+					$this->session->set_flashdata('msg', 'Password Updated Successfully');
+					$this->session->set_flashdata('flag', 'success');
+						redirect("profile");
+				else:
+					$this->session->set_flashdata('msg', 'Password failed to update, Please confirm that you are connected to internet and try again');
+					$this->session->set_flashdata('flag', 'danger');
+						redirect("profile");
+				endif;
+			
+			else:
+ 				$this->session->set_flashdata('msg', 'Your old password do not match in databases, please enter correct password');
+				$this->session->set_flashdata('flag', 'danger');
+					redirect("profile");
+			endif;
+  		else:
+			redirect("profile");
+		endif;
+
   	}
 	
 	public function user_update_profile_data(){

@@ -44,12 +44,23 @@
 			$this->load->view('template/footer');
 		}
 
-		public function connect()
+		public function resetPassword()
 		{
-			$data['title'] = "Familyplus | Connect";
+
+			$data['title'] = "Familyplus | Reset Password";
 			$this->load->view('template/header', $data);
 			$this->load->view('template/nav');
-			$this->load->view('connect');
+			$this->load->view('reset-password');
+			$this->load->view('template/footer');
+		}
+
+		public function reset($id=0)
+		{
+			$data['rec'] = $this->user->article($id);
+			$data['title'] = "Familyplus | Reset Password";
+			$this->load->view('template/header', $data);
+			$this->load->view('template/nav');
+			$this->load->view('reset', $data);
 			$this->load->view('template/footer');
 		}
 
@@ -98,6 +109,22 @@
 			$this->load->view('include/topbar');
 			$this->load->view('include/sidebar');
 			$this->load->view('marriage-articles',$data);
+			$this->load->view('include/footer');
+		}
+
+		public function communities($post_id=0)
+		{
+			if ( !isset($this->session->user_data) ) {
+    		$this->session->set_flashdata('msg', "Please Login to continue");
+			$this->session->set_flashdata('flag', 'danger');
+			redirect('login');
+		}
+			$data['rec'] = $this->user->community_post($post_id);
+			$data['title'] = "Familyplus | comments";
+			$this->load->view('include/header', $data);
+			$this->load->view('include/topbar');
+			$this->load->view('include/sidebar');
+			$this->load->view('communities',$data);
 			$this->load->view('include/footer');
 		}
 

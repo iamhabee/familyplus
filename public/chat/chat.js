@@ -27,37 +27,37 @@ $('.selectVendor').click(function(){
 });
   
 
-$('.upload_attachmentfile').change(function(){
+// $('.upload_attachmentfile').change(function(){
 	
-	DisplayMessage('<div class="spiner"><i class="fa fa-circle-o-notch fa-spin"></i></div>');
-	// ScrollDown();
+// 	DisplayMessage('<div class="spiner"><i class="fa fa-circle-o-notch fa-spin"></i></div>');
+// 	// ScrollDown();
 	
-	var file_data = $('.upload_attachmentfile').prop('files')[0];
-	var receiver_id = $('#ReciverId_txt').val();   
-    var form_data = new FormData();
-    form_data.append('attachmentfile', file_data);
-	form_data.append('type', 'Attachment');
-	form_data.append('receiver_id', receiver_id);
+// 	var file_data = $('.upload_attachmentfile').prop('files')[0];
+// 	var receiver_id = $('#ReciverId_txt').val();   
+//     var form_data = new FormData();
+//     form_data.append('attachmentfile', file_data);
+// 	form_data.append('type', 'Attachment');
+// 	form_data.append('receiver_id', receiver_id);
 	
-	$.ajax({
-                url: 'chat-attachment/upload', 
-                dataType: 'json',  
-                cache: false,
-                contentType: false,
-                processData: false,
-                data: form_data,                        
-                type: 'post',
-                success: function(response){
+// 	$.ajax({
+//                 url: 'chat-attachment/upload', 
+//                 dataType: 'json',  
+//                 cache: false,
+//                 contentType: false,
+//                 processData: false,
+//                 data: form_data,                        
+//                 type: 'post',
+//                 success: function(response){
 					
-					$('.upload_attachmentfile').val('');
-					GetChatHistory(receiver_id);
-				},
-				error: function (jqXHR, status, err) {
- 							 // alert('Local error callback');
-				}
-	 });
+// 					$('.upload_attachmentfile').val('');
+// 					GetChatHistory(receiver_id);
+// 				},
+// 				error: function (jqXHR, status, err) {
+//  							 // alert('Local error callback');
+// 				}
+// 	 });
 	
-});
+// });
 $('.ClearChat').click(function(){
        var receiver_id = $('#ReciverId_txt').val();
   	 			$.ajax({

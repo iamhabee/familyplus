@@ -54,10 +54,11 @@ $route['404_override'] = '';
 $route['login'] = 'page/login';
 $route['signup'] = 'page/signup';
 $route['about'] = 'page/about';
-$route['connect'] = 'page/connect';
+$route['resetPassword'] = 'page/resetPassword';
 $route['consultation'] = 'page/consultation';
 $route['maritalIssues'] = 'page/maritalIssues';
-$route['MarriageArticle'] = 'page/marriageArticle';
+// $route['MarriageArticle'] = 'page/marriageArticle';
+$route['communities/(:any)'] = 'page/communities/$1';
 
 
 $route['dashboard'] = 'dashboard/index';
@@ -80,9 +81,14 @@ $route['user/scheduler'] = 'users/scheduler';
 $route['user/update'] = 'users/update_profile';
 $route['user/photo'] = 'users/upload_picture';
 $route['user/login'] = 'users/login_user';
+$route['user/resetPassword'] = 'users/resetPassword';
+$route['user/reset'] = 'users/reset';
 $route['logout'] = 'users/logout';
 $route['delete'] = 'users/delete';
 $route['activate'] = 'users/update_schedule_status';
+$route['get-comment-history'] = 'users/get_comment_history';
+$route['send-comment'] = 'users/comments';
+$route['comment-count'] = 'users/comment_count';
 $route['translate_uri_dashes'] = FALSE;
 
 // chat 
@@ -98,6 +104,6 @@ $route['view-all-notifications'] = 'NotificationsController/index';
 ////////////////
 $route['chat'] = 'ChatController/index';
 $route['send-message'] = 'ChatController/send_text_message';
-$route['chat-attachment/upload'] = 'ChatController/send_text_message';
+// $route['chat-attachment/upload'] = 'ChatController/send_text_message';
 $route['get-chat-history-vendor'] = 'ChatController/get_chat_history_by_vendor';
 $route['chat-clear'] = 'ChatController/chat_clear_client_cs';

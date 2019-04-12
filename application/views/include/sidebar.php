@@ -9,7 +9,7 @@
             <h6>MENU</h6>
           </li>
           <li >
-            <a href="dashboard" class="text-white">
+            <a href="<?php echo base_url()?>dashbaord" class="text-white">
               <i class="fa fa-globe"></i>
               <span>Community</span>
              <!--  <span class="badge badge-pill badge-warning">New</span> -->
@@ -17,21 +17,15 @@
           </li>
 
           <li> 
-            <a href="chat" class="text-white"> 
+            <a href="<?php echo base_url()?>chat" class="text-white"> 
               <i class="fa fa-comment"></i> 
               <span>Consultation</span> 
             </a>
           </li>
           <li>
-            <a href="maritalIssues" class="text-white">
+            <a href="<?php echo base_url()?>maritalIssues" class="text-white">
               <i class="fa fa-user"></i>
               <span>Marital Issues</span>
-            </a>
-          </li>
-          <li>
-            <a href="connect" class="text-white">
-              <i class="fa fa-globe"></i>
-              <span>Connect</span>
             </a>
           </li>
           <?php if ($this->session->user_data->role_id == '02'): ?>
@@ -133,7 +127,7 @@
             </div>
 
             <div class="form-group">
-              <input type="email" name="counsellor_email" class="form-control" id="counsellor_email" style="border-width: 0px 0px 1px;">
+              <input type="hidden" name="counsellor_email" class="form-control" id="counsellor_email" style="border-width: 0px 0px 1px;">
             </div>
 
             <div class="form-group">
