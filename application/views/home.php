@@ -2,9 +2,9 @@
 <div class="content-wrapper"> 
   
   <section class="content">
-     <div class="row margin">
+     <div class="row">
 
-        <div class="col-md-8">
+        <div class="col-md-8" >
           <?php if ( validation_errors() ): ?>
             <div class="alert alert-danger">
               <?php echo validation_errors() ?>
@@ -19,7 +19,7 @@
 
 
           <!-- Post box start here -->
-              <form action="<?php echo site_url() ?>user/comunity" method="POST">
+              <form action="<?php echo site_url() ?>user/comunity" method="POST" class="margin">
                 <div class="box-footer input-group">
                     <input type="hidden" class="form-control" name="user_id" value="<?php echo $this->session->user_data->id ?>" >
                     <input type="hidden" class="form-control" name="username" value="<?php echo $this->session->user_data->first_name ?>">
@@ -48,16 +48,24 @@
 				<div class="card">
 					<div class="card-body">
 			    	<h6 class="card-subtitle mb-2"><?php echo $key->post; ?></h6>
-			   	 	<p class="card-text">Post bY: <?php echo $key->username. " On ". $key->post_date ?> </p>
+			   	 	<p class="card-text">Posted bY: <?php echo $key->username. " On ". $key->post_date ?> </p>
 			  	</div>
           
-                <input type="hidden" id="like_count" value="<?php echo $key->id?>">
+                
           <hr>
           <!-- buttons start here -->
-          <div> &nbsp;
-            <a class="btn btn-light like" href="#"><i class="fa fa-thumbs-up fa-lg"></i> Like<span class="badge badge-light" id="likeId"><?php echo $key->like_count?></span></a>
 
-            <a class="btn btn-light" href="<?php echo base_url('communities/') .$key->post_id; ?>" id="<?php echo $key->user_id ?>"><i class="fa fa-comment fa-lg"></i> View comments<span class="badge badge-light comment_count" id="<?php echo $key->comment_count?>" name="comment_count"></span></a>
+          <input type="hidden" id="like_count_id" value="<?php echo $key->id?>">
+          <div> &nbsp;
+            <a class="likeBtn btn btn-light" href="#">
+              <i class="fa fa-thumbs-up fa-lg"></i>Like
+              <span class="like_count"  id="<?php echo $key->like_count?>"></span>
+            </a>
+
+            <a class="btn btn-light" href="<?php echo base_url('communities/') .$key->post_id; ?>">
+              <i class="fa fa-comment fa-lg"></i> View comments
+              <span class="badge badge-light" ><?php echo $key->comment_count?></span>
+            </a>
             
           </div>
           <!-- buttons end here -->
@@ -70,17 +78,7 @@
 	 ?>
 <!-- Loops end here -->
     </div>
-   </div>
-    
-    <!-- /.row --> 
-    
-    
-    
-  </section>
-  
-  <!-- /.content --> 
-  
-</div>
+
 <!-- </div> -->
 
 <!-- user profile modal pop up -->

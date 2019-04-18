@@ -23,6 +23,7 @@
   
        <?php echo script_tag('js/jquery.js'); ?>
       <?php echo script_tag('js/bootstrap.js'); ?>
+      <?php echo script_tag('js/popper.min.js'); ?>
       <?php echo script_tag('js/main.js'); ?>
      <?php echo script_tag('js/dash_main.js'); ?>
      <?php echo script_tag('public/components/jquery-slimscroll/jquery.slimscroll.min.js'); ?>
@@ -30,8 +31,8 @@
      <?php echo script_tag('public/dist/js/adminlte.min.js'); ?>
      <?php echo script_tag('public/dist/js/demo.js'); ?>
   <!-- jQuery 3 -->
- <?php if($this->uri->segment(1) != 'chat'){?>
-     <?php echo script_tag('public/components/PACE/pace.min.js'); ?>
+ <?php if($this->uri->segment(1) != 'chat' && $this->uri->segment(1) != 'dashboard'){?>
+     <!-- <?php //echo script_tag('public/components/PACE/pace.min.js'); ?> -->
  <?php }?>
 
 <script src="<?=base_url('public/chat/chat.js');?>"></script> 
@@ -44,7 +45,7 @@
   })
   <?php if($this->uri->segment(1) != 'chat'){?>
   $(document).ajaxStart(function () {
-    Pace.restart();
+    // Pace.restart();
   });
   <?php }?>
 </script>

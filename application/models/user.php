@@ -105,12 +105,35 @@
 
 		public function count($countId, $counter){
 
-			$res = $this->db->update('comunity', ['comment_count' => $counter ] ,['id' => $countId ] ); 
+			$res = $this->db->update('comunity', ['comment_count' => $counter ], ['id' => $countId ] ); 
  		if($res == 1)
  			return true;
  		else
  			return false;
 		}
+
+		public function like_count($countId, $counter){
+
+			$res = $this->db->update('comunity', ['like_count' => $counter ], ['id' => $countId ] ); 
+ 		if($res == 1)
+ 			return true;
+ 		else
+ 			return false;
+		}
+
+		public function get_count_no($count_id){
+
+			$this->db->select('*');
+			$this->db->from('comunity');
+			$this->db->where('id', $count_id);
+			$query = $this->db->get();
+ 		if ($query) {
+			 return $query->result_array();
+		 } else {
+			 return false;
+		 }
+		}
+
 
 		// public function search($file_name){
 

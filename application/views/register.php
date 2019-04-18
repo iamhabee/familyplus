@@ -38,7 +38,7 @@
       </div>
       	<div class="modal-body container">
       		 <div class="jumbotron jumbo-pad bg-white">
-	                <h4 class="text-center text-green">Create New Account</h4>
+	             <h4 class="text-center text-green">Create New Account</h4>
 	             </div>
                  <form id="login" action="<?php echo site_url() ?>user/single" method="POST" enctype="multipart/form-data">
 					
@@ -53,6 +53,7 @@
 		           <img align="center" class="image" id="image" src="<?php echo site_url().'image/male.png'?>">
 
 		           <div class="form-group">
+		           	 <label >Title <b class="text-danger"> *</b></label>
 				     <select class="form-control" name="title" style="border-width: 0px 0px 1px;">
 	                    <option>Select Title</option>
 	                    <option>Mr</option>
@@ -69,32 +70,39 @@
 				  </div>
 
 				   <div class="form-group">
+		           	 <label >First Name <b class="text-danger"> *</b></label>
 				     <input type="text" class="form-control" name="first_name" placeholder="First Name" style="border-width: 0px 0px 1px;">
 				   </div>
 
 				    <div class="form-group">
+		           	 <label >Last Name <b class="text-danger"> *</b></label>
 				      <input type="last_name" class="form-control" name="last_name" placeholder="Last Name" style="border-width: 0px 0px 1px;">
 				    </div>
 
 				   <div class="form-group">
+		           	 <label >Other Name <b class="text-danger"> *</b></label>
 				     <input type="text" class="form-control" name="other_name" placeholder="Other Name" style="border-width: 0px 0px 1px;">
 				   </div>
 
 				   <div class="form-group">
+		           	 <label >Short Description <b class="text-danger"> *</b></label>
 				     <input type="text" class="form-control" name="short_description" placeholder="Short Description" style="border-width: 0px 0px 1px;">
 				   </div>
 
 				   <div class="form-group">
+		           	 <label >Email <b class="text-danger"> *</b></label>
 				      <input type="email" class="form-control" name="email" placeholder="Email" style="border-width: 0px 0px 1px;">
 				    </div>
 
 				  <div class="form-group">
+		           	 <label >Gender <b class="text-danger"> *</b></label>
 				     <input type="radio" class="" name="gender" value="male"> Male &nbsp;&nbsp;&nbsp;
 				     <input type="radio" class="" name="gender" value="female"> Female
 				  </div>
 
 				  <div class="form-group">
-	                  <select class="form-control" name="marital_status" style="border-width: 0px 0px 1px;">
+		           	 <label >Marital Status<b class="text-danger"> *</b></label>
+	                  <select class="form-control married" name="marital_status" style="border-width:0px 0px 1px;">
 	                    <option>Select Marital Status</option>
 	                    <option>Unmarried</option>
 	                    <option>Married</option>
@@ -104,7 +112,13 @@
 	                  </select>
 	              </div>
 
+	              <div class="form-group spouse">
+		           	 <label >Spouse Name <b class="text-danger"> *</b></label>
+				    <input type="text" class="form-control " name="married_to" placeholder="Spouse Name" style="border-width: 0px 0px 1px;">
+				  </div>
+
 	              <div class="form-group">
+		           	 <label >Age <b class="text-danger"> *</b></label>
 				     <select class="form-control" name="age_range" style="border-width: 0px 0px 1px;">
 	                    <option>Select Age Range</option>
 	                    <option>18 - 25</option>
@@ -117,10 +131,12 @@
 				  </div>
 
 				  <div class="form-group">
+		           	 <label >Phone Number <b class="text-danger"> *</b></label>
 				     <input type="tel" class="form-control" name="phone_number" placeholder="Phone Number" style="border-width: 0px 0px 1px;">
 				  </div>
 
 				  <div class="form-group">
+		           	 <label >Religion <b class="text-danger"> *</b></label>
 	                  <select class="form-control" name="religion" style="border-width: 0px 0px 1px;">
 	                    <option>Select Religion</option>
 	                    <option>Islam</option>
@@ -133,6 +149,7 @@
 	              </div>
 
 	              <div class="form-group">
+		           	 <label >Occupation <b class="text-danger"> *</b></label>
 	                  <select class="form-control" name="occupation" style="border-width: 0px 0px 1px;">
 	                    <option>Select Occupation</option>
 	                    <option>Computer Progammer</option>
@@ -150,11 +167,13 @@
 				
 				  	<div class="form-row">
 				    <div class="form-group col-md-6">
+		           	 <label >Password <b class="text-danger"> *</b></label>
 				      <input id="password" type="password" class="form-control" name="password" placeholder="Password" style="border-width: 0px 0px 1px;">
 				      <input id="role" type="hidden" class="form-control" name="role_id" value="04">
 				      <input id="role" type="hidden" class="form-control" name="date_created" value="<?php echo date('d/m/Y') ?>">
 				    </div>
 				    <div class="form-group col-md-6">
+		           	 <label >Confirm Password <b class="text-danger"> *</b></label>
 				      <input id="confirm" type="password" class="form-control" name="confirm_password" placeholder="Confirm Password" style="border-width: 0px 0px 1px;">
 				      <p id="match"></p>
 				    </div>
@@ -171,7 +190,7 @@
 
 <!-- married user register modal pop up -->
 
-<div class="modal fade" id="marrieduserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<!-- <div class="modal fade" id="marrieduserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header btn-color">
@@ -368,4 +387,4 @@
             </div>
       	</div>
     </div>
-  </div>
+  </div> -->

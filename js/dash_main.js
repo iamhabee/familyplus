@@ -18,8 +18,14 @@ $(document).ready(function(){
 		$('body').addClass('loaded');
 		$('h1').css('color','#222222');
 	}, 3000);
-	
 
+	$('.spouse').hide();
+	$('.married').click(function(){
+		var married = $(this).val();
+		if (married === 'Married') {
+			$('.spouse').show();
+		}
+	})
 	
 	$("#counsellor-email").change(function(){
 		var val = $(this).val();
@@ -154,30 +160,46 @@ $("#show-sidebar").click(function() {
 	});
 
 
+		// var count_val = <?php echo $rec->comment_count?>;
+	   // var string = '<span class="badge badge-light" id="comment_count" ></span>';
+	   // $('.comment_count').append(string);
+		
 
-	   var countId = $('#comment_count_id').val();
-	   var counter = $('.comment_count').attr('id');
-	   var add = 1;
-	   var count = Number(counter) + Number(add);
+$('.likeBtn').click(function(){
+	var counter = $('.like_count').attr('id');
+	var add = 1;
+	var count = Number(counter) + Number(add);
+	// if(name == userlike){
+
+	// }
+	updateLikeCount(count);
+})
 
 $('.comments').keypress(function(event){
     var keycode = (event.keyCode ? event.keyCode : event.which);
     if(keycode == '13'){
        
-
+       var counter = $('.comment_count').attr('id');
+	   var add = 1;
+	   var count = Number(counter) + Number(add);
        var comment = $(this).val();
-       alert(count);
-	   updateCommentCount(countId, count, comment);
+	   updateCommentCount(count, comment);
        sendTxtComment(comment);
     }
 });
 		$('.btnCommentSend').click(function(){
+       var counter = $('.comment_count').attr('id');
+	   var add = 1;
+	   var count = Number(counter) + Number(add);
        var comment = $('.comments').val();
-       alert(count);
-	   updateCommentCount(countId, count, comment);
+	   updateCommentCount(count, comment);
        sendTxtComment(comment);
 	});
-		
+		var countId = $('#comment_count_id').val();
+		var likecountId = $('#like_count_id').val();
+		GetLikeCountNo(likecountId);
+		GetCountNo(countId);
+
 		var comment_id = $('#id').val();
 		GetCommentHistory(comment_id);
 });
@@ -224,30 +246,6 @@ function sendTxtComment(comment){
 	}
 }
 
-function updateCommentCount(countId, count, comment){
-			var commentTxt = comment.trim();
-			if(commentTxt!=''){
-				$.ajax({
-						  dataType : "json",
-						  type : 'post',
-						  data : {countId : countId, count: count},
-						  url: '/familyplus/comment-count',
-						  success:function(data)
-						  {
-
-						  },
-						  error: function (jqXHR, status, err) {
- 							 // alert('Local error callback');
-						  }
- 					});
-				$('.comments').val('');
-		$('.comments').focus();
-	}else{
-		$('.comments').focus();
-	}
-}
-
-
 function GetCommentHistory(comment_id){
 				$.ajax({
 						  //dataType : "json",
@@ -263,7 +261,93 @@ function GetCommentHistory(comment_id){
  					});
 }
 
+
+function updateCommentCount( count, comment){
+
+       var countId = $('#comment_count_id').val();
+			var commentTxt = comment.trim();
+			if(commentTxt!=''){
+				$.ajax({
+						  dataType : "json",
+						  type : 'post',
+						  data : {countId : countId, count: count},
+						  url: '/familyplus/comment-count',
+						  success:function(data)
+						  {
+						  	GetCountNo(countId);
+						  },
+						  error: function (jqXHR, status, err) {
+ 							 // alert('Local error callback');
+						  }
+ 					});
+				$('.comments').val('');
+		$('.comments').focus();
+	}else{
+		$('.comments').focus();
+	}
+}
+
+function GetCountNo(count_id){
+				$.ajax({
+						  //dataType : "json",
+  						  url: '/familyplus/get-count-no?count_id='+count_id,
+						  success:function(data)
+						  {
+  							$('.comment_count').html(data);
+							// ScrollDown();	 
+						  },
+						  error: function (jqXHR, status, err) {
+ 							 alert('Local error callback');
+						  }
+ 					});
+}
+
+// like counter start
+function updateLikeCount(count){
+
+       var countId = $('#like_count_id').val();
+			$.ajax({
+					  dataType : "json",
+					  type : 'post',
+					  data : {countId : countId, count: count},
+					  url: '/familyplus/like-count',
+					  success:function(data)
+					  {
+					  	GetLikeCountNo(countId);
+					  },
+					  error: function (jqXHR, status, err) {
+							 // alert('Local error callback');
+					  }
+					});
+}
+
+function GetLikeCountNo(like_count_id){
+				$.ajax({
+						  //dataType : "json",
+  						  url: '/familyplus/get-like-count-no?like_count_id='+like_count_id,
+						  success:function(data)
+						  {
+  							$('.like_count').html(data);
+							// ScrollDown();	 
+						  },
+						  error: function (jqXHR, status, err) {
+ 							 alert('Local error callback');
+						  }
+ 					});
+}
+// like counter end
+
 setInterval(function(){ 
+	
 	var comment_id = $('#commentId_txt').val();
 	if(comment_id!=''){GetCommentHistory(comment_id);}
-}, 50000);
+
+	var newCommentId = $('#comment_count').text();
+	var newLikeId = $('#like_count').text();
+	var countId = $('#comment_count_id').val();
+	var likecountId = $('#like_count_id').val();
+	$('.comment_count').attr("id", newCommentId);
+	$('.like_count').attr("id", newLikeId);
+	GetCountNo(countId);
+	GetLikeCountNo(likecountId);
+}, 1000);

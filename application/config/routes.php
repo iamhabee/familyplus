@@ -70,6 +70,7 @@ $route['admin_married'] = 'admin/married';
 $route['admin_maritalissues'] = 'admin/maritalissues';
 $route['admin_edit'] = 'admin/edit';
 $route['admin_delete'] = 'admin/delete';
+$route['admin_ad_manager'] = 'admin/ad_management';
 
 $route['user/single'] = 'users/single';
 $route['user/married'] = 'users/married';
@@ -89,6 +90,9 @@ $route['activate'] = 'users/update_schedule_status';
 $route['get-comment-history'] = 'users/get_comment_history';
 $route['send-comment'] = 'users/comments';
 $route['comment-count'] = 'users/comment_count';
+$route['get-count-no'] = 'users/get_count_no';
+$route['get-like-count-no'] = 'users/get_like_count_no';
+$route['like-count'] = 'users/like_count';
 $route['translate_uri_dashes'] = FALSE;
 
 // chat 

@@ -532,7 +532,8 @@ public function counsellor()
 
 		public function upload_picture(){
 			$path = 'uploads/'.$this->session->user_data->user_id.'.jpg';
-			unlink($path);
+			if (file_exists($path))
+				unlink($path);
 			if(isset($_FILES['userfile']['tmp_name']) && $_FILES['userfile']['tmp_name'] != ""):
 			move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/'.$this->session->user_data->user_id.'.jpg');
 			$this->session->set_flashdata('msg', "Picture uploaded Successfully");
@@ -587,68 +588,131 @@ public function counsellor()
  		   echo json_encode($response);
 		}
 
+// like conter 
+		public function like_count(){
+			$count = $this->input->post();
+
+				$countId = $count['countId'];
+				$counter =  $count['count'];
+
+			$query = $this->user->like_count($countId, $counter);
+			$response='';
+				if($query == true){
+					$response = ['status' => 1 ,'message' => 'count updated Successfully' ];
+				}else{
+					$response = ['status' => 0 ,'message' => 'sorry we re having some technical problems. please try again !'];
+				}
+             
+ 		   echo json_encode($response);
+		}
+
+// get comment history
 		public function get_comment_history(){
-		$comment_id = $this->input->get('comment_id');
-		
-		$Logged_sender_id = $this->session->user_data->id;
-		 
-		$history = $this->user->get_comments($comment_id);
-		//print_r($history);
-		foreach($history as $comment):
+
+			$comment_id = $this->input->get('comment_id');
 			
-			$comment_id = $comment['id'];
-			$sender_id = $comment['user_id'];
-			$userName = $comment['username'];
-			// $userPic = $this->UserModel->PictureUrlById($chat['sender_id']);
+			$Logged_sender_id = $this->session->user_data->id;
+			 
+			$history = $this->user->get_comments($comment_id);
+			//print_r($history);
+			foreach($history as $comment):
+				
+				$comment_id = $comment['id'];
+				$sender_id = $comment['user_id'];
+				$userName = $comment['username'];
+				// $userPic = $this->UserModel->PictureUrlById($chat['sender_id']);
+				
+				$comment = $comment['comment'];
+				// $commentdatetime = date('d M H:i A',strtotime($comment['date']));
+				
+	 		?>
+	            
+	            
+	        
+	             <?php if($Logged_sender_id!=$sender_id){?>     
+	                  <!-- Message. Default to the left -->
+	                    <div class="direct-chat-msg">
+	                      <div class="direct-chat-info clearfix">
+	                        <span class="direct-chat-name pull-left"><?=$userName;?></span>
+	                        <!-- <span class="direct-chat-timestamp pull-right"><?=$commentdatetime;?></span> -->
+	                      </div>
+	                      <!-- /.direct-chat-info -->
+	                      <!-- <img class="direct-chat-img" src="<?=$userPic;?>" alt="<?=$userName;?>"> -->
+	                      <!-- /.direct-chat-img -->
+	                      <div class="direct-chat-text">
+	                         <?=$comment;?>
+	                      </div>
+	                      <!-- /.direct-chat-text -->
+	                      
+	                    </div>
+	                    <!-- /.direct-chat-msg -->
+				<?php }else{?>
+	                    <!-- Message to the right -->
+	                    <div class="direct-chat-msg right">
+	                      <div class="direct-chat-info clearfix">
+	                        <span class="direct-chat-name pull-right"><?=$userName;?></span>
+	                        <!-- <span class="direct-chat-timestamp pull-left"><?=$commentdatetime;?></span> -->
+	                      </div>
+	                      <!-- /.direct-chat-info -->
+	                      <!-- <img class="direct-chat-img" src="<?=$userPic;?>" alt="<?=$userName;?>"> -->
+	                      <!-- /.direct-chat-img -->
+	                      <div class="direct-chat-text">
+	                      	<?=$comment;?>
+	                          	<!--<div class="spiner">
+	                             	<i class="fa fa-circle-o-notch fa-spin"></i>
+	                            </div>-->
+	                       </div>
+	                       <!-- /.direct-chat-text -->
+	                    </div>
+	                    <!-- /.direct-chat-msg -->
+	             <?php }?>
+	        
+	        <?php
+			endforeach;
+	 		
+		}
+	
+// get comment count number
+public function get_count_no(){
 			
-			$comment = $comment['comment'];
-			// $commentdatetime = date('d M H:i A',strtotime($comment['date']));
+			$count_id = $this->input->get('count_id');
 			
- 		?>
+			 
+			$counter = $this->user->get_count_no($count_id);
+			//print_r($history);
+			foreach($counter as $counts):
+				
+				$comment_count = $counts['comment_count'];
+	 		?>
+	       
+            <span class="badge badge-light" id="comment_count" ><?=$comment_count;?></span>
             
+	        
+	        <?php
+			endforeach;
+	 		
+		}
+
+// get like count number
+	public function get_like_count_no(){
+			
+			$count_id = $this->input->get('like_count_id');
+			
+			 
+			$counter = $this->user->get_count_no($count_id);
+			//print_r($history);
+			foreach($counter as $counts):
+				
+				$like_count = $counts['like_count'];
+	 		?>
+	       
+            <span class="badge badge-light" id="like_count" ><?=$like_count;?></span>
             
-        
-             <?php if($Logged_sender_id!=$sender_id){?>     
-                  <!-- Message. Default to the left -->
-                    <div class="direct-chat-msg">
-                      <div class="direct-chat-info clearfix">
-                        <span class="direct-chat-name pull-left"><?=$userName;?></span>
-                        <!-- <span class="direct-chat-timestamp pull-right"><?=$commentdatetime;?></span> -->
-                      </div>
-                      <!-- /.direct-chat-info -->
-                      <!-- <img class="direct-chat-img" src="<?=$userPic;?>" alt="<?=$userName;?>"> -->
-                      <!-- /.direct-chat-img -->
-                      <div class="direct-chat-text">
-                         <?=$comment;?>
-                      </div>
-                      <!-- /.direct-chat-text -->
-                      
-                    </div>
-                    <!-- /.direct-chat-msg -->
-			<?php }else{?>
-                    <!-- Message to the right -->
-                    <div class="direct-chat-msg right">
-                      <div class="direct-chat-info clearfix">
-                        <span class="direct-chat-name pull-right"><?=$userName;?></span>
-                        <!-- <span class="direct-chat-timestamp pull-left"><?=$commentdatetime;?></span> -->
-                      </div>
-                      <!-- /.direct-chat-info -->
-                      <!-- <img class="direct-chat-img" src="<?=$userPic;?>" alt="<?=$userName;?>"> -->
-                      <!-- /.direct-chat-img -->
-                      <div class="direct-chat-text">
-                      	<?=$comment;?>
-                          	<!--<div class="spiner">
-                             	<i class="fa fa-circle-o-notch fa-spin"></i>
-                            </div>-->
-                       </div>
-                       <!-- /.direct-chat-text -->
-                    </div>
-                    <!-- /.direct-chat-msg -->
-             <?php }?>
-        
-        <?php
-		endforeach;
- 		
+	        
+	        <?php
+			endforeach;
+	 		
+		}
 	}
-}
-?>
+
+	?>

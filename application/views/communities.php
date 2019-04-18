@@ -1,16 +1,17 @@
 <div class="content-wrapper"> 
   <section class="content">
-     <div class="row margin">
-        <div class="col-md-8">
+     <div class="row ">
+        <div class="col-md-8 margin">
         
              <div class="jumbotron jumbo-pad text-center text-dark">
                <h6> <?php echo $rec->post;?> </h6>
+               <p class="card-text">Posted bY: <?php echo $rec->username. " On ". $rec->post_date ?> </p>
              </div>
             <div >
                 <div>
                     <!-- <h3><?php //echo  $rec->username; ?></h3><br>
                     <hr> -->
-                    <p> <?php echo  $rec->username; ?></p>
+                    
                 </div>
             </div>
 
@@ -55,16 +56,23 @@
           <!-- comment box end -->
           <hr>
       <input type="hidden" id="comment_count_id" value="<?php echo $rec->id?>">
+      <input type="hidden" id="like_count_id" value="<?php echo $rec->id?>">
     <!-- buttons start here -->
         <div> &nbsp;&nbsp;&nbsp;
-            <a class="like btn btn-light" title="<?php echo $rec->like_count?>" href="#"><i class="fa fa-thumbs-up fa-lg"></i>Like<span class="badge badge-light" id="likeId"><?php echo $rec->like_count?></span></a>&nbsp;&nbsp;
-            <a class="btn btn-light"><i class="fa fa-comment fa-lg"></i>comments
-              <span class="badge badge-light comment_count" id="<?php echo $rec->comment_count?>" name="comment_count"><?php echo $rec->comment_count?>
-              </span></a>
+          <a class="likeBtn btn btn-light" href="#">
+            <i class="fa fa-thumbs-up fa-lg"></i>Like
+            <span class="like_count"  id="<?php echo $rec->like_count?>"></span>
+          </a>&nbsp;&nbsp;
+            
+          <a class="btn btn-light">
+            <i class="fa fa-comment fa-lg"></i>Comments
+            <span class="comment_count" id="<?php echo $rec->comment_count?>"></span>
+          </a>
+
         </div>
         <!-- buttons end here -->
         </div>
-      </div>
 
-  </section>
-</div>
+      </div>
+    </section>
+  </div>

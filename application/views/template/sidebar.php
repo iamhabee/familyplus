@@ -76,6 +76,12 @@
 
       <!-- Nav Item - Tables -->
       <li class="nav-item">
+        <a class="nav-link" href="admin_ad_manager">
+          <i class="fas fa-fw fa-bullseye"></i>
+          <span>Ad Manager</span></a>
+      </li>
+
+      <li class="nav-item">
         <a class="nav-link" href="tables.html">
           <i class="fas fa-fw fa-cog"></i>
           <span>Settings</span></a>

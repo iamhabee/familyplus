@@ -49,3 +49,82 @@
 
   </section>
 </div>
+<!-- 
+<script type="text/javascript">
+
+  $(document).ready(function(){
+
+    $('.likeBtn').click(function(){
+  var counter = $('.like_count').attr('id');
+  var add = 1;
+  var count = Number(counter) + Number(add);
+  // if(name == userlike){
+
+  // }
+  updateLikeCount(count);
+})
+
+$('.comments').keypress(function(event){
+    var keycode = (event.keyCode ? event.keyCode : event.which);
+    if(keycode == '13'){
+       
+       var counter = $('.comment_count').attr('id');
+     var add = 1;
+     var count = Number(counter) + Number(add);
+       var comment = $(this).val();
+     updateCommentCount(count, comment);
+       sendTxtComment(comment);
+    }
+});
+    $('.btnCommentSend').click(function(){
+       var counter = $('.comment_count').attr('id');
+     var add = 1;
+     var count = Number(counter) + Number(add);
+       var comment = $('.comments').val();
+     updateCommentCount(count, comment);
+       sendTxtComment(comment);
+  });
+    var countId = $('#comment_count_id').val();
+    var likecountId = $('#like_count_id').val();
+    GetLikeCountNo(likecountId);
+    GetCountNo(countId);
+
+    var comment_id = $('#id').val();
+    GetCommentHistory(comment_id);
+
+  });
+  
+  function updateLikeCount(count){
+
+       var countId = $('#like_count_id').val();
+      $.ajax({
+            dataType : "json",
+            type : 'post',
+            data : {countId : countId, count: count},
+            url: '/familyplus/like-count',
+            success:function(data)
+            {
+              GetLikeCountNo(countId);
+            },
+            error: function (jqXHR, status, err) {
+               // alert('Local error callback');
+            }
+          });
+}
+
+function GetLikeCountNo(like_count_id){
+        $.ajax({
+              //dataType : "json",
+                url: '/familyplus/get-like-count-no?like_count_id='+like_count_id,
+              success:function(data)
+              {
+                $('.like_count').html(data);
+              // ScrollDown();   
+              },
+              error: function (jqXHR, status, err) {
+               alert('Local error callback');
+              }
+          });
+}
+// like counter end
+</script> -->

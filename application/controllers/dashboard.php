@@ -23,6 +23,7 @@
 			$this->load->view('include/topbar');
 			$this->load->view('include/sidebar');
 			$this->load->view('home');
+			$this->load->view('include/adbar');
 			$this->load->view('include/footer');
 			
 		}

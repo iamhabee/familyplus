@@ -66,10 +66,12 @@
           </li>
       
        
-      
  
     </ul>
   </section>
+
+
+      <div class="bg-gold ml-5" style="margin-top: 50px;"><a href="#" class="btn btn-md btn-warning">Upgrade to Gold </a></div>v
   
   <!-- /.sidebar -->
   

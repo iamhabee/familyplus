@@ -81,6 +81,19 @@
 			}
 		}
 
+		public function ad_management(){
+			if ($this->session->userdata('admin_data')) {
+				$data['title'] = "Admin | Advert manager";
+				$this->load->view('template/admin_header', $data);
+				$this->load->view('template/sidebar');
+				$this->load->view('template/nav2');
+				$this->load->view('admin/admin_ad_mgt');
+				$this->load->view('template/admin_footer');
+			}else {
+				$this->load->view('admin/admin_login');
+			}
+		}
+
 		public function married(){
 			if ($this->session->userdata('admin_data')) {
 				$data['title'] = "Admin | Married";

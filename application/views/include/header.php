@@ -24,5 +24,7 @@
     <?php  echo link_tag('css/bootstrap.css'); ?>
     <?php  echo link_tag('css/offcanvas.css'); ?>
 
+  </head>
+
   <body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
+    <div class="wrapper">

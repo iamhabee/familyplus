@@ -34,10 +34,10 @@
           <li class="nav-item"><a class="nav-link text-white tooltip-test" title="Cosultation" href="chat">Consultation</a></li>&nbsp; &nbsp; &nbsp;
 
           <li class="nav-item"><a class="nav-link text-white tooltip-test" title="Marital-issues" href="maritalIssues">Marital Issues</a></li>&nbsp; &nbsp; &nbsp;
-
-          <li class="nav-item"><a class="nav-link text-white tooltip-test" title="About" href="about">About</a></li>&nbsp; &nbsp; &nbsp;
           
           <li class="nav-item"><a class="nav-link text-white tooltip-test" title="Connect" href="connect">Connect</a></li>&nbsp; &nbsp; &nbsp;
+
+          <li class="nav-item"><a class="nav-link text-white tooltip-test" title="About" href="about">About</a></li>&nbsp; &nbsp; &nbsp;
           
         <?php if ($this->session->user_data){ 
         if (!file_exists($this->session->userdata('user_data')->user_id.'.jpg')) { ?>
@@ -103,7 +103,7 @@
           <div id="demo" class="carousel slide carousel-fade" data-ride="carousel">
             <div class="carousel-inner img-height">
               <div class="carousel-item active">
-            	<img class=" w-100" height="500" src="<?php echo site_url() ?>image/image06.jpg" alt="First slide">
+            	<img class=" w-100" height="500" src="<?php echo site_url() ?>image/fp1.jpg" alt="First slide">
             	<div class="carousel-caption d-none d-md-block" style="top: 150px;">
 
           <h1 class=" text-center text-color"> WELCOME TO familyPlus</h1>
@@ -116,7 +116,7 @@
 				</div>
               </div>
               <div class="carousel-item">
-            	<img class=" w-100" height="500" src="<?php echo site_url() ?>image/image04.jpg" alt="First slide">
+            	<img class=" w-100" height="500" src="<?php echo site_url() ?>image/fp2.jpg" alt="First slide">
             	<div class="carousel-caption d-none d-md-block" style="top: 150px;">
           <h1 class=" text-center text-color"> WELCOME TO familyPlus</h3>
 					<h3 class=" text-center text-dark"> Take your relationship to the next Level </h1>
@@ -128,7 +128,7 @@
 				</div>
               </div>
               <div class="carousel-item" >
-            	<img class=" w-100" height="500" src="<?php echo site_url() ?>image/image05.jpg" alt="First slide">
+            	<img class=" w-100" height="500" src="<?php echo site_url() ?>image/fp8.png" alt="First slide">
             	<div class="carousel-caption d-none d-md-block" style="top: 150px;">
           <h1 class=" text-center text-color"> WELCOME TO familyPlus</h1>
 					<h3 class=" text-center text-dark">A safe place to resolve family matters</h3>
@@ -143,47 +143,25 @@
     </div>
     <!-- /slider end -->
 
-  	<div class="container-fluid bg-light margin-bottom">
-  		<div class="jumbotron jumbo-pad bg-light">
-  			<h3 class="text-center">How It Works</h3>
-  		</div>
-  		<div class="row">
-  			<div class="col-md-4">
-  				<div class="card align-items-center" style="width: 100%;">
-              <h5 class="card-title text-center">STEP 1</h5>
-			        <img style="height: 200PX; width: 200px; border-radius: 200px;" src="<?php echo site_url() ?>image/image01.jpg" alt="Card image cap">
-			        <div class="card-body">
-			        	<h5 class="card-title text-center">CREATE</h5>
-			        	<h6 class="card-subtitle mb-2 text-muted text-center">Register with us as Couple or as Single</h6>
-			        </div>
-			    </div>
-  			</div>
-  			<div class="col-md-4">
-  				<div class="card align-items-center" style="width: 100%;">
-              <h5 class="card-title text-center">STEP 2</h5>
-			        <img style="height: 200PX; width: 200px; border-radius: 200px;" src="<?php echo site_url() ?>image/image02.jpg" alt="Card image cap">
-			        <div class="card-body">
-			        	<h5 class="card-title text-center">CHOOSE</h5>
-			        	<h6 class="card-subtitle mb-2 text-muted text-center">Declare who and what you are looking for</h6>
-			        </div>
-			    </div>
-  			</div>
-  			<div class="col-md-4">
-  				<div class="card align-items-center" style="width: 100%;">
-              <h5 class="card-title text-center">STEP 3</h5>
-			        <img style="height: 200PX; width: 200px; border-radius: 200px;" src="<?php echo site_url() ?>image/image03.jpg" alt="Card image cap">
-			        <div class="card-body">
-			        	<h5 class="card-title text-center"> CONNECT</h5>
-			        	<h6 class="card-subtitle mb-2 text-muted text-center">Search and Connect with your best match</h6>
-			        </div>
-			    </div>
-  			</div>
-  		</div>
-  	</div>
+    <div class="container-fluid margin">
+      <div class="row margin-bottom">
+        <div class="col-md-6 text-center">
+          <h1 class="text-dark">NEED A PARTNER?</h1>
+          <p class="text-dark">Search and connect with your perfect match in the sunnah way</p>
+          <a href="signup" class="btn btn-light btn-rad text-dark">Get started</a>
+        </div>
+        <div class="col-md-6 text-center">
+          <h1 class="text-dark">MEET A COUNCILOR?</h1>
+          <p class="text-dark">Talk to the experts about your marital issues</p>
+          <a href="signup" class="btn btn-light btn-rad text-dark"> Get started</a>
+        </div>
+      </div>
+    </div>
+
   	<div class="container-fluid">
       <div class="row">
         <div class="col-md-6">
-       	  <img class=" w-100" height="400" src="<?php echo site_url() ?>image/image7.jpg" alt="First slide">
+       	  <img class=" w-100" height="400" src="<?php echo site_url() ?>image/fp1.jpg" alt="First slide">
         </div>
         <div class="col-md-6 text-center align-items-center">
           <div style="height: 25%"></div>
@@ -192,22 +170,48 @@
         </div>
       </div>
   	</div>
-  	<div class="container-fluid margin">
-  		<div class="row margin-bottom">
-  			<div class="col-md-6 text-center">
-  				<h1 class="text-dark">NEED A PARTNER?</h1>
-  				<p class="text-dark">Search and connect with your perfect match in the sunnah way</p>
-  				<a href="signup" class="btn btn-light btn-rad text-dark">Get started</a>
-  			</div>
-  			<div class="col-md-6 text-center">
-  				<h1 class="text-dark">MEET A COUNCILOR?</h1>
-  				<p class="text-dark">Talk to the experts about your marital issues</p>
-  				<a href="signup" class="btn btn-light btn-rad text-dark"> Get started</a>
-  			</div>
-  		</div>
-  	</div>
+
+
+    <div class="container-fluid bg-light margin-bottom">
+      <div class="jumbotron jumbo-pad bg-light">
+        <h3 class="text-center">How It Works</h3>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card align-items-center" style="width: 100%;">
+              <h5 class="card-title text-center">STEP 1</h5>
+              <img style="height: 200PX; width: 200px; border-radius: 200px;" src="<?php echo site_url() ?>image/fp2.jpg" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title text-center">CREATE</h5>
+                <h6 class="card-subtitle mb-2 text-muted text-center">Register with us as Couple or as Single</h6>
+              </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card align-items-center" style="width: 100%;">
+              <h5 class="card-title text-center">STEP 2</h5>
+              <img style="height: 200PX; width: 200px; border-radius: 200px;" src="<?php echo site_url() ?>image/fp5.jpg" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title text-center">CHOOSE</h5>
+                <h6 class="card-subtitle mb-2 text-muted text-center">Declare who and what you are looking for</h6>
+              </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card align-items-center" style="width: 100%;">
+              <h5 class="card-title text-center">STEP 3</h5>
+              <img style="height: 200PX; width: 200px; border-radius: 200px;" src="<?php echo site_url() ?>image/fp6.jpg" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title text-center"> CONNECT</h5>
+                <h6 class="card-subtitle mb-2 text-muted text-center">Search and Connect with your best match</h6>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   	<div class="container-fluid margin-bottom">
-       	<img class=" w-100" height="400" src="<?php echo site_url() ?>image/image6.jpg" alt="First slide">
+       	<img class=" w-100" height="400" src="<?php echo site_url() ?>image/fp8.png" alt="First slide">
   	</div>
   	<div class="container-fluid text-center text-dark margin-bottom">
   		<h1>FamilyPlus Connect</h1>
