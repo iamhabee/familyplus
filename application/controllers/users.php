@@ -392,6 +392,7 @@ public function counsellor()
 				redirect('admin');
 
 			else:
+				$_POST['user_id'] = $this->session->user_data->id;
 			$issues = $this->input->post();
 			$sql = $this->db->insert_string('maritalissues', $issues);
 			$this->db->query($sql);
@@ -431,6 +432,7 @@ public function counsellor()
 				redirect('maritalIssues');
 
 			else:
+				$_POST['user_id'] = $this->session->user_data->id;
 			$issues = $this->input->post();
 			$sql = $this->db->insert_string('maritalissues', $issues);
 			$this->db->query($sql);
@@ -439,6 +441,30 @@ public function counsellor()
 			 redirect('maritalIssues');
 			endif;
 		}
+
+		public function banner(){
+			$this->form_validation->set_rules('description', 'Description', 'required');
+			$this->form_validation->set_rules('link', 'Link', 'required');
+			$this->form_validation->set_rules('size', 'Sizes', 'required');
+			$this->form_validation->set_rules('title', 'Title', 'required');
+			if ( $this->form_validation->run() === FALSE):
+
+			$this->session->set_flashdata('msg', "Not Successful");
+			$this->session->set_flashdata('flag', 'danger');
+				redirect('admin_ad_manager');
+
+			else:
+			$_post['date'] = date('d/M/Y');
+			$ad = $this->input->post();
+			move_uploaded_file($_FILES['userfile']['tmp_name'], 'banner/'.$this->session->admin_data->user_id.'.jpg');
+			$sql = $this->db->insert_string('banner', $ad);
+			$this->db->query($sql);
+			$this->session->set_flashdata('msg', "Banner posted Successfully");
+			$this->session->set_flashdata('flag', 'success');
+			 redirect('admin_ad_manager');
+			endif;
+		}
+
 		public function scheduler(){
 			$this->form_validation->set_rules('name', 'Name', 'required');
 			$this->form_validation->set_rules('description', 'Description', 'required');
@@ -458,7 +484,8 @@ public function counsellor()
                    
 				$occupation = $userList->occupation;
 				// $counsellor = $occupation;
-					$msg = "Hi ".$this->input->post('name').", you have successfully schedule a meeting with " .$occupation;
+				$username = $this->user->get_username($this->session->user_data->id);
+					$msg = "Hi ".$username.", you have successfully schedule a meeting with " .$occupation;
 					$msg .= "This is to inform the both parties that a meeting have schedule to take place at " .$this->input->post('time');
 
 				$message = "
@@ -551,16 +578,43 @@ public function counsellor()
 	public function comments(){
 			$comment = $this->input->post();
 			$commentTxt = reduce_multiples($comment['commentTxt'],' ');
-
+			$userId = $comment['userId'];
+			$table = 'comments';
+			// $Sender_Name = $this->user->get_username($userId);
 			$data=[
- 					'username' => $comment['Sender_Name'],
-					'user_id' => $comment['userId'],
+ 					// 'username' => $comment['Sender_Name'],
+					'user_id' => $userId,
 					'comment_id' => $comment['comment_id'],
 					'comment' =>   $commentTxt,
 					'date' => date('Y-m-d H:i:s'), //23 Jan 2:05 pm
 					// 'ip_address' => $this->input->ip_address(),
 				];
-			$query = $this->user->comments($data);
+			$query = $this->user->comments($data, $table);
+			$response='';
+				if($query == true){
+					$response = ['status' => 1 ,'message' => 'comment Successfull' ];
+				}else{
+					$response = ['status' => 0 ,'message' => 'sorry we re having some technical problems. please try again !'];
+				}
+             
+ 		   echo json_encode($response);
+		}
+
+		public function send_question(){
+			$questions = $this->input->post();
+			$questionTxt = reduce_multiples($questions['questionTxt'],' ');
+			$userId = $questions['userId'];
+			$table = 'questions';
+			// $Sender_Name = $this->user->get_username($userId);
+			$data=[
+ 					// 'username' => $comment['Sender_Name'],
+					'user_id' => $userId,
+					'question_id' => $questions['question_id'],
+					'question' =>   $questionTxt,
+					'date' => date('Y-m-d H:i:s'), //23 Jan 2:05 pm
+					// 'ip_address' => $this->input->ip_address(),
+				];
+			$query = $this->user->comments($data, $table);
 			$response='';
 				if($query == true){
 					$response = ['status' => 1 ,'message' => 'comment Successfull' ];
@@ -577,7 +631,24 @@ public function counsellor()
 				$countId = $count['countId'];
 				$counter =  $count['count'];
 
-			$query = $this->user->count($countId, $counter);
+			$query = $this->user->comment_count($countId, $counter);
+			$response='';
+				if($query == true){
+					$response = ['status' => 1 ,'message' => 'count updated Successfully' ];
+				}else{
+					$response = ['status' => 0 ,'message' => 'sorry we re having some technical problems. please try again !'];
+				}
+             
+ 		   echo json_encode($response);
+		}
+
+		public function question_count(){
+			$count = $this->input->post();
+
+				$countId = $count['countId'];
+				$counter =  $count['count'];
+
+			$query = $this->user->question_count($countId, $counter);
 			$response='';
 				if($query == true){
 					$response = ['status' => 1 ,'message' => 'count updated Successfully' ];
@@ -619,7 +690,7 @@ public function counsellor()
 				
 				$comment_id = $comment['id'];
 				$sender_id = $comment['user_id'];
-				$userName = $comment['username'];
+				$userName = $this->UserModel->GetName($sender_id);
 				// $userPic = $this->UserModel->PictureUrlById($chat['sender_id']);
 				
 				$comment = $comment['comment'];
@@ -707,6 +778,75 @@ public function get_count_no(){
 	 		?>
 	       
             <span class="badge badge-light" id="like_count" ><?=$like_count;?></span>
+            
+	        
+	        <?php
+			endforeach;
+	 		
+		}
+
+		public function get_question_history(){
+
+			$question_id = $this->input->get('question_id');
+			
+			$Logged_sender_id = $this->session->user_data->id;
+			 
+			$history = $this->user->get_questions($question_id);
+			//print_r($history);
+			foreach($history as $question):
+				
+				$comment_id = $question['id'];
+				$sender_id = $question['user_id'];
+				$userName = $this->UserModel->GetName($sender_id);
+				$question = $question['question'];
+				// $commentdatetime = date('d M H:i A',strtotime($comment['date']));
+				
+	 		?>
+	             <?php if($Logged_sender_id!=$sender_id){?>     
+	                  <!-- Message. Default to the left -->
+	                    <div class="direct-chat-msg">
+	                      <div class="direct-chat-info clearfix">
+	                        <span class="direct-chat-name pull-left"><?=$userName;?></span>
+	                      </div>
+	                      <div class="direct-chat-text">
+	                         <?=$question;?>
+	                      </div>
+	                      <!-- /.direct-chat-text -->
+	                    </div>
+	                    <!-- /.direct-chat-msg -->
+				<?php }else{?>
+	                    <!-- Message to the right -->
+	                    <div class="direct-chat-msg right">
+	                      <div class="direct-chat-info clearfix">
+	                        <span class="direct-chat-name pull-right"><?=$userName;?></span>
+	                        <!-- <span class="direct-chat-timestamp pull-left"><?=$commentdatetime;?></span> -->
+	                      </div>
+	                      <div class="direct-chat-text">
+	                      	<?=$question;?>
+	                       </div>
+	                       <!-- /.direct-chat-text -->
+	                    </div>
+	                    <!-- /.direct-chat-msg -->
+	             <?php }?>
+	        
+	        <?php
+			endforeach;
+	 		
+		}
+
+		public function get_question_count_no(){
+			
+			$count_id = $this->input->get('count_id');
+			
+			 
+			$counter = $this->user->get_question_count_no($count_id);
+			//print_r($history);
+			foreach($counter as $counts):
+				
+				$question_count = $counts['question_count'];
+	 		?>
+	       
+            <span class="badge badge-light" id="question_count" ><?=$question_count;?></span>
             
 	        
 	        <?php

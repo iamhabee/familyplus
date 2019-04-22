@@ -6,10 +6,10 @@
     
     <ul class="sidebar-menu text-white" data-widget="tree">
           <li class="header-menu">
-            <h6>MENU</h6>
+            <h6 class="ml-1">MENU</h6>
           </li>
           <li >
-            <a href="<?php echo base_url()?>dashbaord" class="text-white">
+            <a href="<?php echo base_url()?>dashboard" class="text-white">
               <i class="fa fa-globe"></i>
               <span>Community</span>
              <!--  <span class="badge badge-pill badge-warning">New</span> -->
@@ -28,25 +28,19 @@
               <span>Marital Issues</span>
             </a>
           </li>
-          <?php if ($this->session->user_data->role_id == '02'): ?>
+          <?php if ($this->session->user_data->role_id != '02'): ?>
           <li>
-            <a href="#" class="text-white">
+            <a href="<?php echo base_url()?>counsellor_bio" class="text-white">
               <i class="fa fa-book"></i>
-              <span>Bio</span>
+              <span> Counsellor's Bio</span>
               <!-- <span class="badge badge-pill badge-primary">Beta</span> -->
             </a>
           </li>
           <?php endif ?>
-          <!-- <li>
-            <a href="#" class="text-white">
-              <i class="fa fa-folder"></i>
-              <span>Business</span>
-            </a>
-          </li> -->
           <li>
-            <a href="about" class="text-white">
-              <i class="fa fa-user-circle"></i>
-              <span>About Us</span>
+            <a href="<?php echo base_url()?>family_quiz" class="text-white">
+              <i class="fa fa-folder"></i>
+              <span>Family Quiz</span>
             </a>
           </li>
           <?php if ($this->session->user_data->role_id !== '02'): ?>
@@ -64,14 +58,36 @@
               <span>Settings</span>
             </a>
           </li>
+          <li>
+            <a href="<?php echo base_url()?>about" class="text-white">
+              <i class="fa fa-user-circle"></i>
+              <span>About Us</span>
+            </a>
+          </li>
       
+       <li>
+    <div style="padding: 25px 25px 0 25px;">
+      <h5 class="text-center text-danger"> Meet The Awardee</h5>
+      <a href="<?php echo base_url()?>awardee"><img src="<?php echo site_url() ?>image/award.jpg" height="150px" width="150px"></a>
+      <p class="text-center text-white"> The most participating family </p>
+    </div>
+    <?php if ($this->session->user_data->role_id != '02'): 
+        if ($this->session->user_data->membership_classes == 'standard'): ?>
+        <div class=" ml-4" style="margin-top: 50px;"><a href="#" class="btn btn-md btn-warning border-left-2">Upgrade to Gold </a></div>
+    <?php elseif ($this->session->user_data->membership_classes == 'gold'):  ?>
+         <div class=" ml-5 mt-5"><a href="#" class="btn btn-md btn-primary text-white">Upgrade to Gold </a></div>
+    <?php else: ?>
+      <div class=" text-white text-center"> 
+        <h3 > Congratulations you are now a Platinum user</h3> 
+        <p>click <a href="">this link </a>to see all the awesome benefit that comes with your new upgrade</p>
+      </div>
+      <?php  endif;
+        endif; ?>
+    </li>
        
- 
     </ul>
+   
   </section>
-
-
-      <div class="bg-gold ml-5" style="margin-top: 50px;"><a href="#" class="btn btn-md btn-warning">Upgrade to Gold </a></div>v
   
   <!-- /.sidebar -->
   

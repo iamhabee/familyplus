@@ -57,6 +57,9 @@ $route['about'] = 'page/about';
 $route['resetPassword'] = 'page/resetPassword';
 $route['consultation'] = 'page/consultation';
 $route['maritalIssues'] = 'page/maritalIssues';
+$route['family_quiz'] = 'page/family_quiz';
+$route['counsellor_bio'] = 'page/counsellor_bio';
+$route['awardee'] = 'page/awardee';
 // $route['MarriageArticle'] = 'page/marriageArticle';
 $route['communities/(:any)'] = 'page/communities/$1';
 
@@ -72,6 +75,7 @@ $route['admin_edit'] = 'admin/edit';
 $route['admin_delete'] = 'admin/delete';
 $route['admin_ad_manager'] = 'admin/ad_management';
 
+$route['user/banner'] = 'users/banner';
 $route['user/single'] = 'users/single';
 $route['user/married'] = 'users/married';
 $route['user/issues'] = 'users/issues';
@@ -93,6 +97,12 @@ $route['comment-count'] = 'users/comment_count';
 $route['get-count-no'] = 'users/get_count_no';
 $route['get-like-count-no'] = 'users/get_like_count_no';
 $route['like-count'] = 'users/like_count';
+
+$route['get-question-count-no'] = 'users/get_question_count_no';
+$route['question-count'] = 'users/question_count';
+$route['get-question-history'] = 'users/get_question_history';
+$route['send-question'] = 'users/send_question';
+
 $route['translate_uri_dashes'] = FALSE;
 
 // chat 

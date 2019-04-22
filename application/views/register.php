@@ -76,7 +76,7 @@
 
 				    <div class="form-group">
 		           	 <label >Last Name <b class="text-danger"> *</b></label>
-				      <input type="last_name" class="form-control" name="last_name" placeholder="Last Name" style="border-width: 0px 0px 1px;">
+				      <input type="text" class="form-control" name="last_name" placeholder="Last Name" style="border-width: 0px 0px 1px;">
 				    </div>
 
 				   <div class="form-group">

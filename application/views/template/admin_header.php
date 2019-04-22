@@ -16,6 +16,7 @@
     <?php  echo link_tag('css/sb-admin-2.min.css'); ?>
     <?php  echo link_tag('fontawesome/css/all.min.css'); ?>
     <?php  echo link_tag('https://fonts.googleapis.com/css?family=Kaushan+Script|Alegreya|Cuprum|Pacifico'); ?>
+    <!-- <?php // echo link_tag('css/offcanvas.css'); ?> -->
   <link rel="shortcut icon" type="image/png" href="<?php echo site_url() ?>image/favicon.png">
 
     <!-- <link href="fontawesome/css/all.min.css" rel="stylesheet" type="text/css"> -->

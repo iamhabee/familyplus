@@ -77,6 +77,7 @@
 			$this->load->view('include/topbar');
 			$this->load->view('include/sidebar');
 			$this->load->view('consultation');
+			$this->load->view('include/adbar');
 			$this->load->view('include/footer');
 		}
 
@@ -93,6 +94,7 @@
 			$this->load->view('include/topbar');
 			$this->load->view('include/sidebar');
 			$this->load->view('marital-status');
+			$this->load->view('include/adbar');
 			$this->load->view('include/footer');
 		}
 
@@ -109,6 +111,7 @@
 			$this->load->view('include/topbar');
 			$this->load->view('include/sidebar');
 			$this->load->view('marriage-articles',$data);
+			$this->load->view('include/adbar');
 			$this->load->view('include/footer');
 		}
 
@@ -125,6 +128,59 @@
 			$this->load->view('include/topbar');
 			$this->load->view('include/sidebar');
 			$this->load->view('communities',$data);
+			$this->load->view('include/adbar');
+			$this->load->view('include/footer');
+		}
+
+		public function counsellor_bio()
+		{
+			if ( !isset($this->session->user_data) ) {
+    		$this->session->set_flashdata('msg', "Please Login to continue");
+			$this->session->set_flashdata('flag', 'danger');
+			redirect('login');
+		}
+			# code...
+			$data['title'] = "Familyplus | Counsellor's Biography";
+			$this->load->view('include/header',$data);
+			$this->load->view('include/topbar');
+			$this->load->view('include/sidebar');
+			$this->load->view('counsellor_bio');
+			$this->load->view('include/adbar');
+			$this->load->view('include/footer');
+		}
+
+
+		public function family_quiz()
+		{
+			if ( !isset($this->session->user_data) ) {
+    		$this->session->set_flashdata('msg', "Please Login to continue");
+			$this->session->set_flashdata('flag', 'danger');
+			redirect('login');
+		}
+			# code...
+			$data['title'] = "Familyplus | Family Quiz";
+			$this->load->view('include/header',$data);
+			$this->load->view('include/topbar');
+			$this->load->view('include/sidebar');
+			$this->load->view('family_quiz');
+			$this->load->view('include/adbar');
+			$this->load->view('include/footer');
+		}
+
+		public function awardee()
+		{
+			if ( !isset($this->session->user_data) ) {
+    		$this->session->set_flashdata('msg', "Please Login to continue");
+			$this->session->set_flashdata('flag', 'danger');
+			redirect('login');
+		}
+			# code...
+			$data['title'] = "Familyplus | Awardee";
+			$this->load->view('include/header',$data);
+			$this->load->view('include/topbar');
+			$this->load->view('include/sidebar');
+			$this->load->view('awardee');
+			$this->load->view('include/adbar');
 			$this->load->view('include/footer');
 		}
 
