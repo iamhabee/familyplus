@@ -60,7 +60,8 @@ $route['maritalIssues'] = 'page/maritalIssues';
 $route['family_quiz'] = 'page/family_quiz';
 $route['counsellor_bio'] = 'page/counsellor_bio';
 $route['awardee'] = 'page/awardee';
-// $route['MarriageArticle'] = 'page/marriageArticle';
+$route['payment'] = 'page/payment';
+$route['marriageArticle/(:any)'] = 'page/marriageArticle/$1';
 $route['communities/(:any)'] = 'page/communities/$1';
 
 
@@ -90,13 +91,17 @@ $route['user/resetPassword'] = 'users/resetPassword';
 $route['user/reset'] = 'users/reset';
 $route['logout'] = 'users/logout';
 $route['delete'] = 'users/delete';
+$route['gold'] = 'users/gold';
+$route['platinum'] = 'users/platinum';
 $route['activate'] = 'users/update_schedule_status';
 $route['get-comment-history'] = 'users/get_comment_history';
 $route['send-comment'] = 'users/comments';
 $route['comment-count'] = 'users/comment_count';
 $route['get-count-no'] = 'users/get_count_no';
 $route['get-like-count-no'] = 'users/get_like_count_no';
+$route['get-likeQ-count-no'] = 'users/get_likeQ_count_no';
 $route['like-count'] = 'users/like_count';
+$route['likeQ-count'] = 'users/likeQ_count';
 
 $route['get-question-count-no'] = 'users/get_question_count_no';
 $route['question-count'] = 'users/question_count';

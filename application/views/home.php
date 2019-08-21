@@ -21,7 +21,7 @@
           <!-- Post box start here -->
               <form action="<?php echo site_url() ?>user/comunity" method="POST" class="margin">
                 <div class="box-footer input-group">
-                    <input type="hidden" class="form-control" name="user_id" value="<?php echo $this->session->user_data->id ?>" >
+                    <input type="hidden" id="userId" class="form-control" name="user_id" value="<?php echo $this->session->user_data->id ?>" >
                     <!-- <input type="hidden" class="form-control" name="username" value="<?php ?>"> -->
                     <input type="hidden" class="form-control" name="post_date" value="<?php echo date('d/m/Y') ?>">
                     <input type="text" name="post" class="form-control" style=" border-width: 0px 0px 1px;" placeholder="What's on your mind">
@@ -55,18 +55,18 @@
                 
           <hr>
           <!-- buttons start here -->
-
-          <input type="hidden" id="like_count_id" value="<?php echo $key->id?>">
           <div> &nbsp;
             
-            <a class="likeBtn btn btn-light" display_id="<?php echo $key->post_id?>" id="<?php echo $key->like_count?>">
+            <a class="btn btn-light" href="<?php echo base_url('users/like_counter/') .$key->id; ?>">
               <i class="fa fa-thumbs-up fa-lg"></i>Like
-              <span class="like_count" id="<?php echo $key->post_id?>" ></span>
+              <span class="badge badge-light"><?php $count = $this->user->get_like_count_no($key->id); 
+                echo $counter = count($count);
+              ?></span>
             </a>&nbsp;&nbsp;
 
             <a class="btn btn-light" href="<?php echo base_url('communities/') .$key->post_id; ?>">
               <i class="fa fa-comment fa-lg"></i> View comments
-              <span class="badge badge-light" ><?php echo $key->comment_count?></span>
+              <span class="badge badge-light"><?php echo $key->comment_count?></span>
             </a>
             
           </div>

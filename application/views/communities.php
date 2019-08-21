@@ -1,9 +1,9 @@
 <div class="content-wrapper"> 
   <section class="content">
      <div class="row ">
-        <div class="col-md-8 margin">
+        <div class="col-md-8 ">
         
-             <div class="jumbotron jumbo-pad text-dark">
+             <div class="jumbotron jumbo-pad text-dark margin">
                <h6> <?php echo $rec->post;?> </h6>
                <p class="card-text">Posted bY: <?php echo $username = $this->UserModel->GetName($rec->user_id). " On ". $rec->post_date ?> </p>
              </div>
@@ -50,10 +50,11 @@
           <!-- comment box end -->
           <hr>
           <input type="hidden" id="comment_count_id" value="<?php echo $rec->id?>">
+          <input type="hidden" id="liker_name" value="<?php echo $this->UserModel->GetName($rec->user_id)?>">
           <input type="hidden" id="like_count_id" value="<?php echo $rec->id?>">
     <!-- buttons start here -->
         <div> &nbsp;&nbsp;&nbsp;
-          <a class="likeBtn btn btn-light" display_id="<?php echo $rec->post_id?>" id="<?php echo $rec->like_count?>">
+          <a class="likeBtn btn btn-light" id="<?php echo $rec->like_count?>">
             <i class="fa fa-thumbs-up fa-lg"></i>Like
             <span class="like_count" id="<?php echo $rec->post_id?>" ></span>
           </a>&nbsp;&nbsp;

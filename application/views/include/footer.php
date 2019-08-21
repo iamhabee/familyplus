@@ -32,20 +32,20 @@
 </body>
   
   
-       <?php echo script_tag('js/jquery.js'); ?>
+       
 
-      <?php echo script_tag('js/bootstrap.js'); ?>
-      <?php echo script_tag('js/popper.min.js'); ?>
-      <?php echo script_tag('js/main.js'); ?>
-     <?php echo script_tag('js/dash_main.js'); ?>
-     <?php echo script_tag('public/components/jquery-slimscroll/jquery.slimscroll.min.js'); ?>
-     <?php echo script_tag('public/components/fastclick/lib/fastclick.js'); ?>
-     <?php echo script_tag('public/dist/js/adminlte.min.js'); ?>
-     <?php echo script_tag('public/dist/js/demo.js'); ?>
+    <?php echo script_tag('js/jquery.js'); ?>
+    <?php echo script_tag('js/bootstrap.js'); ?>
+    <?php echo script_tag('js/popper.min.js'); ?>
+    <?php echo script_tag('js/main.js'); ?>
+    <?php echo script_tag('js/dash_main.js'); ?>
+    <?php echo script_tag('public/components/jquery-slimscroll/jquery.slimscroll.min.js'); ?>
+    <?php echo script_tag('public/components/fastclick/lib/fastclick.js'); ?>
+    <?php echo script_tag('public/dist/js/adminlte.min.js'); ?>
+    <?php echo script_tag('public/dist/js/demo.js'); ?>
+
   <!-- jQuery 3 -->
- <?php if($this->uri->segment(2) == 'marriageArticle'){?>
-  <?php echo script_tag('js/question.js'); ?>
- <?php }?>
+ 
 
 <script src="<?=base_url('public/chat/chat.js');?>"></script> 
 <script>

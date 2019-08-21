@@ -15,7 +15,7 @@
             </div>
 
             <div class="box-body load">
-              <input type="hidden" id="id" value="<?php echo $rec->id ?>">
+              <input type="hidden" id="qid" value="<?php echo $rec->id ?>">
               <!-- Conversations are loaded here -->
               <div class="direct-chat-messages" id="content">
                  <!-- /.direct-chat-msg -->
@@ -40,12 +40,14 @@
             </div>
 
             <input type="hidden" id="question_count_id" value="<?php echo $rec->id?>">
-            <!-- <input type="hidden" id="like_count_id" value="<?php echo $rec->id?>"> -->
+            <input type="hidden" id="countId" value="<?php echo $rec->id?>">
+            <input type="hidden" id="count" value="<?php echo $rec->like_count?>">
+            <input type="hidden" id="count" value="<?php echo $rec->users?>">
 
             <div> &nbsp;&nbsp;&nbsp;
-              <a class="likeBtn btn btn-light" href="#">
-                <i class="fa fa-thumbs-up fa-lg"></i>Jazakumullahu
-                <span class="like_count"  id="<?php echo $rec->like_count?>"></span>
+              <a class="likeQBtn btn btn-light" id="<?php echo $rec->like_count?>">
+                <i class="fa fa-thumbs-up fa-lg"></i>Like
+                <span class="likeQ_count" id="<?php echo $rec->id?>" ></span>
               </a>&nbsp;&nbsp;
                 
               <a class="btn btn-light">

@@ -454,9 +454,10 @@ public function counsellor()
 				redirect('admin_ad_manager');
 
 			else:
-			$_post['date'] = date('d/M/Y');
+			$filename = $_FILES['userfile']['name'];
+			$_POST['image_path'] = $filename;
 			$ad = $this->input->post();
-			move_uploaded_file($_FILES['userfile']['tmp_name'], 'banner/'.$this->session->admin_data->user_id.'.jpg');
+			move_uploaded_file($_FILES['userfile']['tmp_name'], 'banner/'.$filename);
 			$sql = $this->db->insert_string('banner', $ad);
 			$this->db->query($sql);
 			$this->session->set_flashdata('msg', "Banner posted Successfully");
@@ -499,6 +500,10 @@ public function counsellor()
 					     </html>";
 
 					if($this->send_mail($this->session->user_data->email, "Schedule Successfull", $message) && $this->send_mail($this->input->post('counsellor_email'), "Schedule Successfull", $message)):
+						// $email = $this->session->user_data->email;
+						$countId = $this->session->user_data->id;
+						$count = $this->session->user_data->schedule_count;
+						$cunter = $count + 1; 
 						$_POST['counsellor'] = $occupation;
 					    $schedule = $this->input->post();
 						$sql = $this->db->insert_string('scheduler', $schedule);
@@ -506,7 +511,6 @@ public function counsellor()
 						$this->session->set_flashdata('msg', "A meeting was Successfully scheduled");
 						$this->session->set_flashdata('flag', 'success');
 						 redirect('dashboard');
-					   
 					else:
 					     $this->session->set_flashdata('msg', "Please Verify You Are Connected To The Internet");
 					     $this->session->set_flashdata('flag', 'danger');
@@ -555,6 +559,36 @@ public function counsellor()
 						redirect('chat');
 					}
 				}
+		}
+
+		public function gold(){
+					$member_class = $this->session->user_data->membership_classes;
+					$id = $this->session->user_data->id;
+					$email = $this->session->user_data->email;
+
+					if ($member_class == 'standard'):
+						$class = "gold";
+						$this->user->upgrade($id, $class);
+						$details = $this->user->get_user_by_email($email);
+						$this->session->set_userdata('user_data', $details);
+						$this->session->set_flashdata('msg', 'Congratulations You are now a Gold member');
+						$this->session->set_flashdata('flag', 'success');
+						redirect('dashboard');
+
+					elseif($member_class === 'gold'):
+						$class = "platinum";
+						$this->user->upgrade($id, $class);
+						$details = $this->user->get_user_by_email($email);
+						$this->session->set_userdata('user_data', $details);
+						$this->session->set_flashdata('msg', 'Congratulations You are now a Platinum member');
+						$this->session->set_flashdata('flag', 'success');
+						redirect('dashboard');
+
+					else:
+						$this->session->set_flashdata('msg', '');
+						$this->session->set_flashdata('flag', 'danger');
+						redirect('dashboard');
+					endif;
 		}
 
 		public function upload_picture(){
@@ -659,22 +693,76 @@ public function counsellor()
  		   echo json_encode($response);
 		}
 
+		public function like_counter($post_id){
+			$data['user_id'] = $this->session->user_data->id;
+			$data['post_id'] = $post_id;
+			
+			$query = $this->user->like_count($data);
+				if($query == true){
+					$this->session->set_flashdata('msg', '');
+						$this->session->set_flashdata('flag', 'success');
+						redirect('dashboard');
+				}else{
+					$this->session->set_flashdata('msg', '');
+						$this->session->set_flashdata('flag', 'danger');
+						redirect('dashboard');
+				}
+		}
+
 // like conter 
 		public function like_count(){
-			$count = $this->input->post();
-
-				$countId = $count['countId'];
-				$counter =  $count['count'];
-
-			$query = $this->user->like_count($countId, $counter);
+			$data = $this->input->post();
+			
+			$query = $this->user->like_count($data);
 			$response='';
 				if($query == true){
 					$response = ['status' => 1 ,'message' => 'count updated Successfully' ];
 				}else{
 					$response = ['status' => 0 ,'message' => 'sorry we re having some technical problems. please try again !'];
 				}
-             
  		   echo json_encode($response);
+		}
+
+		public function likeQ2_count($countId, $count, $users){
+			$user = $this->session->user_data->first_name;
+			$username = strpos($users, $user);
+			if ($username === false):
+
+			$query = $this->user->likeQ_count($countId, $count, $users);
+
+				$response='';
+				if($query == true){
+					$response = ['status' => 1 ,'message' => 'count updated Successfully' ];
+				}else{
+					$response = ['status' => 0 ,'message' => 'sorry we re having some technical problems. please try again !'];
+				}
+ 		   		echo json_encode($response);
+ 		   	else:
+ 		   		redirect('maritalIssues');
+			endif;
+
+		}
+
+		public function likeQ_count(){
+			$data = $this->input->post();
+			$count = $data['count'];
+			$countId = $data['countId'];
+			$users = $data['users'];
+			$user = $this->session->user_data->first_name;
+			$username = strpos($users, $user);
+			if ($username === false):
+
+			$query = $this->user->likeQ_count($countId, $count, $users);
+
+				$response='';
+				if($query == true){
+					$response = ['status' => 1 ,'message' => 'count updated Successfully' ];
+				}else{
+					$response = ['status' => 0 ,'message' => 'sorry we re having some technical problems. please try again !'];
+				}
+ 		   		echo json_encode($response);
+			endif;
+
 		}
 
 // get comment history
@@ -767,17 +855,34 @@ public function get_count_no(){
 // get like count number
 	public function get_like_count_no(){
 			
-			$count_id = $this->input->get('like_count_id');
+			$post_id = $this->input->get('post_id');
 			
 			 
-			$counter = $this->user->get_count_no($count_id);
+			$count = $this->user->get_like_count_no($post_id);
+			//print_r($history);
+			$counter = count($count);
+			?>
+	       
+            <span class="badge badge-light" id="like_count" ><?=$counter;?></span>
+            
+	        
+	        <?php
+	 		
+		}
+
+		public function get_likeQ_count_no(){
+			
+			$count_id = $this->input->get('count_id');
+			
+			 
+			$counter = $this->user->get_likeQ_count_no($count_id);
 			//print_r($history);
 			foreach($counter as $counts):
 				
-				$like_count = $counts['like_count'];
+				$likeQ_count = $counts['like_count'];
 	 		?>
 	       
-            <span class="badge badge-light" id="like_count" ><?=$like_count;?></span>
+            <span class="badge badge-light" id="likeQ_count" ><?=$likeQ_count;?></span>
             
 	        
 	        <?php

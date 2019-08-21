@@ -34,6 +34,17 @@
 			$this->load->view('template/footer');
 		}
 
+		public function payment()
+		{
+			# code...
+			$data['title'] = "Familyplus | Payment";
+			$this->load->view('template/header', $data);
+			$this->load->view('template/nav');
+			$this->load->view('payment');
+			$this->load->view('template/footer');
+		}
+
+
 		public function about()
 		{
 			

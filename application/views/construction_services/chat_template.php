@@ -61,7 +61,7 @@
             // var_dump($userList);
                 $user_id = $this->session->user_data->id;
                 $scheduler = $this->user->get_schedule($user_id);
-            if ($this->session->user_data->role_id !== '02' && $scheduler === NULL) : ?>
+            if ($this->session->user_data->role_id !== '02' && empty($scheduler)) : ?>
 
             <div class="container text-center">
               <h4> Hi <?php echo $this->session->user_data->first_name; ?> </h4><br>

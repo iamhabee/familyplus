@@ -75,46 +75,20 @@ nav > div a.nav-item.nav-link:focus
 
               <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                 <div class="row">
+                  <?php $ad = $this->db->get('banner')->result(); 
+                    foreach ($ad as $key ):  
+                   ?>
                   <div class="col-md-3">
                     <div class="card" >
                       <div class="card-body">
                           <h3 class="card-title">Advert title</h3>
                           <h6 class="card-subtitle mb-2">Advert description</h6>
-                          <img src="<?php echo site_url() ?>image/image01.jpg" alt="ad image"width="100%" height="200px"><br>
+                          <img style="width: 100%; height: 100px;" src="<?php echo site_url('banner/'.$key->image_path)?>"><br>
                           <a href="#" class="card-link text-white btn btn-color" width="100%">Ad Link</a>
                         </div>
                     </div>
                   </div>
-                  <div class="col-md-3">
-                    <div class="card" >
-                      <div class="card-body">
-                          <h3 class="card-title">Advert title</h3>
-                          <h6 class="card-subtitle mb-2">Advert description</h6>
-                          <img src="<?php echo site_url() ?>image/image01.jpg" alt="ad image"width="100%" height="200px"><br>
-                          <a href="#" class="card-link text-white btn btn-color" width="100%">Ad Link</a>
-                        </div>
-                    </div>
-                  </div>
-                  <div class="col-md-3">
-                    <div class="card" >
-                      <div class="card-body">
-                          <h3 class="card-title">Advert title</h3>
-                          <h6 class="card-subtitle mb-2">Advert description</h6>
-                          <img src="<?php echo site_url() ?>image/image01.jpg" alt="ad image"width="100%" height="200px"><br>
-                          <a href="#" class="card-link text-white btn btn-color" width="100%">Ad Link</a>
-                        </div>
-                    </div>
-                  </div>
-                  <div class="col-md-3">
-                    <div class="card" >
-                      <div class="card-body">
-                          <h3 class="card-title">Advert title</h3>
-                          <h6 class="card-subtitle mb-2">Advert description</h6>
-                          <img src="<?php echo site_url() ?>image/image01.jpg" alt="ad image"width="100%" height="200px"><br>
-                          <a href="#" class="card-link text-white btn btn-color" width="100%">Ad Link</a>
-                        </div>
-                    </div>
-                  </div>
+                <?php endforeach; ?>
                 </div>
               </div>
               
@@ -168,6 +142,7 @@ nav > div a.nav-item.nav-link:focus
             
             <div class="form-group">
               <input type="text" class="form-control" name="title" placeholder="Title" style="border-width: 0px 0px 1px;">
+              <input type="hidden" class="form-control" name="date" value="<?php echo date('d/m/Y') ?>">
             </div>
 
             <div class="form-group">

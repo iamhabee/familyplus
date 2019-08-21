@@ -1,18 +1,6 @@
 
 
-// var myVar;
-
-// function myFunction() {
-//  	myVar = setTimeout(showPage, 3000);
-// }
-
-// function showPage() {
-//   document.getElementById("loader").style.display = "none";
-//   document.getElementById("myDiv").style.display = "block";
-// }
-
 $(document).ready(function(){
-
 
 	setTimeout(function(){
 		$('body').addClass('loaded');
@@ -25,32 +13,14 @@ $(document).ready(function(){
 		if (married === 'Married') {
 			$('.spouse').show();
 		}
-	})
-	
-	$("#counsellor-email").change(function(){
+	});
+  
+  $("#counsellor-email").change(function(){
 		var val = $(this).val();
 		$("#counsellor_email").val(val);
 	});
     
 
-
-	$('#like').click(function(){
-
-				$.ajax({
-						  dataType : "json",
-						  type : 'post',
-						  data : {likeId : likeId, count: count},
-						  url: '/familyplus/like-count',
-						  success:function(data)
-						  {
-						  	data['']
-						  },
-						  error: function (jqXHR, status, err) {
- 							 // alert('Local error callback');
-						  }
- 					});
-
-	});
 
 	$("#logout").click(function(e){
 		var ask = confirm("Do you really want to logout?");
@@ -76,7 +46,8 @@ $(document).ready(function(){
 			}
 		});
 
-	$("#inputGroupFile04").change(function(event){
+
+$("#inputGroupFile04").change(function(event){
 		var reader = new FileReader();
 		var image = document.getElementById('image');
 
@@ -89,7 +60,7 @@ $(document).ready(function(){
 		reader.readAsDataURL(event.target.files[0]);
 	});
 
-	$("#confirm").keyup(function(){
+$("#confirm").keyup(function(){
 		if ($("#confirm").val() === $("#password").val()){
 			$("#match").attr('class', '');
 			$("#match").text("password matched");
@@ -101,7 +72,6 @@ $(document).ready(function(){
 		}
 		// body...
 	});
-
 
  $(".sidebar-dropdown > a").click(function() {
   $(".sidebar-submenu").slideUp(200);
@@ -159,24 +129,18 @@ $("#show-sidebar").click(function() {
 		// });
 	});
 
-
-		// var count_val = <?php echo $rec->comment_count?>;
-	   // var string = '<span class="badge badge-light" id="comment_count" ></span>';
-	   // $('.comment_count').append(string);
-		
 $('.likeBtn').click(function(){
-	var counter = $(this).attr('id');
-	var display_id = $(this).attr('display_id');
-	// alert(display_id);
-	window.localStorage.setItem('display_id', display_id);
-	var add = 1;
-	var count = Number(counter) + Number(add);
-	var countId = $('#like_count_id').val();
-	// if(name == userlike){
+	var user_id = $('#userId').val();
+	var post_id = $('#like_count_id').val();
+	updateLikeCount(post_id, user_id);
+});
 
-	// }
-	updateLikeCount(count, countId, display_id);
-})
+$('.likeQBtn').click(function(){
+	var countId = $('#countId').val();
+	var count = $('#count').val();
+	var users = $('#users').val();
+	updateLikeQCount(countId, count, users);
+});
 
 $('.comments').keypress(function(event){
     var keycode = (event.keyCode ? event.keyCode : event.which);
@@ -199,13 +163,44 @@ $('.comments').keypress(function(event){
        sendTxtComment(comment);
 	});
 		var countId = $('#comment_count_id').val();
-		var likecountId = $('#like_count_id').val();
-		GetLikeCountNo(likecountId);
+		var post_id = $('#like_count_id').val();
+		GetLikeCountNo(post_id);
 		GetCountNo(countId);
 
 		var comment_id = $('#id').val();
 		GetCommentHistory(comment_id);
+
+	    var countId = $('#question_count_id').val();
+	    GetQuestionCountNo(countId);
+
+	    var question_id = $('#qid').val();
+	    GetQuestionHistory(question_id);
+
+		$('.question').keypress(function(event){
+		    var keycode = (event.keyCode ? event.keyCode : event.which);
+		    if(keycode == '13'){
+		       
+		     var counter = $('.question_count').attr('id');
+		     var add = 1;
+		     var count = Number(counter) + Number(add);
+		     var question = $(this).val();
+		     updateQuestionCount(count, question);
+		       sendTxtQuestion(question);
+		    }
+		});
+
+$('.btnQuestionSend').click(function(){
+		      var counter = $('.question_count').attr('id');
+		      var add = 1;
+		      var count = Number(counter) + Number(add);
+		      var question = $('.question').val();
+		      updateQuestionCount(count, question);
+		      sendTxtQuestion(question);
+		  });
+
+
 });
+
 
 function Displaycomments(comment){
 	var Sender_Name = $('#Sender_Name').val();
@@ -304,16 +299,15 @@ function GetCountNo(count_id){
 }
 
 // like counter start
-function updateLikeCount(count, countId, display_id){
-
+function updateLikeCount(post_id, user_id){
 			$.ajax({
 					  dataType : "json",
 					  type : 'post',
-					  data : {countId : countId, count: count},
+					  data : {user_id : user_id, post_id: post_id},
 					  url: '/familyplus/like-count',
 					  success:function(data)
 					  {	
-					  	GetLikeCountNo(countId, display_id);
+					  	GetLikeCountNo(post_id);
 					  },
 					  error: function (jqXHR, status, err) {
 							 // alert('Local error callback');
@@ -321,37 +315,177 @@ function updateLikeCount(count, countId, display_id){
 					});
 }
 
-function GetLikeCountNo(like_count_id, display_id){
+function updateLikeQCount(countId, count, users){
+			$.ajax({
+					  dataType : "json",
+					  type : 'post',
+					  data : {countId : countId, count: count, users: users},
+					  url: '/familyplus/likeQ-count',
+					  success:function(data)
+					  {	
+					  	GetLikeQCountNo(countId);
+					  },
+					  error: function (jqXHR, status, err) {
+							 // alert('Local error callback');
+					  }
+					});
+}
+
+function GetLikeCountNo(post_id){
 	
 				$.ajax({
 						  //dataType : "json",
-  						  url: '/familyplus/get-like-count-no?like_count_id='+like_count_id,
+  						  url: '/familyplus/get-like-count-no?post_id='+post_id,
 						  success:function(data)
 						  {
-						  	var display_v = $("#"+display_id);
-
-  							// alert(display_id);
-  							display_v.html(data);
+  							$('.like_count').html(data);
 							// ScrollDown();	 
 						  },
 						  error: function (jqXHR, status, err) {
 						  }
  					});
 }
+
+function GetLikeQCountNo(count_id){
+	
+				$.ajax({
+						  //dataType : "json",
+  						  url: '/familyplus/get-likeQ-count-no?count_id='+count_id,
+						  success:function(data)
+						  {
+  							$('.likeQ_count').html(data);
+							// ScrollDown();	 
+						  },
+						  error: function (jqXHR, status, err) {
+						  }
+ 					});
+}
+
 // like counter end
+
+  function Displayquestions(question){
+  var Sender_Name = $('#Sender_Name').val();
+  
+    var str = '<div class="direct-chat-msg right">';
+        str+='<div class="direct-chat-info clearfix">';
+         str+='<span class="direct-chat-name pull-right">'+Sender_Name ;
+         str+='</span><span class="direct-chat-timestamp pull-left"></span>'; //23 Jan 2:05 pm
+         // str+='</div><img class="direct-chat-img" src="'+Sender_ProfilePic+'" alt="">';
+         str+='<div class="direct-chat-text">'+question;
+         str+='</div></div>';
+    $('#dump').append(str);
+}
+
+function sendTxtQuestion(question){
+  var questionTxt = question.trim();
+  if(questionTxt!=''){
+
+    Displayquestions(questionTxt);
+    
+        var userId = $('#userId').val();
+        var question_id = $('#questionId_txt').val();
+        // var Sender_Name = $('#Sender_Name').val();
+        $.ajax({
+              dataType : "json",
+              type : 'post',
+              data : {questionTxt : questionTxt, question_id: question_id, userId: userId},
+              url: '/familyplus/send-question',
+              success:function(data)
+              {
+                GetQuestionHistory(question_id)    
+              },
+              error: function (jqXHR, status, err) {
+               // alert('Local error callback');
+              }
+          });
+        $('.question').val('');
+    $('.question').focus();
+  }else{
+    $('.question').focus();
+  }
+}
+
+function GetQuestionHistory(question_id){
+        $.ajax({
+              //dataType : "json",
+                url: '/familyplus/get-question-history?question_id='+question_id,
+              success:function(data)
+              {
+                $('#dump').html(data);
+              // ScrollDown();   
+              },
+              error: function (jqXHR, status, err) {
+              }
+          });
+}
+
+
+function updateQuestionCount( count, question){
+
+       var countId = $('#question_count_id').val();
+      var questionTxt = question.trim();
+      if(questionTxt!=''){
+        $.ajax({
+              dataType : "json",
+              type : 'post',
+              data : {countId : countId, count: count},
+              url: '/familyplus/question-count',
+              success:function(data)
+              {
+                GetQuestionCountNo(countId);
+              },
+              error: function (jqXHR, status, err) {
+               // alert('Local error callback');
+              }
+          });
+        $('.question').val('');
+    $('.question').focus();
+  }else{
+    $('.question').focus();
+  }
+}
+
+function GetQuestionCountNo(count_id){
+        $.ajax({
+              //dataType : "json",
+                url: '/familyplus/get-question-count-no?count_id='+count_id,
+              success:function(data)
+              {
+                $('.question_count').html(data);
+              // ScrollDown();   
+              },
+              error: function (jqXHR, status, err) {
+              }
+          });
+}
+
 setInterval(function(){ 
 	
 	var comment_id = $('#commentId_txt').val();
 	if(comment_id!=''){GetCommentHistory(comment_id);}
 
-	var newCommentId = $('#comment_count').text();
-	var newLikeId = $('#like_count').text();
-	var countId = $('#comment_count_id').val();
-	var likecountId = $('#like_count_id').val();
-	$('.comment_count').attr("id", newCommentId);
-	$('.likebtn').attr("id", newLikeId);
+	var question_id = $('#questionId_txt').val();
+	if(question_id!=''){GetQuestionHistory(question_id);}
 
-	var display_id = window.localStorage.getItem('display_id');
+// question reload
+	var newQuestionId = $('#question_count').text();
+	$('.question_count').attr("id", newQuestionId);
+	var countId = $('#question_count_id').val();
+	GetQuestionCountNo(countId);
+
+// question like count reload
+	var countId = $('#countId').val();	
+	GetLikeQCountNo(countId);
+
+
+	
+//comment count reload
+	var newCommentId = $('#comment_count').text();
+	$('.comment_count').attr("id", newCommentId);
+	var countId = $('#comment_count_id').val();
 	GetCountNo(countId);
-	// GetLikeCountNo(likecountId, display_id);
+
+//comment like count reload
+	var post_id = $('#like_count_id').val();
+	GetLikeCountNo(post_id);
 }, 1000);
